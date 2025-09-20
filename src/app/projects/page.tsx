@@ -2,7 +2,15 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { 
+  Typography, 
+  Section, 
+  Container, 
+  Card, 
+  Button,
+  Link,
+  ScrollReveal 
+} from '@/components/ui';
 import AnimatedCTA from '@/components/ui/AnimatedCTA';
 
 const categories = ['All', 'Web Development', 'UI/UX Design', 'E-commerce', 'Mobile App'];
@@ -122,75 +130,66 @@ export default function ProjectsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Our{' '}
-                <span className="text-gradient">Projects</span>
-              </h1>
-              <p className="text-xl text-charcoal-600 mb-8">
-                Discover our portfolio of successful projects and the impact we've made 
-                for businesses across various industries.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <AnimatedCTA href="/contact" size="lg">
-                  Start Your Project
-                </AnimatedCTA>
-                <AnimatedCTA href="/services" variant="outline" size="lg">
-                  Our Services
-                </AnimatedCTA>
-              </div>
+      <Section variant="gradient" padding="lg">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto text-center">
+            <Typography variant="h1" align="center" className="mb-6">
+              Our{' '}
+              <span className="text-gradient">Projects</span>
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl mb-8">
+              Discover our portfolio of successful projects and the impact we&apos;ve made 
+              for businesses across various industries.
+            </Typography>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="primary" size="lg">
+                <Link href="/contact">Start Your Project</Link>
+              </Button>
+              <Button variant="outline" size="lg">
+                <Link href="/services">Our Services</Link>
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Filter Section */}
-      <section className="py-12 bg-white sticky top-16 lg:top-20 z-40 border-b border-charcoal-200">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                    activeCategory === category
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-charcoal-100 text-charcoal-700 hover:bg-charcoal-200'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <Section className="py-12 bg-white sticky top-16 lg:top-20 z-40 border-b border-charcoal-200" padding="none">
+        <ScrollReveal>
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                variant={activeCategory === category ? 'primary' : 'secondary'}
+                className={activeCategory === category ? 'shadow-lg' : ''}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Projects Grid */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card overflow-hidden group cursor-pointer"
-                  whileHover={{ y: -5 }}
-                >
+      <Section padding="lg">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden group cursor-pointer h-full" hover animated>
                   {/* Project Image */}
                   <div className="relative overflow-hidden">
                     <img
@@ -200,44 +199,46 @@ export default function ProjectsPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
+                      <Typography variant="caption" component="span" className="px-3 py-1 bg-blue-600 text-white rounded-full">
                         {project.category}
-                      </span>
+                      </Typography>
                     </div>
                     <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <AnimatedCTA variant="secondary" size="sm" className="w-full">
+                      <Button variant="secondary" size="sm" fullWidth>
                         View Case Study
-                      </AnimatedCTA>
+                      </Button>
                     </div>
                   </div>
 
                   {/* Project Info */}
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold text-charcoal-950 group-hover:text-blue-600 transition-colors">
+                      <Typography variant="h5" className="group-hover:text-blue-600 transition-colors">
                         {project.title}
-                      </h3>
-                      <span className="text-sm text-charcoal-500">{project.year}</span>
+                      </Typography>
+                      <Typography variant="caption" color="muted">{project.year}</Typography>
                     </div>
                     
-                    <p className="text-charcoal-600 mb-4 line-clamp-2">
+                    <Typography variant="body2" color="secondary" className="mb-4 line-clamp-2">
                       {project.description}
-                    </p>
+                    </Typography>
 
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.slice(0, 3).map((tech) => (
-                        <span
+                        <Typography
                           key={tech}
-                          className="px-2 py-1 bg-charcoal-100 text-charcoal-600 text-xs rounded"
+                          variant="caption"
+                          component="span"
+                          className="px-2 py-1 bg-charcoal-100 text-charcoal-600 rounded"
                         >
                           {tech}
-                        </span>
+                        </Typography>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="px-2 py-1 bg-charcoal-100 text-charcoal-600 text-xs rounded">
+                        <Typography variant="caption" component="span" className="px-2 py-1 bg-charcoal-100 text-charcoal-600 rounded">
                           +{project.technologies.length - 3} more
-                        </span>
+                        </Typography>
                       )}
                     </div>
 
@@ -245,41 +246,41 @@ export default function ProjectsPage() {
                     <div className="grid grid-cols-3 gap-4 pt-4 border-t border-charcoal-200">
                       {Object.entries(project.results).map(([key, result]) => (
                         <div key={key} className="text-center">
-                          <div className="text-lg font-bold text-blue-600">{result.value}</div>
-                          <div className="text-xs text-charcoal-500">{result.label}</div>
+                          <Typography variant="body1" color="accent" weight="bold">{result.value}</Typography>
+                          <Typography variant="caption" color="muted">{result.label}</Typography>
                         </div>
                       ))}
                     </div>
 
                     {/* Client */}
                     <div className="mt-4 pt-4 border-t border-charcoal-200">
-                      <p className="text-sm text-charcoal-500">
-                        Client: <span className="font-medium text-charcoal-700">{project.client}</span>
-                      </p>
+                      <Typography variant="caption" color="muted">
+                        Client: <Typography variant="caption" weight="medium" component="span">{project.client}</Typography>
+                      </Typography>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
-          {filteredProjects.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-16"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-semibold text-charcoal-950 mb-2">
-                No projects found
-              </h3>
-              <p className="text-charcoal-600">
-                Try selecting a different category to see more projects.
-              </p>
-            </motion.div>
-          )}
-        </div>
-      </section>
+        {filteredProjects.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <div className="text-6xl mb-4">🔍</div>
+            <Typography variant="h4" className="mb-2">
+              No projects found
+            </Typography>
+            <Typography variant="body2" color="secondary">
+              Try selecting a different category to see more projects.
+            </Typography>
+          </motion.div>
+        )}
+      </Section>
 
       {/* Process Section */}
       <section className="section-padding bg-charcoal-50">

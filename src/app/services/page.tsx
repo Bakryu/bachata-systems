@@ -2,7 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { 
+  Typography, 
+  Section, 
+  Container, 
+  Card, 
+  Button,
+  ScrollReveal 
+} from '@/components/ui';
 import AnimatedCTA from '@/components/ui/AnimatedCTA';
 
 const services = [
@@ -98,220 +105,203 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Our{' '}
-                <span className="text-gradient">Services</span>
-              </h1>
-              <p className="text-xl text-charcoal-600 mb-8">
-                We offer comprehensive digital solutions to help your business thrive in the digital landscape. 
-                From design to development, we've got you covered.
-              </p>
-              <AnimatedCTA href="/contact" size="lg">
-                Start Your Project
-              </AnimatedCTA>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <Section variant="gradient" padding="lg">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto text-center">
+            <Typography variant="h1" align="center" className="mb-6">
+              Our{' '}
+              <span className="text-gradient">Services</span>
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl mb-8">
+              We offer comprehensive digital solutions to help your business thrive in the digital landscape. 
+              From design to development, we&apos;ve got you covered.
+            </Typography>
+            <AnimatedCTA href="/contact" size="lg">
+              Start Your Project
+            </AnimatedCTA>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Services Grid */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {services.map((service, index) => (
-              <ScrollReveal key={service.id} delay={index * 0.2}>
-                <motion.div
-                  className="card overflow-hidden group cursor-pointer h-full"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className={`${service.bgColor} p-8 relative`}>
-                    <div className="flex items-center mb-4">
-                      <div className="text-4xl mr-4">{service.icon}</div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-charcoal-950">{service.title}</h3>
-                        <p className={`${service.textColor} font-medium`}>{service.subtitle}</p>
-                      </div>
+      <Section padding="lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {services.map((service, index) => (
+            <ScrollReveal key={service.id} delay={index * 0.2}>
+              <Card className="overflow-hidden group cursor-pointer h-full" hover animated>
+                <div className={`${service.bgColor} p-8 relative`}>
+                  <div className="flex items-center mb-4">
+                    <div className="text-4xl mr-4">{service.icon}</div>
+                    <div>
+                      <Typography variant="h4" className="mb-1">{service.title}</Typography>
+                      <Typography variant="body2" className={`${service.textColor} font-medium`}>{service.subtitle}</Typography>
                     </div>
-                    <p className="text-charcoal-600 mb-6">{service.description}</p>
-                    
-                    {/* Features */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-charcoal-950 mb-3">What's Included:</h4>
-                      <div className="grid grid-cols-2 gap-2">
-                        {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center text-sm text-charcoal-600">
-                            <span className="text-green-500 mr-2">✓</span>
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-charcoal-950 mb-3">Technologies:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {service.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-white rounded-full text-sm text-charcoal-600 border"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link href={service.href}>
-                      <AnimatedCTA variant="outline" className="w-full">
-                        Learn More
-                      </AnimatedCTA>
-                    </Link>
                   </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
+                  <Typography variant="body2" color="secondary" className="mb-6">{service.description}</Typography>
+                  
+                  {/* Features */}
+                  <div className="mb-6">
+                    <Typography variant="h6" className="mb-3">What&apos;s Included:</Typography>
+                    <div className="grid grid-cols-2 gap-2">
+                      {service.features.map((feature) => (
+                        <div key={feature} className="flex items-center">
+                          <Typography variant="caption" className="text-green-500 mr-2">✓</Typography>
+                          <Typography variant="caption" color="secondary">{feature}</Typography>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="mb-6">
+                    <Typography variant="h6" className="mb-3">Technologies:</Typography>
+                    <div className="flex flex-wrap gap-2">
+                      {service.technologies.map((tech) => (
+                        <Typography
+                          key={tech}
+                          variant="caption"
+                          component="span"
+                          className="px-3 py-1 bg-white rounded-full border"
+                          color="secondary"
+                        >
+                          {tech}
+                        </Typography>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Link href={service.href}>
+                    <Button variant="outline" fullWidth>
+                      Learn More
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Process Section */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Our Process
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                We follow a proven methodology that ensures successful project delivery 
-                and exceptional results every time.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {process.map((step, index) => (
-              <ScrollReveal key={step.step} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6 text-center group"
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {step.icon}
-                  </div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">{step.step}</div>
-                  <h3 className="text-xl font-semibold text-charcoal-950 mb-3">{step.title}</h3>
-                  <p className="text-charcoal-600">{step.description}</p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Our Process
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              We follow a proven methodology that ensures successful project delivery 
+              and exceptional results every time.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {process.map((step, index) => (
+            <ScrollReveal key={step.step} delay={index * 0.1}>
+              <Card padding="md" className="text-center group" hover animated>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {step.icon}
+                </div>
+                <Typography variant="h4" color="accent" className="mb-2">{step.step}</Typography>
+                <Typography variant="h5" className="mb-3">{step.title}</Typography>
+                <Typography variant="body2" color="secondary">{step.description}</Typography>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Stats Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Why Choose Us
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Our track record speaks for itself. We've helped businesses of all sizes 
-                achieve their digital goals.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <ScrollReveal key={stat.label} delay={index * 0.1}>
-                <motion.div
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-charcoal-600 font-medium">{stat.label}</div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Why Choose Us
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Our track record speaks for itself. We&apos;ve helped businesses of all sizes 
+              achieve their digital goals.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <ScrollReveal key={stat.label} delay={index * 0.1}>
+              <motion.div
+                className="text-center"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Typography variant="h2" color="accent" className="mb-2">
+                  {stat.number}
+                </Typography>
+                <Typography variant="body2" color="secondary" weight="medium">{stat.label}</Typography>
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Industries Section */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Industries We Serve
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                We have experience working across various industries, bringing specialized 
-                knowledge to every project.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[
-              { name: 'E-commerce', icon: '🛒' },
-              { name: 'Healthcare', icon: '🏥' },
-              { name: 'Education', icon: '🎓' },
-              { name: 'Finance', icon: '💰' },
-              { name: 'Real Estate', icon: '🏠' },
-              { name: 'Technology', icon: '💻' },
-              { name: 'Non-Profit', icon: '❤️' },
-              { name: 'Entertainment', icon: '🎬' }
-            ].map((industry, index) => (
-              <ScrollReveal key={industry.name} delay={index * 0.05}>
-                <motion.div
-                  className="card p-6 text-center group"
-                  whileHover={{ y: -3 }}
-                >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {industry.icon}
-                  </div>
-                  <h3 className="font-semibold text-charcoal-950">{industry.name}</h3>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Industries We Serve
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              We have experience working across various industries, bringing specialized 
+              knowledge to every project.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {[
+            { name: 'E-commerce', icon: '🛒' },
+            { name: 'Healthcare', icon: '🏥' },
+            { name: 'Education', icon: '🎓' },
+            { name: 'Finance', icon: '💰' },
+            { name: 'Real Estate', icon: '🏠' },
+            { name: 'Technology', icon: '💻' },
+            { name: 'Non-Profit', icon: '❤️' },
+            { name: 'Entertainment', icon: '🎬' }
+          ].map((industry, index) => (
+            <ScrollReveal key={industry.name} delay={index * 0.05}>
+              <Card padding="md" className="text-center group" hover animated>
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {industry.icon}
+                </div>
+                <Typography variant="h6" weight="semibold">{industry.name}</Typography>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-custom text-center">
-          <ScrollReveal>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+      <Section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white" padding="lg">
+        <ScrollReveal>
+          <div className="text-center">
+            <Typography variant="h2" align="center" className="mb-4 text-white">
               Ready to Get Started?
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              Let's discuss your project and see how we can help you achieve your goals. 
+            </Typography>
+            <Typography variant="body1" align="center" className="text-xl mb-8 max-w-3xl mx-auto opacity-90 text-white">
+              Let&apos;s discuss your project and see how we can help you achieve your goals. 
               Get in touch with us today for a free consultation.
-            </p>
+            </Typography>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <AnimatedCTA href="/contact" variant="secondary" size="lg">
-                Start Your Project
-              </AnimatedCTA>
-              <AnimatedCTA href="/projects" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
-                View Our Work
-              </AnimatedCTA>
+              <Button variant="secondary" size="lg">
+                <a href="/contact">Start Your Project</a>
+              </Button>
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
+                <a href="/projects">View Our Work</a>
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
     </>
   );
 }

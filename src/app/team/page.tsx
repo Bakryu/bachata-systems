@@ -1,7 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { 
+  Typography, 
+  Section, 
+  Container, 
+  Card, 
+  Button,
+  Link,
+  ScrollReveal 
+} from '@/components/ui';
 import AnimatedCTA from '@/components/ui/AnimatedCTA';
 
 const teamMembers = [
@@ -139,250 +147,231 @@ export default function TeamPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Meet Our{' '}
-                <span className="text-gradient">Team</span>
-              </h1>
-              <p className="text-xl text-charcoal-600 mb-8">
-                We're a passionate team of designers, developers, and strategists 
-                dedicated to creating exceptional digital experiences.
-              </p>
-              <AnimatedCTA href="/contact" size="lg">
-                Work With Us
-              </AnimatedCTA>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <Section variant="gradient" padding="lg">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto text-center">
+            <Typography variant="h1" align="center" className="mb-6">
+              Meet Our{' '}
+              <span className="text-gradient">Team</span>
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl mb-8">
+              We&apos;re a passionate team of designers, developers, and strategists 
+              dedicated to creating exceptional digital experiences.
+            </Typography>
+            <Button variant="primary" size="lg">
+              <Link href="/contact">Work With Us</Link>
+            </Button>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Team Members */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Our Team
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Get to know the talented individuals who bring your projects to life.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <ScrollReveal key={member.name} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6 text-center group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="relative mb-6">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-32 h-32 rounded-full mx-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-
-                  <h3 className="text-xl font-semibold text-charcoal-950 mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-4">{member.role}</p>
-                  <p className="text-charcoal-600 mb-6">{member.bio}</p>
-
-                  {/* Skills */}
-                  <div className="flex flex-wrap justify-center gap-2 mb-6">
-                    {member.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Social Links */}
-                  <div className="flex justify-center space-x-4">
-                    {Object.entries(member.social).map(([platform, url]) => (
-                      <a
-                        key={platform}
-                        href={url}
-                        className="w-10 h-10 bg-charcoal-100 rounded-full flex items-center justify-center text-charcoal-600 hover:bg-blue-600 hover:text-white transition-colors duration-200"
-                      >
-                        <span className="text-sm font-bold">
-                          {platform === 'linkedin' ? 'in' : 
-                           platform === 'twitter' ? '𝕏' :
-                           platform === 'github' ? 'gh' :
-                           platform === 'dribbble' ? 'dr' : '@'}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Our Team
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Get to know the talented individuals who bring your projects to life.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {teamMembers.map((member, index) => (
+            <ScrollReveal key={member.name} delay={index * 0.1}>
+              <Card padding="md" className="text-center group" hover animated>
+                <div className="relative mb-6">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-32 h-32 rounded-full mx-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                <Typography variant="h5" className="mb-1">
+                  {member.name}
+                </Typography>
+                <Typography variant="body2" color="accent" weight="medium" className="mb-4">{member.role}</Typography>
+                <Typography variant="body2" color="secondary" className="mb-6">{member.bio}</Typography>
+
+                {/* Skills */}
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                  {member.skills.map((skill) => (
+                    <Typography
+                      key={skill}
+                      variant="caption"
+                      component="span"
+                      className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full"
+                    >
+                      {skill}
+                    </Typography>
+                  ))}
+                </div>
+
+                {/* Social Links */}
+                <div className="flex justify-center space-x-4">
+                  {Object.entries(member.social).map(([platform, url]) => (
+                    <Link
+                      key={platform}
+                      href={url}
+                      className="w-10 h-10 bg-charcoal-100 rounded-full flex items-center justify-center text-charcoal-600 hover:bg-blue-600 hover:text-white transition-colors duration-200"
+                    >
+                      <Typography variant="caption" weight="bold">
+                        {platform === 'linkedin' ? 'in' : 
+                         platform === 'twitter' ? '𝕏' :
+                         platform === 'github' ? 'gh' :
+                         platform === 'dribbble' ? 'dr' : '@'}
+                      </Typography>
+                    </Link>
+                  ))}
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Cooperation Models */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                How We Work
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Choose the collaboration model that best fits your project needs and business goals.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cooperationModels.map((model, index) => (
-              <ScrollReveal key={model.title} delay={index * 0.1}>
-                <motion.div
-                  className="card p-8 h-full group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {model.icon}
-                  </div>
-                  
-                  <h3 className="text-2xl font-semibold text-charcoal-950 mb-3">
-                    {model.title}
-                  </h3>
-                  
-                  <p className="text-charcoal-600 mb-6">
-                    {model.description}
-                  </p>
-
-                  <ul className="space-y-2 mb-6">
-                    {model.features.map((feature) => (
-                      <li key={feature} className="flex items-start">
-                        <span className="text-green-500 mr-2 mt-0.5">✓</span>
-                        <span className="text-charcoal-700 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto">
-                    <div className="border-t border-charcoal-200 pt-4">
-                      <p className="text-sm text-charcoal-500 mb-1">Best for:</p>
-                      <p className="font-medium text-charcoal-700 mb-2">{model.bestFor}</p>
-                      <p className="text-sm text-charcoal-500 mb-1">Duration:</p>
-                      <p className="font-medium text-blue-600">{model.duration}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              How We Work
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Choose the collaboration model that best fits your project needs and business goals.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {cooperationModels.map((model, index) => (
+            <ScrollReveal key={model.title} delay={index * 0.1}>
+              <Card padding="lg" className="h-full group" hover animated>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {model.icon}
+                </div>
+                
+                <Typography variant="h4" className="mb-3">
+                  {model.title}
+                </Typography>
+                
+                <Typography variant="body2" color="secondary" className="mb-6">
+                  {model.description}
+                </Typography>
+
+                <ul className="space-y-2 mb-6">
+                  {model.features.map((feature) => (
+                    <li key={feature} className="flex items-start">
+                      <Typography variant="caption" className="text-green-500 mr-2 mt-0.5">✓</Typography>
+                      <Typography variant="caption" className="text-charcoal-700">{feature}</Typography>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto">
+                  <div className="border-t border-charcoal-200 pt-4">
+                    <Typography variant="caption" color="muted" className="mb-1">Best for:</Typography>
+                    <Typography variant="body2" weight="medium" className="mb-2">{model.bestFor}</Typography>
+                    <Typography variant="caption" color="muted" className="mb-1">Duration:</Typography>
+                    <Typography variant="body2" color="accent" weight="medium">{model.duration}</Typography>
+                  </div>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Values */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Our Values
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                These core values guide everything we do and shape how we work with our clients.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <ScrollReveal key={value.title} delay={index * 0.1}>
-                <motion.div
-                  className="text-center group"
-                  whileHover={{ y: -3 }}
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {value.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-charcoal-950 mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-charcoal-600 text-sm">
-                    {value.description}
-                  </p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Our Values
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              These core values guide everything we do and shape how we work with our clients.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {values.map((value, index) => (
+            <ScrollReveal key={value.title} delay={index * 0.1}>
+              <motion.div
+                className="text-center group"
+                whileHover={{ y: -3 }}
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {value.icon}
+                </div>
+                <Typography variant="h6" className="mb-3">
+                  {value.title}
+                </Typography>
+                <Typography variant="caption" color="secondary">
+                  {value.description}
+                </Typography>
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* FAQ */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Common questions about working with our team and our processes.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6"
-                  whileHover={{ y: -2 }}
-                >
-                  <h3 className="font-semibold text-charcoal-950 mb-3 text-lg">
-                    {faq.question}
-                  </h3>
-                  <p className="text-charcoal-600">
-                    {faq.answer}
-                  </p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Frequently Asked Questions
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Common questions about working with our team and our processes.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="max-w-4xl mx-auto space-y-6">
+          {faqs.map((faq, index) => (
+            <ScrollReveal key={index} delay={index * 0.1}>
+              <Card padding="md" hover animated>
+                <Typography variant="h6" className="mb-3">
+                  {faq.question}
+                </Typography>
+                <Typography variant="body2" color="secondary">
+                  {faq.answer}
+                </Typography>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-custom text-center">
-          <ScrollReveal>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+      <Section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white" padding="lg">
+        <ScrollReveal>
+          <div className="text-center">
+            <Typography variant="h2" align="center" className="mb-4 text-white">
               Ready to Work Together?
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              Let's discuss your project and find the perfect collaboration model 
+            </Typography>
+            <Typography variant="body1" align="center" className="text-xl mb-8 max-w-3xl mx-auto opacity-90 text-white">
+              Let&apos;s discuss your project and find the perfect collaboration model 
               for your needs. Get in touch with us today.
-            </p>
+            </Typography>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <AnimatedCTA href="/contact" variant="secondary" size="lg">
-                Start a Conversation
-              </AnimatedCTA>
-              <AnimatedCTA href="/pricing" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
-                View Pricing
-              </AnimatedCTA>
+              <Button variant="secondary" size="lg">
+                <Link href="/contact">Start a Conversation</Link>
+              </Button>
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
+                <Link href="/pricing">View Pricing</Link>
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
     </>
   );
 }

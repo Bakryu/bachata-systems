@@ -9,47 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Halo-Lab inspired palette
-        background: "#ffffff",
-        foreground: "#1a1a1a",
-        charcoal: {
-          50: "#f6f6f6",
-          100: "#e7e7e7",
-          200: "#d1d1d1",
-          300: "#b0b0b0",
-          400: "#888888",
-          500: "#6d6d6d",
-          600: "#5d5d5d",
-          700: "#4f4f4f",
-          800: "#454545",
-          900: "#3d3d3d",
-          950: "#1a1a1a",
+        // Dark theme color palette
+        background: {
+          DEFAULT: "#0B0B0F", // main background (almost black with subtle blue tint)
+          secondary: "#15161A", // secondary background (cards, containers)
         },
-        blue: {
-          50: "#eff6ff",
-          100: "#dbeafe",
-          200: "#bfdbfe",
-          300: "#93c5fd",
-          400: "#60a5fa",
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1d4ed8",
-          800: "#1e40af",
-          900: "#1e3a8a",
-          950: "#172554",
+        text: {
+          primary: "#EAEAEA", // primary text (almost white)
+          secondary: "#9CA3AF", // secondary text (body, descriptions)
+          muted: "#6B7280", // muted text (captions, hints)
         },
-        yellow: {
-          50: "#fefce8",
-          100: "#fef9c3",
-          200: "#fef08a",
-          300: "#fde047",
-          400: "#facc15",
-          500: "#eab308",
-          600: "#ca8a04",
-          700: "#a16207",
-          800: "#854d0e",
-          900: "#713f12",
-          950: "#422006",
+        accent: {
+          yellow: "#FFD600", // main accent (CTA buttons, highlights)
+          yellowHover: "#FACC15", // hover state for yellow buttons
+          blue: "#2563EB", // secondary accent (icons, UI details)
+          purple: "#8B5CF6", // alternative accent (gradients, effects)
+        },
+        border: {
+          subtle: "#1F2937", // subtle dividers and borders
         },
       },
       fontFamily: {

@@ -1,42 +1,42 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import AnimatedCTA from '../ui/AnimatedCTA';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import AnimatedCTA from "../ui/AnimatedCTA";
 
 const footerLinks = {
   Services: [
-    { name: 'Web Development', href: '/services/development' },
-    { name: 'UI/UX Design', href: '/services/design' },
-    { name: 'Consulting', href: '/services' },
-    { name: 'Support', href: '/services' },
+    { name: "Web Development", href: "/services/development" },
+    { name: "UI/UX Design", href: "/services/design" },
+    { name: "Consulting", href: "/services" },
+    { name: "Support", href: "/services" },
   ],
   Company: [
-    { name: 'About Us', href: '/team' },
-    { name: 'Our Team', href: '/team' },
-    { name: 'Careers', href: '/team' },
-    { name: 'Contact', href: '/contact' },
+    { name: "About Us", href: "/team" },
+    { name: "Our Team", href: "/team" },
+    { name: "Careers", href: "/team" },
+    { name: "Contact", href: "/contact" },
   ],
   Resources: [
-    { name: 'Blog', href: '/resources' },
-    { name: 'Case Studies', href: '/projects' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'FAQ', href: '/team' },
+    { name: "Blog", href: "/resources" },
+    { name: "Case Studies", href: "/projects" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "FAQ", href: "/team" },
   ],
 };
 
 const socialLinks = [
-  { name: 'Twitter', href: '#', icon: '𝕏' },
-  { name: 'LinkedIn', href: '#', icon: 'in' },
-  { name: 'GitHub', href: '#', icon: 'gh' },
-  { name: 'Dribbble', href: '#', icon: 'dr' },
+  { name: "Twitter", href: "#", icon: "𝕏" },
+  { name: "LinkedIn", href: "#", icon: "in" },
+  { name: "GitHub", href: "#", icon: "gh" },
+  { name: "Dribbble", href: "#", icon: "dr" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal-950 text-white">
+    <footer className="bg-background text-text-primary">
       {/* Newsletter Section */}
-      <div className="border-b border-charcoal-800">
+      <div className="border-b border-border-subtle">
         <div className="container-custom section-padding">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -48,15 +48,16 @@ export default function Footer() {
               <h2 className="text-3xl lg:text-4xl font-bold mb-4">
                 Stay Updated with Our Latest Insights
               </h2>
-              <p className="text-charcoal-300 text-lg mb-8">
-                Get weekly updates on design trends, development tips, and industry insights.
+              <p className="text-text-secondary text-lg mb-8">
+                Get weekly updates on design trends, development tips, and
+                industry insights.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg bg-charcoal-800 border border-charcoal-700 text-white placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="flex-1 px-4 py-3 rounded-lg bg-background-secondary border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-yellow focus:border-transparent"
                 />
                 <AnimatedCTA variant="primary" size="md">
                   Subscribe
@@ -73,15 +74,16 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🐕</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-accent-yellow to-accent-purple rounded-full flex items-center justify-center">
+                <span className="text-2xl font-bold text-background">H</span>
               </div>
-              <span className="text-2xl font-bold">Bachata Team</span>
+              <span className="text-2xl font-bold">Halo Agency</span>
             </Link>
-            
-            <p className="text-charcoal-300 mb-6 max-w-md">
-              We're a creative digital agency that helps startups and enterprises 
-              build exceptional web experiences that drive results and inspire users.
+
+            <p className="text-text-secondary mb-6 max-w-md">
+              We're a creative digital agency that helps startups and
+              enterprises build exceptional web experiences that drive results
+              and inspire users.
             </p>
 
             <div className="flex space-x-4">
@@ -89,7 +91,7 @@ export default function Footer() {
                 <motion.a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 bg-charcoal-800 rounded-lg flex items-center justify-center text-charcoal-300 hover:bg-blue-600 hover:text-white transition-colors duration-200"
+                  className="w-10 h-10 bg-background-secondary rounded-lg flex items-center justify-center text-text-muted hover:bg-accent-blue hover:text-text-primary transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -108,7 +110,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-charcoal-300 hover:text-white transition-colors duration-200"
+                      className="text-text-secondary hover:text-text-primary transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
@@ -121,21 +123,30 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-charcoal-800">
+      <div className="border-t border-border-subtle">
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-charcoal-400 text-sm">
-              © 2024 Bachata Team. All rights reserved.
+            <p className="text-text-muted text-sm">
+              © 2024 Halo Agency. All rights reserved.
             </p>
-            
+
             <div className="flex space-x-6 text-sm">
-              <Link href="#" className="text-charcoal-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-charcoal-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Terms of Service
               </Link>
-              <Link href="#" className="text-charcoal-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Cookie Policy
               </Link>
             </div>

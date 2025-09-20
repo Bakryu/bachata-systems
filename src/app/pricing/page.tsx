@@ -2,7 +2,15 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { 
+  Typography, 
+  Section, 
+  Container, 
+  Card, 
+  Button,
+  Link,
+  ScrollReveal 
+} from '@/components/ui';
 import AnimatedCTA from '@/components/ui/AnimatedCTA';
 
 const pricingPlans = [
@@ -151,176 +159,162 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Simple, Transparent{' '}
-                <span className="text-gradient">Pricing</span>
-              </h1>
-              <p className="text-xl text-charcoal-600 mb-8">
-                Choose the perfect plan for your project. All plans include our signature 
-                attention to detail and commitment to excellence.
-              </p>
-              
-              {/* Billing Toggle */}
-              <div className="flex items-center justify-center mb-8">
-                <span className={`mr-3 ${billingCycle === 'monthly' ? 'text-charcoal-950 font-medium' : 'text-charcoal-600'}`}>
-                  Project-based
-                </span>
-                <button
-                  onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                  className="relative inline-flex h-6 w-11 items-center rounded-full bg-charcoal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <span className={`ml-3 ${billingCycle === 'yearly' ? 'text-charcoal-950 font-medium' : 'text-charcoal-600'}`}>
-                  Retainer (Save 17%)
-                </span>
-              </div>
+      <Section variant="gradient" padding="lg">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto text-center">
+            <Typography variant="h1" align="center" className="mb-6">
+              Simple, Transparent{' '}
+              <span className="text-gradient">Pricing</span>
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl mb-8">
+              Choose the perfect plan for your project. All plans include our signature 
+              attention to detail and commitment to excellence.
+            </Typography>
+            
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center mb-8">
+              <Typography variant="body2" className={`mr-3 ${billingCycle === 'monthly' ? 'text-charcoal-950 font-medium' : 'text-charcoal-600'}`}>
+                Project-based
+              </Typography>
+              <button
+                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
+                className="relative inline-flex h-6 w-11 items-center rounded-full bg-charcoal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+              <Typography variant="body2" className={`ml-3 ${billingCycle === 'yearly' ? 'text-charcoal-950 font-medium' : 'text-charcoal-600'}`}>
+                Retainer (Save 17%)
+              </Typography>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Pricing Plans */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <ScrollReveal key={plan.name} delay={index * 0.1}>
-                <motion.div
-                  className={`card relative overflow-hidden ${
-                    plan.popular ? 'ring-2 ring-blue-600 scale-105' : ''
-                  }`}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-medium">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <div className={`p-8 ${plan.popular ? 'pt-12' : ''}`}>
-                    <div className="text-center mb-8">
-                      <h3 className="text-2xl font-bold text-charcoal-950 mb-2">{plan.name}</h3>
-                      <p className="text-charcoal-600 mb-4">{plan.description}</p>
-                      
-                      <div className="mb-4">
-                        <span className="text-4xl font-bold text-charcoal-950">
-                          {formatPrice(plan.price[billingCycle])}
-                        </span>
-                        <span className="text-charcoal-600 ml-2">
-                          {billingCycle === 'monthly' ? 'per project' : 'per month'}
-                        </span>
-                      </div>
-
-                      <div className="flex justify-center space-x-4 text-sm text-charcoal-600 mb-6">
-                        <div className="flex items-center">
-                          <span className="text-green-500 mr-1">⏱️</span>
-                          {plan.deliveryTime}
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-blue-500 mr-1">🔄</span>
-                          {plan.revisions}
-                        </div>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <span className="text-green-500 mr-3 mt-0.5">✓</span>
-                          <span className="text-charcoal-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <AnimatedCTA
-                      href="/contact"
-                      variant={plan.popular ? 'primary' : 'outline'}
-                      className="w-full"
-                    >
-                      Get Started
-                    </AnimatedCTA>
+      <Section padding="lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {pricingPlans.map((plan, index) => (
+            <ScrollReveal key={plan.name} delay={index * 0.1}>
+              <Card className={`relative overflow-hidden ${plan.popular ? 'ring-2 ring-blue-600 scale-105' : ''}`} hover animated>
+                {plan.popular && (
+                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-medium">
+                    Most Popular
                   </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
+                )}
+                
+                <div className={`p-8 ${plan.popular ? 'pt-12' : ''}`}>
+                  <div className="text-center mb-8">
+                    <Typography variant="h4" className="mb-2">{plan.name}</Typography>
+                    <Typography variant="body2" color="secondary" className="mb-4">{plan.description}</Typography>
+                    
+                    <div className="mb-4">
+                      <Typography variant="h2" component="span">
+                        {formatPrice(plan.price[billingCycle])}
+                      </Typography>
+                      <Typography variant="body2" color="secondary" component="span" className="ml-2">
+                        {billingCycle === 'monthly' ? 'per project' : 'per month'}
+                      </Typography>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 text-sm text-charcoal-600 mb-6">
+                      <div className="flex items-center">
+                        <span className="text-green-500 mr-1">⏱️</span>
+                        <Typography variant="caption">{plan.deliveryTime}</Typography>
+                      </div>
+                      <div className="flex items-center">
+                        <span className="text-blue-500 mr-1">🔄</span>
+                        <Typography variant="caption">{plan.revisions}</Typography>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        <Typography variant="caption" className="text-green-500 mr-3 mt-0.5">✓</Typography>
+                        <Typography variant="body2">{feature}</Typography>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    variant={plan.popular ? 'primary' : 'outline'}
+                    fullWidth
+                  >
+                    <Link href="/contact">Get Started</Link>
+                  </Button>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Add-ons Section */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Add-on Services
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Enhance your project with our additional services. Perfect for creating 
-                a complete digital presence.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {addOns.map((addon, index) => (
-              <ScrollReveal key={addon.name} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6 text-center group"
-                  whileHover={{ y: -3 }}
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {addon.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-charcoal-950 mb-2">
-                    {addon.name}
-                  </h3>
-                  <p className="text-charcoal-600 mb-4 text-sm">
-                    {addon.description}
-                  </p>
-                  <div className="text-2xl font-bold text-blue-600">
-                    {formatPrice(addon.price)}
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Add-on Services
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Enhance your project with our additional services. Perfect for creating 
+              a complete digital presence.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {addOns.map((addon, index) => (
+            <ScrollReveal key={addon.name} delay={index * 0.1}>
+              <Card padding="md" className="text-center group" hover animated>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {addon.icon}
+                </div>
+                <Typography variant="h6" className="mb-2">
+                  {addon.name}
+                </Typography>
+                <Typography variant="caption" color="secondary" className="mb-4">
+                  {addon.description}
+                </Typography>
+                <Typography variant="h5" color="accent">
+                  {formatPrice(addon.price)}
+                </Typography>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Comparison Table */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Compare Plans
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                See what's included in each plan to make the best choice for your project.
-              </p>
-            </div>
-          </ScrollReveal>
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Compare Plans
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              See what&apos;s included in each plan to make the best choice for your project.
+            </Typography>
+          </div>
+        </ScrollReveal>
 
-          <ScrollReveal>
-            <div className="overflow-x-auto">
-              <table className="w-full card">
+        <ScrollReveal>
+          <div className="overflow-x-auto">
+            <Card className="w-full">
+              <table className="w-full">
                 <thead>
                   <tr className="border-b border-charcoal-200">
-                    <th className="text-left p-6 font-semibold text-charcoal-950">Features</th>
+                    <th className="text-left p-6">
+                      <Typography variant="h6">Features</Typography>
+                    </th>
                     {pricingPlans.map((plan) => (
-                      <th key={plan.name} className="text-center p-6 font-semibold text-charcoal-950">
-                        {plan.name}
+                      <th key={plan.name} className="text-center p-6">
+                        <Typography variant="h6">{plan.name}</Typography>
                       </th>
                     ))}
                   </tr>
@@ -338,89 +332,86 @@ export default function PricingPage() {
                     'Priority Support'
                   ].map((feature, index) => (
                     <tr key={feature} className="border-b border-charcoal-100">
-                      <td className="p-6 text-charcoal-700">{feature}</td>
+                      <td className="p-6">
+                        <Typography variant="body2">{feature}</Typography>
+                      </td>
                       <td className="p-6 text-center">
                         {index < 3 ? (
-                          <span className="text-green-500">✓</span>
+                          <Typography variant="body2" className="text-green-500">✓</Typography>
                         ) : (
-                          <span className="text-charcoal-300">—</span>
+                          <Typography variant="body2" className="text-charcoal-300">—</Typography>
                         )}
                       </td>
                       <td className="p-6 text-center">
                         {index < 6 ? (
-                          <span className="text-green-500">✓</span>
+                          <Typography variant="body2" className="text-green-500">✓</Typography>
                         ) : (
-                          <span className="text-charcoal-300">—</span>
+                          <Typography variant="body2" className="text-charcoal-300">—</Typography>
                         )}
                       </td>
                       <td className="p-6 text-center">
-                        <span className="text-green-500">✓</span>
+                        <Typography variant="body2" className="text-green-500">✓</Typography>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+            </Card>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* FAQ Section */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Got questions about our pricing? We've got answers.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6"
-                  whileHover={{ y: -2 }}
-                >
-                  <h3 className="font-semibold text-charcoal-950 mb-3 text-lg">
-                    {faq.question}
-                  </h3>
-                  <p className="text-charcoal-600">
-                    {faq.answer}
-                  </p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Frequently Asked Questions
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Got questions about our pricing? We&apos;ve got answers.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="max-w-4xl mx-auto space-y-6">
+          {faqs.map((faq, index) => (
+            <ScrollReveal key={index} delay={index * 0.1}>
+              <Card padding="md" hover animated>
+                <Typography variant="h6" className="mb-3">
+                  {faq.question}
+                </Typography>
+                <Typography variant="body2" color="secondary">
+                  {faq.answer}
+                </Typography>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-custom text-center">
-          <ScrollReveal>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+      <Section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white" padding="lg">
+        <ScrollReveal>
+          <div className="text-center">
+            <Typography variant="h2" align="center" className="mb-4 text-white">
               Ready to Get Started?
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              Have questions about which plan is right for you? Let's discuss your project 
+            </Typography>
+            <Typography variant="body1" align="center" className="text-xl mb-8 max-w-3xl mx-auto opacity-90 text-white">
+              Have questions about which plan is right for you? Let&apos;s discuss your project 
               and find the perfect solution for your needs.
-            </p>
+            </Typography>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <AnimatedCTA href="/contact" variant="secondary" size="lg">
-                Get Free Consultation
-              </AnimatedCTA>
-              <AnimatedCTA href="/projects" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
-                View Our Work
-              </AnimatedCTA>
+              <Button variant="secondary" size="lg">
+                <Link href="/contact">Get Free Consultation</Link>
+              </Button>
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
+                <Link href="/projects">View Our Work</Link>
+              </Button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
     </>
   );
 }

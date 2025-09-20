@@ -1,66 +1,54 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import ScrollReveal from '@/components/ui/ScrollReveal';
-import AnimatedCTA from '@/components/ui/AnimatedCTA';
-
-const budgetRanges = [
-  '$5,000 - $10,000',
-  '$10,000 - $25,000',
-  '$25,000 - $50,000',
-  '$50,000 - $100,000',
-  '$100,000+',
-];
-
-const projectTypes = [
-  'Web Development',
-  'UI/UX Design',
-  'E-commerce',
-  'Mobile App',
-  'Branding',
-  'Consulting',
-  'Other',
-];
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Input, Select, Textarea, Button, ScrollReveal } from "@/components/ui";
+import { questionsAnswers, projectTypes, budgetRanges } from "@/data/contact";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    projectType: '',
-    budget: '',
-    timeline: '',
-    message: '',
+    name: "",
+    email: "",
+    company: "",
+    projectType: "",
+    budget: "",
+    timeline: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setSubmitStatus("success");
       setFormData({
-        name: '',
-        email: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        timeline: '',
-        message: '',
+        name: "",
+        email: "",
+        company: "",
+        projectType: "",
+        budget: "",
+        timeline: "",
+        message: "",
       });
     } catch (error) {
-      setSubmitStatus('error');
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -74,12 +62,13 @@ export default function ContactPage() {
           <ScrollReveal>
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Let's Build Something{' '}
+                Let's Build Something{" "}
                 <span className="text-gradient">Amazing Together</span>
               </h1>
               <p className="text-xl text-charcoal-600 mb-8">
-                Ready to transform your digital presence? Get in touch with us today 
-                and let's discuss how we can help bring your vision to life.
+                Ready to transform your digital presence? Get in touch with us
+                today and let's discuss how we can help bring your vision to
+                life.
               </p>
             </div>
           </ScrollReveal>
@@ -96,8 +85,8 @@ export default function ContactPage() {
                 <h2 className="text-3xl font-bold text-charcoal-950 mb-6">
                   Start Your Project
                 </h2>
-                
-                {submitStatus === 'success' && (
+
+                {submitStatus === "success" && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -107,148 +96,108 @@ export default function ContactPage() {
                   </motion.div>
                 )}
 
-                {submitStatus === 'error' && (
+                {submitStatus === "error" && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg text-red-800"
                   >
-                    Something went wrong. Please try again or contact us directly.
+                    Something went wrong. Please try again or contact us
+                    directly.
                   </motion.div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-charcoal-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-charcoal-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                        placeholder="john@company.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-charcoal-700 mb-2">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
+                    <Input
+                      label="Full Name"
+                      name="name"
+                      required
+                      value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      placeholder="Your Company"
+                      placeholder="John Doe"
+                      fullWidth
+                    />
+
+                    <Input
+                      label="Email Address"
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="john@company.com"
+                      fullWidth
                     />
                   </div>
+
+                  <Input
+                    label="Company Name"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Your Company"
+                    fullWidth
+                  />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="projectType" className="block text-sm font-medium text-charcoal-700 mb-2">
-                        Project Type *
-                      </label>
-                      <select
-                        id="projectType"
-                        name="projectType"
-                        required
-                        value={formData.projectType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      >
-                        <option value="">Select a project type</option>
-                        {projectTypes.map((type) => (
-                          <option key={type} value={type}>
-                            {type}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="budget" className="block text-sm font-medium text-charcoal-700 mb-2">
-                        Budget Range *
-                      </label>
-                      <select
-                        id="budget"
-                        name="budget"
-                        required
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      >
-                        <option value="">Select budget range</option>
-                        {budgetRanges.map((range) => (
-                          <option key={range} value={range}>
-                            {range}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-charcoal-700 mb-2">
-                      Desired Timeline
-                    </label>
-                    <input
-                      type="text"
-                      id="timeline"
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      placeholder="e.g., 3 months, ASAP, Q2 2024"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-charcoal-700 mb-2">
-                      Project Description *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
+                    <Select
+                      label="Project Type"
+                      name="projectType"
                       required
-                      rows={6}
-                      value={formData.message}
+                      value={formData.projectType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors resize-vertical"
-                      placeholder="Tell us about your project, goals, and any specific requirements..."
+                      placeholder="Select a project type"
+                      options={projectTypes.map((type) => ({
+                        value: type,
+                        label: type,
+                      }))}
+                      fullWidth
+                    />
+
+                    <Select
+                      label="Budget Range"
+                      name="budget"
+                      required
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      placeholder="Select budget range"
+                      options={budgetRanges.map((range) => ({
+                        value: range,
+                        label: range,
+                      }))}
+                      fullWidth
                     />
                   </div>
 
-                  <button
+                  <Input
+                    label="Desired Timeline"
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 3 months, ASAP, Q2 2024"
+                    fullWidth
+                  />
+
+                  <Textarea
+                    label="Project Description"
+                    name="message"
+                    required
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    fullWidth
+                  />
+
+                  <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn btn-primary px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    loading={isSubmitting}
+                    fullWidth
+                    size="lg"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </button>
+                    Send Message
+                  </Button>
                 </form>
               </div>
             </ScrollReveal>
@@ -261,8 +210,9 @@ export default function ContactPage() {
                     Get in Touch
                   </h2>
                   <p className="text-lg text-charcoal-600 mb-8">
-                    We're here to help you succeed. Reach out to us through any of these channels, 
-                    and we'll get back to you as soon as possible.
+                    We're here to help you succeed. Reach out to us through any
+                    of these channels, and we'll get back to you as soon as
+                    possible.
                   </p>
                 </div>
 
@@ -276,7 +226,9 @@ export default function ContactPage() {
                       <span className="text-blue-600 text-xl">📧</span>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-charcoal-950 mb-1">Email Us</h3>
+                      <h3 className="font-semibold text-charcoal-950 mb-1">
+                        Email Us
+                      </h3>
                       <p className="text-charcoal-600 mb-2">
                         For project inquiries and general questions
                       </p>
@@ -297,11 +249,15 @@ export default function ContactPage() {
                       <span className="text-green-600 text-xl">💬</span>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-charcoal-950 mb-1">Live Chat</h3>
+                      <h3 className="font-semibold text-charcoal-950 mb-1">
+                        Live Chat
+                      </h3>
                       <p className="text-charcoal-600 mb-2">
                         Quick questions? Chat with our team
                       </p>
-                      <span className="text-green-600 font-medium">Available 9 AM - 6 PM EST</span>
+                      <span className="text-green-600 font-medium">
+                        Available 9 AM - 6 PM EST
+                      </span>
                     </div>
                   </motion.div>
 
@@ -313,7 +269,9 @@ export default function ContactPage() {
                       <span className="text-purple-600 text-xl">📱</span>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-charcoal-950 mb-1">Call Us</h3>
+                      <h3 className="font-semibold text-charcoal-950 mb-1">
+                        Call Us
+                      </h3>
                       <p className="text-charcoal-600 mb-2">
                         Prefer to talk? Give us a call
                       </p>
@@ -334,7 +292,9 @@ export default function ContactPage() {
                       <span className="text-blue-600 text-xl">💼</span>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-charcoal-950 mb-1">LinkedIn</h3>
+                      <h3 className="font-semibold text-charcoal-950 mb-1">
+                        LinkedIn
+                      </h3>
                       <p className="text-charcoal-600 mb-2">
                         Connect with us professionally
                       </p>
@@ -352,7 +312,9 @@ export default function ContactPage() {
 
                 {/* Office Information */}
                 <div className="card p-6">
-                  <h3 className="font-semibold text-charcoal-950 mb-4">Our Office</h3>
+                  <h3 className="font-semibold text-charcoal-950 mb-4">
+                    Our Office
+                  </h3>
                   <div className="space-y-2 text-charcoal-600">
                     <p>123 Innovation Drive</p>
                     <p>Tech District, San Francisco</p>
@@ -362,10 +324,12 @@ export default function ContactPage() {
 
                 {/* Response Time */}
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-charcoal-950 mb-2">⚡ Quick Response</h3>
+                  <h3 className="font-semibold text-charcoal-950 mb-2">
+                    ⚡ Quick Response
+                  </h3>
                   <p className="text-charcoal-600">
-                    We typically respond to all inquiries within 24 hours during business days. 
-                    For urgent matters, please call us directly.
+                    We typically respond to all inquiries within 24 hours during
+                    business days. For urgent matters, please call us directly.
                   </p>
                 </div>
               </div>
@@ -383,45 +347,20 @@ export default function ContactPage() {
                 Frequently Asked Questions
               </h2>
               <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Got questions? We've got answers. Here are some common questions we receive.
+                Got questions? We've got answers. Here are some common questions
+                we receive.
               </p>
             </div>
           </ScrollReveal>
 
           <div className="max-w-4xl mx-auto space-y-6">
-            {[
-              {
-                question: "How long does a typical project take?",
-                answer: "Project timelines vary based on scope and complexity. A simple website might take 4-6 weeks, while a complex web application could take 3-6 months. We'll provide a detailed timeline during our initial consultation."
-              },
-              {
-                question: "What's included in your web development service?",
-                answer: "Our web development service includes strategy consultation, UI/UX design, frontend and backend development, testing, deployment, and post-launch support. We also provide training and documentation."
-              },
-              {
-                question: "Do you work with startups?",
-                answer: "Absolutely! We love working with startups and understand the unique challenges they face. We offer flexible pricing and can help you build an MVP to validate your idea before scaling."
-              },
-              {
-                question: "What technologies do you use?",
-                answer: "We use modern, proven technologies including React, Next.js, Node.js, TypeScript, and various cloud platforms. We choose the best tech stack based on your specific needs and goals."
-              },
-              {
-                question: "Do you provide ongoing support?",
-                answer: "Yes, we offer various support packages including maintenance, updates, monitoring, and feature enhancements. We're here to help your digital product succeed long-term."
-              }
-            ].map((faq, index) => (
+            {questionsAnswers.map((faq, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6"
-                  whileHover={{ y: -2 }}
-                >
+                <motion.div className="card p-6" whileHover={{ y: -2 }}>
                   <h3 className="font-semibold text-charcoal-950 mb-3 text-lg">
                     {faq.question}
                   </h3>
-                  <p className="text-charcoal-600">
-                    {faq.answer}
-                  </p>
+                  <p className="text-charcoal-600">{faq.answer}</p>
                 </motion.div>
               </ScrollReveal>
             ))}

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import AnimatedCTA from '../ui/AnimatedCTA';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import AnimatedCTA from "../ui/AnimatedCTA";
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Team', href: '/team' },
-  { name: 'Resources', href: '/resources' },
-  { name: 'Pricing', href: '/pricing' },
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Projects", href: "/projects" },
+  { name: "Team", href: "/team" },
+  { name: "Resources", href: "/resources" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 export default function Header() {
@@ -25,16 +25,16 @@ export default function Header() {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-charcoal-200'
-          : 'bg-transparent'
+          ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border-subtle"
+          : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -45,13 +45,15 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <motion.div
-              className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center"
+              className="w-10 h-10 bg-gradient-to-r from-accent-yellow to-accent-purple rounded-full flex items-center justify-center"
               whileHover={{ scale: 1.1, rotate: 10 }}
               transition={{ duration: 0.3 }}
             >
-              <span className="text-2xl">🐕</span>
+              <span className="text-2xl font-bold text-background">H</span>
             </motion.div>
-            <span className="text-xl font-bold text-charcoal-900">Bachata Team</span>
+            <span className="text-xl font-bold text-text-primary">
+              Halo Agency
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,14 +64,14 @@ export default function Header() {
                 href={item.href}
                 className={`relative text-sm font-medium transition-colors duration-200 ${
                   pathname === item.href
-                    ? 'text-blue-600'
-                    : 'text-charcoal-700 hover:text-blue-600'
+                    ? "text-accent-yellow"
+                    : "text-text-secondary hover:text-accent-yellow"
                 }`}
               >
                 {item.name}
                 {pathname === item.href && (
                   <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-yellow"
                     layoutId="activeTab"
                     initial={false}
                   />
@@ -87,12 +89,12 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-charcoal-700 hover:text-blue-600 transition-colors"
+            className="lg:hidden p-2 text-text-secondary hover:text-accent-yellow transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
             <motion.div
-              animate={isMobileMenuOpen ? 'open' : 'closed'}
+              animate={isMobileMenuOpen ? "open" : "closed"}
               className="w-6 h-6 flex flex-col justify-center items-center"
             >
               <motion.span
@@ -127,23 +129,23 @@ export default function Header() {
         <motion.div
           className="lg:hidden"
           initial={false}
-          animate={isMobileMenuOpen ? 'open' : 'closed'}
+          animate={isMobileMenuOpen ? "open" : "closed"}
           variants={{
-            open: { height: 'auto', opacity: 1 },
+            open: { height: "auto", opacity: 1 },
             closed: { height: 0, opacity: 0 },
           }}
           transition={{ duration: 0.3 }}
-          style={{ overflow: 'hidden' }}
+          style={{ overflow: "hidden" }}
         >
-          <div className="py-4 space-y-4 border-t border-charcoal-200">
+          <div className="py-4 space-y-4 border-t border-border-subtle">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`block text-base font-medium transition-colors duration-200 ${
                   pathname === item.href
-                    ? 'text-blue-600'
-                    : 'text-charcoal-700 hover:text-blue-600'
+                    ? "text-accent-yellow"
+                    : "text-text-secondary hover:text-accent-yellow"
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

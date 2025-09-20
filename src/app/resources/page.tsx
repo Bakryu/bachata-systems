@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { 
+  Typography, 
+  Section, 
+  Container, 
+  Card, 
+  Button,
+  Link,
+  Input,
+  ScrollReveal 
+} from '@/components/ui';
 import AnimatedCTA from '@/components/ui/AnimatedCTA';
 
 const categories = ['All', 'Web Development', 'Design', 'Business', 'Technology'];
@@ -170,146 +179,133 @@ export default function ResourcesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-charcoal-950 mb-6">
-                Resources &{' '}
-                <span className="text-gradient">Insights</span>
-              </h1>
-              <p className="text-xl text-charcoal-600 mb-8">
-                Discover valuable insights, tools, and resources to help you build 
-                better digital experiences and grow your business.
-              </p>
-              <AnimatedCTA href="#newsletter" size="lg">
-                Subscribe to Updates
-              </AnimatedCTA>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <Section variant="gradient" padding="lg">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto text-center">
+            <Typography variant="h1" align="center" className="mb-6">
+              Resources &{' '}
+              <span className="text-gradient">Insights</span>
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl mb-8">
+              Discover valuable insights, tools, and resources to help you build 
+              better digital experiences and grow your business.
+            </Typography>
+            <Button variant="primary" size="lg">
+              <Link href="#newsletter">Subscribe to Updates</Link>
+            </Button>
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Featured Articles */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Featured Articles
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Our latest insights and thoughts on web development, design, and digital strategy.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {featuredArticles.map((article, index) => (
-              <ScrollReveal key={article.id} delay={index * 0.1}>
-                <motion.article
-                  className="card overflow-hidden group cursor-pointer"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
-                        Featured
-                      </span>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-charcoal-500 mb-3">
-                      <span className="px-2 py-1 bg-charcoal-100 rounded text-xs mr-3">
-                        {article.category}
-                      </span>
-                      <span>{article.readTime}</span>
-                      <span className="mx-2">•</span>
-                      <span>{new Date(article.date).toLocaleDateString()}</span>
-                    </div>
-
-                    <h3 className="text-xl font-semibold text-charcoal-950 mb-3 group-hover:text-blue-600 transition-colors">
-                      {article.title}
-                    </h3>
-
-                    <p className="text-charcoal-600 mb-4">
-                      {article.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-charcoal-500">
-                        By {article.author}
-                      </span>
-                      <AnimatedCTA variant="outline" size="sm">
-                        Read More
-                      </AnimatedCTA>
-                    </div>
-                  </div>
-                </motion.article>
-              </ScrollReveal>
-            ))}
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Featured Articles
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Our latest insights and thoughts on web development, design, and digital strategy.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {featuredArticles.map((article, index) => (
+            <ScrollReveal key={article.id} delay={index * 0.1}>
+              <Card className="overflow-hidden group cursor-pointer" hover animated>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Typography variant="caption" component="span" className="px-3 py-1 bg-blue-600 text-white rounded-full">
+                      Featured
+                    </Typography>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-charcoal-500 mb-3">
+                    <Typography variant="caption" component="span" className="px-2 py-1 bg-charcoal-100 rounded mr-3">
+                      {article.category}
+                    </Typography>
+                    <Typography variant="caption">{article.readTime}</Typography>
+                    <Typography variant="caption" className="mx-2">•</Typography>
+                    <Typography variant="caption">{new Date(article.date).toLocaleDateString()}</Typography>
+                  </div>
+
+                  <Typography variant="h5" className="mb-3 group-hover:text-blue-600 transition-colors">
+                    {article.title}
+                  </Typography>
+
+                  <Typography variant="body2" color="secondary" className="mb-4">
+                    {article.excerpt}
+                  </Typography>
+
+                  <div className="flex items-center justify-between">
+                    <Typography variant="caption" color="muted">
+                      By {article.author}
+                    </Typography>
+                    <Button variant="outline" size="sm">
+                      Read More
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* All Articles */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                All Articles
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Browse our complete collection of articles and insights.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-charcoal-700 hover:bg-charcoal-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              All Articles
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Browse our complete collection of articles and insights.
+            </Typography>
           </div>
+        </ScrollReveal>
 
-          {/* Articles Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              onClick={() => handleCategoryChange(category)}
+              variant={activeCategory === category ? 'primary' : 'secondary'}
+              className={activeCategory === category ? 'shadow-lg' : ''}
             >
-              {filteredArticles.map((article, index) => (
-                <motion.article
-                  key={article.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card overflow-hidden group cursor-pointer"
-                  whileHover={{ y: -3 }}
-                >
+              {category}
+            </Button>
+          ))}
+        </div>
+
+        {/* Articles Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredArticles.map((article, index) => (
+              <motion.div
+                key={article.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden group cursor-pointer h-full" hover animated>
                   <div className="relative overflow-hidden">
                     <img
                       src={article.image}
@@ -317,171 +313,158 @@ export default function ResourcesPage() {
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-white/90 text-charcoal-700 text-xs rounded">
+                      <Typography variant="caption" component="span" className="px-2 py-1 bg-white/90 text-charcoal-700 rounded">
                         {article.category}
-                      </span>
+                      </Typography>
                     </div>
                   </div>
 
                   <div className="p-6">
                     <div className="flex items-center text-sm text-charcoal-500 mb-3">
-                      <span>{article.readTime}</span>
-                      <span className="mx-2">•</span>
-                      <span>{new Date(article.date).toLocaleDateString()}</span>
+                      <Typography variant="caption">{article.readTime}</Typography>
+                      <Typography variant="caption" className="mx-2">•</Typography>
+                      <Typography variant="caption">{new Date(article.date).toLocaleDateString()}</Typography>
                     </div>
 
-                    <h3 className="text-lg font-semibold text-charcoal-950 mb-2 group-hover:text-blue-600 transition-colors">
+                    <Typography variant="h6" className="mb-2 group-hover:text-blue-600 transition-colors">
                       {article.title}
-                    </h3>
+                    </Typography>
 
-                    <p className="text-charcoal-600 text-sm mb-4 line-clamp-3">
+                    <Typography variant="caption" color="secondary" className="mb-4 line-clamp-3">
                       {article.excerpt}
-                    </p>
+                    </Typography>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-charcoal-500">
+                      <Typography variant="caption" color="muted">
                         By {article.author}
-                      </span>
-                      <span className="text-blue-600 text-sm font-medium group-hover:underline">
+                      </Typography>
+                      <Typography variant="caption" className="text-blue-600 font-medium group-hover:underline">
                         Read More →
-                      </span>
+                      </Typography>
                     </div>
                   </div>
-                </motion.article>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </Section>
 
       {/* Free Resources */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Free Resources
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Download our free templates, checklists, and tools to accelerate your projects.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {resources.map((resource, index) => (
-              <ScrollReveal key={resource.title} delay={index * 0.1}>
-                <motion.div
-                  className="card p-6 text-center group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {resource.icon}
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold text-charcoal-950 mb-2">
-                    {resource.title}
-                  </h3>
-                  
-                  <p className="text-charcoal-600 text-sm mb-4">
-                    {resource.description}
-                  </p>
-
-                  <div className="text-xs text-blue-600 font-medium mb-4">
-                    {resource.type}
-                  </div>
-
-                  <AnimatedCTA variant="outline" size="sm" className="w-full">
-                    Download Free
-                  </AnimatedCTA>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+      <Section padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Free Resources
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Download our free templates, checklists, and tools to accelerate your projects.
+            </Typography>
           </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {resources.map((resource, index) => (
+            <ScrollReveal key={resource.title} delay={index * 0.1}>
+              <Card padding="md" className="text-center group" hover animated>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {resource.icon}
+                </div>
+                
+                <Typography variant="h6" className="mb-2">
+                  {resource.title}
+                </Typography>
+                
+                <Typography variant="caption" color="secondary" className="mb-4">
+                  {resource.description}
+                </Typography>
+
+                <Typography variant="caption" color="accent" weight="medium" className="mb-4">
+                  {resource.type}
+                </Typography>
+
+                <Button variant="outline" size="sm" fullWidth>
+                  Download Free
+                </Button>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Tools We Use */}
-      <section className="section-padding bg-charcoal-50">
-        <div className="container-custom">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-charcoal-950 mb-4">
-                Tools We Use
-              </h2>
-              <p className="text-xl text-charcoal-600 max-w-3xl mx-auto">
-                Discover the tools and technologies that power our development process.
-              </p>
-            </div>
-          </ScrollReveal>
+      <Section variant="muted" padding="lg">
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <Typography variant="h2" align="center" className="mb-4">
+              Tools We Use
+            </Typography>
+            <Typography variant="body1" color="secondary" align="center" className="text-xl max-w-3xl mx-auto">
+              Discover the tools and technologies that power our development process.
+            </Typography>
+          </div>
+        </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tools.map((tool, index) => (
-              <ScrollReveal key={tool.name} delay={index * 0.1}>
-                <motion.a
-                  href={tool.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card p-6 group block"
-                  whileHover={{ y: -3 }}
-                  transition={{ duration: 0.3 }}
-                >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tools.map((tool, index) => (
+            <ScrollReveal key={tool.name} delay={index * 0.1}>
+              <Link href={tool.url} external>
+                <Card padding="md" className="group" hover animated>
                   <div className="flex items-start space-x-4">
                     <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
                       {tool.logo}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-blue-600 transition-colors">
+                        <Typography variant="h6" className="group-hover:text-blue-600 transition-colors">
                           {tool.name}
-                        </h3>
-                        <span className="text-xs px-2 py-1 bg-charcoal-100 text-charcoal-600 rounded">
+                        </Typography>
+                        <Typography variant="caption" className="px-2 py-1 bg-charcoal-100 text-charcoal-600 rounded">
                           {tool.category}
-                        </span>
+                        </Typography>
                       </div>
-                      <p className="text-charcoal-600 text-sm">
+                      <Typography variant="caption" color="secondary">
                         {tool.description}
-                      </p>
+                      </Typography>
                     </div>
                   </div>
-                </motion.a>
-              </ScrollReveal>
-            ))}
-          </div>
+                </Card>
+              </Link>
+            </ScrollReveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Newsletter */}
-      <section id="newsletter" className="section-padding bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-custom text-center">
-          <ScrollReveal>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+      <Section id="newsletter" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white" padding="lg">
+        <ScrollReveal>
+          <div className="text-center">
+            <Typography variant="h2" align="center" className="mb-4 text-white">
               Stay Updated
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+            </Typography>
+            <Typography variant="body1" align="center" className="text-xl mb-8 max-w-3xl mx-auto opacity-90 text-white">
               Subscribe to our newsletter and get the latest insights, resources, 
               and updates delivered to your inbox.
-            </p>
+            </Typography>
             
             <div className="max-w-md mx-auto">
               <div className="flex flex-col sm:flex-row gap-4">
-                <input
+                <Input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg text-charcoal-950 focus:outline-none focus:ring-2 focus:ring-white"
+                  className="flex-1 text-charcoal-950"
                 />
-                <AnimatedCTA variant="secondary" size="lg">
+                <Button variant="secondary" size="lg">
                   Subscribe
-                </AnimatedCTA>
+                </Button>
               </div>
-              <p className="text-sm opacity-75 mt-4">
+              <Typography variant="caption" className="opacity-75 mt-4 text-white">
                 No spam, unsubscribe at any time.
-              </p>
+              </Typography>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        </ScrollReveal>
+      </Section>
     </>
   );
 }
