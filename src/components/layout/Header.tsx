@@ -49,10 +49,10 @@ export default function Header() {
               whileHover={{ scale: 1.1, rotate: 10 }}
               transition={{ duration: 0.3 }}
             >
-              <span className="text-2xl font-bold text-background">H</span>
+              <span className="text-2xl font-bold text-background">B</span>
             </motion.div>
             <span className="text-xl font-bold text-text-primary">
-              Halo Agency
+              Bachata-team
             </span>
           </Link>
 

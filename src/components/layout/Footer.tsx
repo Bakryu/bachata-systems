@@ -77,7 +77,7 @@ export default function Footer() {
               <div className="w-10 h-10 bg-gradient-to-r from-accent-yellow to-accent-purple rounded-full flex items-center justify-center">
                 <span className="text-2xl font-bold text-background">H</span>
               </div>
-              <span className="text-2xl font-bold">Halo Agency</span>
+              <span className="text-2xl font-bold">Bachata-team</span>
             </Link>
 
             <p className="text-text-secondary mb-6 max-w-md">
@@ -127,7 +127,7 @@ export default function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-text-muted text-sm">
-              © 2024 Halo Agency. All rights reserved.
+              © 2024 Bachata-team. All rights reserved.
             </p>
 
             <div className="flex space-x-6 text-sm">

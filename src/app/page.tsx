@@ -131,7 +131,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-4xl mx-auto"
+              className="max-w-4xl mx-auto backdrop-blur-sm bg-background/10 rounded-2xl p-8 md:p-12 border border-border-subtle/20 shadow-2xl shadow-black/20"
             >
               <motion.div
                 initial={{ opacity: 0, y: 30 }}

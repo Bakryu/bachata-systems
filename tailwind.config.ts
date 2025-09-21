@@ -20,7 +20,8 @@ const config: Config = {
           muted: "#6B7280", // muted text (captions, hints)
         },
         accent: {
-          yellow: "#FFD600", // main accent (CTA buttons, highlights)
+          yellow: "#F0B90B", // main accent (CTA buttons, highlights)
+          BtnYellow: "#FCD535;", // main accent (CTA buttons, highlights)
           yellowHover: "#FACC15", // hover state for yellow buttons
           blue: "#2563EB", // secondary accent (icons, UI details)
           purple: "#8B5CF6", // alternative accent (gradients, effects)

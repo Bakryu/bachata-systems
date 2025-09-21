@@ -15,7 +15,7 @@ export interface ButtonProps
 
 const variantStyles = {
   primary:
-    "bg-accent-yellow text-background hover:bg-accent-yellowHover active:bg-accent-yellowHover shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold",
+    "bg-accent-BtnYellow text-background hover:bg-accent-yellow active:bg-accent-yellow shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold",
   secondary:
     "bg-background-secondary text-text-primary hover:bg-border-subtle active:bg-border-subtle border border-border-subtle",
   outline:
@@ -91,7 +91,6 @@ export default function Button({
       <motion.button
         className={classes}
         disabled={disabled || loading}
-        whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
         onClick={props.onClick}
