@@ -11,8 +11,8 @@ const config: Config = {
       colors: {
         // Dark theme color palette
         background: {
-          DEFAULT: "#0B0B0F", // main background (almost black with subtle blue tint)
-          secondary: "#15161A", // secondary background (cards, containers)
+          DEFAULT: "#02021e", // main background (almost black with subtle blue tint)
+          secondary: "#14142d", // secondary background (cards, containers)
         },
         text: {
           primary: "#EAEAEA", // primary text (almost white)

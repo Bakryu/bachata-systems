@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+
 import { 
   Typography, 
   Section, 
@@ -10,7 +10,7 @@ import {
   Button,
   ScrollReveal 
 } from '@/components/ui';
-import AnimatedCTA from '@/components/ui/AnimatedCTA';
+import Link from '@/components/ui/Link';
 
 const services = [
   {
@@ -116,9 +116,9 @@ export default function ServicesPage() {
               We offer comprehensive digital solutions to help your business thrive in the digital landscape. 
               From design to development, we&apos;ve got you covered.
             </Typography>
-            <AnimatedCTA href="/contact" size="lg">
+            <Link href="/contact" size="lg">
               Start Your Project
-            </AnimatedCTA>
+            </Link>
           </div>
         </ScrollReveal>
       </Section>

@@ -11,7 +11,7 @@ import {
   Link,
   ScrollReveal 
 } from '@/components/ui';
-import AnimatedCTA from '@/components/ui/AnimatedCTA';
+
 
 const categories = ['All', 'Web Development', 'UI/UX Design', 'E-commerce', 'Mobile App'];
 
@@ -427,12 +427,12 @@ export default function ProjectsPage() {
               something amazing that drives real results for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <AnimatedCTA href="/contact" variant="secondary" size="lg">
+              <Link href="/contact" variant="secondary" size="lg">
                 Get Started Today
-              </AnimatedCTA>
-              <AnimatedCTA href="/services" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
+              </Link>
+              <Link href="/services" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
                 Our Services
-              </AnimatedCTA>
+              </Link>
             </div>
           </ScrollReveal>
         </div>

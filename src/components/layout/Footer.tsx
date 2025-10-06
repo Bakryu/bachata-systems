@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import AnimatedCTA from "../ui/AnimatedCTA";
+
+import Link from "../ui/Link";
 
 const footerLinks = {
   Services: [
@@ -59,9 +59,9 @@ export default function Footer() {
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-3 rounded-lg bg-background-secondary border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-yellow focus:border-transparent"
                 />
-                <AnimatedCTA variant="primary" size="md">
+                <Link href='#' variant="primary" size="md">
                   Subscribe
-                </AnimatedCTA>
+                </Link>
               </div>
             </motion.div>
           </div>

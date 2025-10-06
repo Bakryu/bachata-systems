@@ -11,7 +11,7 @@ import {
   Link,
   ScrollReveal 
 } from '@/components/ui';
-import AnimatedCTA from '@/components/ui/AnimatedCTA';
+
 
 const pricingPlans = [
   {

@@ -15,7 +15,7 @@ export interface ButtonProps
 
 const variantStyles = {
   primary:
-    "bg-accent-BtnYellow text-background hover:bg-accent-yellow active:bg-accent-yellow shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold",
+    "bg-accent-BtnYellow text-background hover:bg-accent-yellow active:bg-accent-yellowHover shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold",
   secondary:
     "bg-background-secondary text-text-primary hover:bg-border-subtle active:bg-border-subtle border border-border-subtle",
   outline:

@@ -5,6 +5,7 @@ A comprehensive, multi-page agency website built with Next.js, inspired by halo-
 ## 🚀 Features
 
 ### Core Technologies
+
 - **Next.js 15** with App Router and TypeScript
 - **Tailwind CSS** for styling with custom design system
 - **Framer Motion** for smooth animations and micro-interactions
@@ -12,6 +13,7 @@ A comprehensive, multi-page agency website built with Next.js, inspired by halo-
 - **React Intersection Observer** for scroll-triggered animations
 
 ### Design System
+
 - **Halo-Lab Inspired Palette**: Clean white backgrounds with charcoal text, deep blue accents, and bright yellow highlights
 - **Typography**: Inter font family for modern, readable text
 - **Responsive Design**: Mobile-first approach with seamless desktop scaling
@@ -19,27 +21,33 @@ A comprehensive, multi-page agency website built with Next.js, inspired by halo-
 
 ### Key Components
 
-#### 🎨 AnimatedCTA Component
+#### 🎨 Link Component
+
 Reusable call-to-action button with text scroll animation:
+
 - Text slides up and fades out on hover
 - Identical text enters from bottom
 - Supports multiple variants (primary, secondary, outline)
 - Configurable sizes (sm, md, lg)
 
 ```tsx
-<AnimatedCTA href="/contact" variant="primary" size="lg">
+<Link href="/contact" variant="primary" size="lg">
   Get Started Today
-</AnimatedCTA>
+</Link>
 ```
 
 #### 📱 Scroll Reveal Animations
+
 Smooth scroll-triggered animations throughout the site:
+
 - Staggered fade and translate effects
 - Configurable direction, delay, and duration
 - Intersection Observer for performance
 
 #### 🌟 3D Hero Scene
+
 Interactive 3D elements using React Three Fiber:
+
 - Floating geometric shapes with physics-based animations
 - Auto-rotating camera controls
 - Mobile fallback with static SVG animations
@@ -48,6 +56,7 @@ Interactive 3D elements using React Three Fiber:
 ### Page Structure
 
 #### 🏠 Home Page
+
 - **Hero Section**: 3D animated background with compelling headline
 - **Trusted Companies**: Logo showcase of client partnerships
 - **Services Preview**: 4-card grid highlighting core offerings
@@ -56,32 +65,38 @@ Interactive 3D elements using React Three Fiber:
 - **CTA Section**: Final conversion-focused call-to-action
 
 #### 🛠️ Services Pages (Planned)
+
 - Detailed service descriptions for Design and Development
 - Process workflows and methodologies
 - Pricing information and packages
 
 #### 💼 Projects/Case Studies (Planned)
+
 - Filterable project grid
 - Individual project detail pages
 - Technology stack showcases
 - Results and impact metrics
 
 #### 👥 Team Page (Planned)
+
 - Team member profiles
 - Cooperation models and workflows
 - Pricing structures and FAQ
 
 #### 📚 Resources/Blog (Planned)
+
 - Article listing with categories
 - Individual blog post pages
 - Search and filtering capabilities
 
 #### 💰 Pricing Page (Planned)
+
 - Service packages and pricing tiers
 - Feature comparisons
 - Custom quote requests
 
 #### 📞 Contact Page (Planned)
+
 - Contact form with validation
 - Company information and location
 - Multiple contact methods
@@ -89,18 +104,21 @@ Interactive 3D elements using React Three Fiber:
 ## 🎯 Performance & Optimization
 
 ### 3D Scene Optimization
+
 - Dynamic imports with `{ ssr: false }` for React Three Fiber
 - Instancing for repeated geometries
 - Mobile detection with static fallbacks
 - Performance monitoring with frame rate limits
 
 ### Image Optimization
+
 - Next.js Image component with lazy loading
 - Unsplash integration for placeholder images
 - WebP format support with fallbacks
 - Responsive image sizing
 
 ### Animation Performance
+
 - Hardware-accelerated transforms
 - Reduced motion support for accessibility
 - Efficient scroll listeners with throttling
@@ -109,23 +127,27 @@ Interactive 3D elements using React Three Fiber:
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 18.17.0 or later
 - npm or yarn package manager
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd halo-agency
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
@@ -160,7 +182,7 @@ halo-agency/
 │   │   └── contact/           # Contact form and info
 │   ├── components/
 │   │   ├── ui/                # Reusable UI components
-│   │   │   ├── AnimatedCTA.tsx
+│   │   │   ├── Link.tsx
 │   │   │   └── ScrollReveal.tsx
 │   │   ├── layout/            # Layout components
 │   │   │   ├── Header.tsx
@@ -178,6 +200,7 @@ halo-agency/
 ## 🎨 Customization
 
 ### Design Tokens
+
 Update colors and spacing in `tailwind.config.ts`:
 
 ```typescript
@@ -193,13 +216,16 @@ theme: {
 ```
 
 ### Content Management
+
 - Update company information in `src/data/`
 - Replace placeholder images with your assets
 - Modify service offerings and project showcases
 - Customize team member profiles
 
 ### 3D Scene Customization
+
 Modify the Hero3D component to:
+
 - Change geometric shapes and materials
 - Adjust animation speeds and patterns
 - Add custom 3D models (GLTF/GLB)
@@ -208,11 +234,13 @@ Modify the Hero3D component to:
 ## 📱 Mobile Behavior
 
 ### Responsive Design
+
 - **Mobile**: Simplified layouts, reduced animation complexity
 - **Tablet**: Balanced feature set with touch-optimized interactions
 - **Desktop**: Full feature set with hover states and complex animations
 
 ### 3D Scene Handling
+
 - **Desktop**: Full 3D scene with interactive controls
 - **Mobile**: Static SVG fallback with CSS animations
 - **Performance**: Automatic quality adjustment based on device capabilities
@@ -220,11 +248,13 @@ Modify the Hero3D component to:
 ## 🌐 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect your GitHub repository to Vercel
 2. Configure build settings (auto-detected for Next.js)
 3. Deploy with automatic CI/CD
 
 ### Other Platforms
+
 - **Netlify**: Configure build command as `npm run build`
 - **AWS Amplify**: Use Next.js SSG configuration
 - **Docker**: Use the included Dockerfile for containerization
@@ -232,18 +262,22 @@ Modify the Hero3D component to:
 ## 🔧 Development Notes
 
 ### Environment Variables
+
 Create `.env.local` for local development:
+
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_ANALYTICS_ID=your-analytics-id
 ```
 
 ### Code Quality
+
 - ESLint configuration for code consistency
 - TypeScript for type safety
 - Prettier for code formatting (recommended)
 
 ### Performance Monitoring
+
 - Core Web Vitals tracking
 - 3D scene performance metrics
 - Image loading optimization

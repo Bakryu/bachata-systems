@@ -12,7 +12,7 @@ import {
   Input,
   ScrollReveal 
 } from '@/components/ui';
-import AnimatedCTA from '@/components/ui/AnimatedCTA';
+
 
 const categories = ['All', 'Web Development', 'Design', 'Business', 'Technology'];
 

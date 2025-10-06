@@ -14,7 +14,6 @@ export { default as Typography } from './Typography';
 export { default as Link } from './Link';
 
 // Existing Components
-export { default as AnimatedCTA } from './AnimatedCTA';
 export { default as ScrollReveal } from './ScrollReveal';
 
 // Export types

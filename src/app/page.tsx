@@ -10,14 +10,14 @@ import {
   Button,
   ScrollReveal,
 } from "@/components/ui";
-import AnimatedCTA from "@/components/ui/AnimatedCTA";
 
 // Lazy load the Matrix component for better performance
 const MatrixHero = lazy(() => import("@/components/three/MatrixHero"));
 
 // Trusted companies logos (placeholder)
+
 const trustedCompanies = [
-  "TechCorp",
+  "DreamHost",
   "StartupX",
   "InnovateLab",
   "DigitalFlow",
@@ -176,22 +176,6 @@ export default function HomePage() {
                 </Button>
               </motion.div>
             </motion.div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-            >
-              <div className="w-6 h-10 border-2 border-text-muted rounded-full flex justify-center">
-                <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-1 h-3 bg-text-muted rounded-full mt-2"
-                />
-              </div>
-            </motion.div>
           </Container>
         </div>
       </Section>
@@ -199,26 +183,28 @@ export default function HomePage() {
       {/* Trusted Companies */}
       <Section variant="muted" padding="lg">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <Typography variant="body1" color="secondary" className="text-lg">
-              Trusted by innovative companies
-            </Typography>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-            {trustedCompanies.map((company, index) => (
-              <motion.div
-                key={company}
-                className="text-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="h-12 flex items-center justify-center">
-                  <Typography variant="body1" color="muted" weight="semibold">
-                    {company}
-                  </Typography>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative border border-solid rounded-3xl border-text-secondary p-4 lg:p-12">
+            <div className="absolute bg-background px-4 xl:px-6 top-0 left-1/2 translate-x-[-50%] translate-y-[-50%] text-center">
+              <Typography variant="body1" color="secondary" className="text-lg">
+                Trusted by innovative companies
+              </Typography>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+              {trustedCompanies.map((company, index) => (
+                <motion.div
+                  key={company}
+                  className="text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="h-12 flex items-center justify-center">
+                    <Typography variant="body1" color="muted" weight="semibold">
+                      {company}
+                    </Typography>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </ScrollReveal>
       </Section>
@@ -395,10 +381,7 @@ export default function HomePage() {
       </Section>
 
       {/* CTA Section */}
-      <Section
-        className="bg-gradient-to-r from-accent-blue to-accent-purple text-text-primary"
-        padding="lg"
-      >
+      <Section variant="gradient" className="text-text-primary" padding="lg">
         <ScrollReveal>
           <div className="text-center">
             <Typography

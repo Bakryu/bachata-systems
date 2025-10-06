@@ -362,7 +362,7 @@ export default function MatrixHero({ className = "" }: MatrixHeroProps) {
       monitorPerformance();
 
       // Clear canvas efficiently
-      ctx.fillStyle = "#0B0B0F";
+      ctx.fillStyle = "#02021e";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw columns if visible

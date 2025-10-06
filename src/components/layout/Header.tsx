@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
-import AnimatedCTA from "../ui/AnimatedCTA";
+import Link from "../ui/Link";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "Team", href: "/team" },
-  { name: "Resources", href: "/resources" },
-  { name: "Pricing", href: "/pricing" },
+  { name: "Services", href: "/services/" },
+  { name: "Projects", href: "/projects/" },
+  { name: "Team", href: "/team/" },
+  { name: "Resources", href: "/resources/" },
+  { name: "Pricing", href: "/pricing/" },
 ];
 
 export default function Header() {
@@ -82,9 +82,9 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <AnimatedCTA href="/contact" size="sm">
+            <Link href="/contact" size="sm">
               Get in Touch
-            </AnimatedCTA>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -153,9 +153,9 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4">
-              <AnimatedCTA href="/contact" size="sm" className="w-full">
+              <Link href="/contact" size="sm" className="w-full">
                 Get in Touch
-              </AnimatedCTA>
+              </Link>
             </div>
           </div>
         </motion.div>
