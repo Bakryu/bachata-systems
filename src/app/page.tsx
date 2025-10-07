@@ -1,6 +1,6 @@
-"use client";
 
 import { Suspense, lazy } from "react";
+
 import { motion } from "framer-motion";
 import {
   Typography,
@@ -10,20 +10,12 @@ import {
   Button,
   ScrollReveal,
 } from "@/components/ui";
+import TrustedCompanies from "@/components/sections/TrustedCompanies";
 
 // Lazy load the Matrix component for better performance
 const MatrixHero = lazy(() => import("@/components/three/MatrixHero"));
 
-// Trusted companies logos (placeholder)
 
-const trustedCompanies = [
-  "DreamHost",
-  "StartupX",
-  "InnovateLab",
-  "DigitalFlow",
-  "CloudSync",
-  "DataVision",
-];
 
 // Services preview
 const services = [
@@ -180,34 +172,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Trusted Companies */}
-      <Section variant="muted" padding="lg">
-        <ScrollReveal>
-          <div className="relative border border-solid rounded-3xl border-text-secondary p-4 lg:p-12">
-            <div className="absolute bg-background px-4 xl:px-6 top-0 left-1/2 translate-x-[-50%] translate-y-[-50%] text-center">
-              <Typography variant="body1" color="secondary" className="text-lg">
-                Trusted by innovative companies
-              </Typography>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-              {trustedCompanies.map((company, index) => (
-                <motion.div
-                  key={company}
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="h-12 flex items-center justify-center">
-                    <Typography variant="body1" color="muted" weight="semibold">
-                      {company}
-                    </Typography>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
-      </Section>
+      <TrustedCompanies />
 
       {/* Services Preview */}
       <Section padding="lg">
