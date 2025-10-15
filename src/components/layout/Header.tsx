@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-import { usePathname } from "next/navigation";
-import Link from "../ui/Link";
+import { usePathname } from 'next/navigation';
+import Link from '../ui/Link';
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Services", href: "/services/" },
-  { name: "Projects", href: "/projects/" },
-  { name: "Team", href: "/team/" },
-  { name: "Resources", href: "/resources/" },
-  { name: "Pricing", href: "/pricing/" },
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Projects', href: '/projects/' },
+  { name: 'Team', href: '/team/' },
+  { name: 'Resources', href: '/resources/' },
+  { name: 'Pricing', href: '/pricing/' },
 ];
 
 export default function Header() {
@@ -25,16 +25,16 @@ export default function Header() {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border-subtle"
-          : "bg-transparent"
+          ? 'bg-background/95 backdrop-blur-md shadow-sm border-b border-border-subtle'
+          : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -51,21 +51,19 @@ export default function Header() {
             >
               <span className="text-2xl font-bold text-background">B</span>
             </motion.div>
-            <span className="text-xl font-bold text-text-primary">
-              Bachata-team
-            </span>
+            <span className="text-xl font-bold text-text-primary">Bachata-team</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`relative text-sm font-medium transition-colors duration-200 ${
                   pathname === item.href
-                    ? "text-accent-yellow"
-                    : "text-text-secondary hover:text-accent-yellow"
+                    ? 'text-accent-yellow'
+                    : 'text-text-secondary hover:text-accent-yellow'
                 }`}
               >
                 {item.name}
@@ -80,10 +78,86 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Link href="/contact" size="sm">
-              Get in Touch
+          <div className="hidden lg:block ml-4">
+            {/* Variant 2: Glassmorphic Button with Orbiting Dots */}
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center px-7 py-2 font-semibold text-text-primary bg-background-secondary/60 backdrop-blur-md rounded-2xl shadow-xl border border-border-subtle hover:border-accent-yellow transition-all duration-300 overflow-hidden"
+              style={{
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-4">
+                <span className="drop-shadow-lg">Contact Us</span>
+                {/* Orbiting Dots Animation */}
+                <span className="relative w-5 h-5">
+                  <span className="absolute w-2 h-2 bg-accent-yellow rounded-full animate-orbit1" />
+                  <span className="absolute w-2 h-2 bg-accent-blue rounded-full animate-orbit2" />
+                  <span className="absolute w-2 h-2 bg-accent-purple rounded-full animate-orbit3" />
+                </span>
+              </span>
+              {/* Glass shine */}
+              <span className="absolute left-0 top-0 w-full h-full pointer-events-none">
+                <span className="absolute left-[-60%] top-0 w-1/2 h-full bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-40 animate-shine3d" />
+              </span>
+              <style jsx>{`
+                @keyframes orbit1 {
+                  0% {
+                    transform: rotate(0deg) translateX(8px);
+                  }
+                  100% {
+                    transform: rotate(360deg) translateX(8px);
+                  }
+                }
+                @keyframes orbit2 {
+                  0% {
+                    transform: rotate(120deg) translateX(8px);
+                  }
+                  100% {
+                    transform: rotate(480deg) translateX(8px);
+                  }
+                }
+                @keyframes orbit3 {
+                  0% {
+                    transform: rotate(240deg) translateX(8px);
+                  }
+                  100% {
+                    transform: rotate(600deg) translateX(8px);
+                  }
+                }
+                .animate-orbit1 {
+                  animation: orbit1 1.8s linear infinite;
+                  left: 50%;
+                  top: 50%;
+                  margin-left: -4px;
+                  margin-top: -4px;
+                }
+                .animate-orbit2 {
+                  animation: orbit2 2.2s linear infinite;
+                  left: 50%;
+                  top: 50%;
+                  margin-left: -4px;
+                  margin-top: -4px;
+                }
+                .animate-orbit3 {
+                  animation: orbit3 2.6s linear infinite;
+                  left: 50%;
+                  top: 50%;
+                  margin-left: -4px;
+                  margin-top: -4px;
+                }
+                @keyframes shine3d {
+                  0% {
+                    left: -60%;
+                  }
+                  100% {
+                    left: 120%;
+                  }
+                }
+                .animate-shine3d {
+                  animation: shine3d 2.5s linear infinite;
+                }
+              `}</style>
             </Link>
           </div>
 
@@ -94,7 +168,7 @@ export default function Header() {
             aria-label="Toggle mobile menu"
           >
             <motion.div
-              animate={isMobileMenuOpen ? "open" : "closed"}
+              animate={isMobileMenuOpen ? 'open' : 'closed'}
               className="w-6 h-6 flex flex-col justify-center items-center"
             >
               <motion.span
@@ -129,23 +203,23 @@ export default function Header() {
         <motion.div
           className="lg:hidden"
           initial={false}
-          animate={isMobileMenuOpen ? "open" : "closed"}
+          animate={isMobileMenuOpen ? 'open' : 'closed'}
           variants={{
-            open: { height: "auto", opacity: 1 },
+            open: { height: 'auto', opacity: 1 },
             closed: { height: 0, opacity: 0 },
           }}
           transition={{ duration: 0.3 }}
-          style={{ overflow: "hidden" }}
+          style={{ overflow: 'hidden' }}
         >
           <div className="py-4 space-y-4 border-t border-border-subtle">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`block text-base font-medium transition-colors duration-200 ${
                   pathname === item.href
-                    ? "text-accent-yellow"
-                    : "text-text-secondary hover:text-accent-yellow"
+                    ? 'text-accent-yellow'
+                    : 'text-text-secondary hover:text-accent-yellow'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -153,7 +227,7 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4">
-              <Link href="/contact" size="sm" className="w-full">
+              <Link href="/contact" className="w-full">
                 Get in Touch
               </Link>
             </div>

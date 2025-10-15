@@ -7,52 +7,10 @@ import TrustedCompanies from '@/components/sections/TrustedCompanies';
 import ServicesPreview from '@/components/sections/ServicesPreview';
 import WebDevSteps from '@/components/sections/WebDevSteps';
 
+import FeaturedProjectsShowcase from '@/components/sections/FeaturedProjectsShowcase';
+
 // Lazy load the Matrix component for better performance
 const MatrixHero = lazy(() => import('@/components/three/MatrixHero'));
-
-// Featured projects
-const featuredProjects = [
-  {
-    title: 'E-commerce Platform',
-    description: 'A modern e-commerce solution with advanced analytics and user experience.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-    tags: ['React', 'Node.js', 'MongoDB'],
-  },
-  {
-    title: 'SaaS Dashboard',
-    description: 'Comprehensive dashboard for data visualization and business intelligence.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    tags: ['Vue.js', 'Python', 'PostgreSQL'],
-  },
-  {
-    title: 'Mobile Banking App',
-    description: 'Secure and intuitive mobile banking experience with modern design.',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop',
-    tags: ['React Native', 'TypeScript', 'AWS'],
-  },
-];
-
-// Testimonials
-const testimonials = [
-  {
-    name: 'Sarah Johnson',
-    role: 'CEO, TechStartup',
-    company: 'TechStartup Inc.',
-    content:
-      'HaloAgency transformed our vision into a stunning digital product. Their attention to detail and technical expertise exceeded our expectations.',
-    avatar:
-      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face',
-  },
-  {
-    name: 'Michael Chen',
-    role: 'Product Manager',
-    company: 'InnovateLab',
-    content:
-      'Working with HaloAgency was a game-changer. They delivered a scalable solution that helped us grow our user base by 300%.',
-    avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-  },
-];
 
 export default function HomePage() {
   return (
@@ -131,117 +89,10 @@ export default function HomePage() {
       <TrustedCompanies />
 
       <ServicesPreview />
+
       <WebDevSteps />
-      {/* Featured Projects */}
-      <Section variant="muted" padding="lg">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <Typography variant="h2" align="center" className="mb-4">
-              Featured Projects
-            </Typography>
-            <Typography
-              variant="body1"
-              color="secondary"
-              align="center"
-              className="text-xl max-w-3xl mx-auto"
-            >
-              Discover some of our recent work and the impact we&apos;ve made for our clients.
-            </Typography>
-          </div>
-        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <ScrollReveal key={project.title} delay={index * 0.1}>
-              <Card className="overflow-hidden group cursor-pointer" hover animated>
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-accent-blue opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                </div>
-                <div className="p-6">
-                  <Typography variant="h6" className="mb-2">
-                    {project.title}
-                  </Typography>
-                  <Typography variant="body2" color="secondary" className="mb-4">
-                    {project.description}
-                  </Typography>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <Typography
-                        key={tag}
-                        variant="caption"
-                        component="span"
-                        className="px-3 py-1 bg-accent-blue/20 text-accent-blue rounded-full"
-                      >
-                        {tag}
-                      </Typography>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        <ScrollReveal delay={0.4}>
-          <div className="text-center mt-12">
-            <Button variant="outline" size="md">
-              <a href="/projects">View All Projects</a>
-            </Button>
-          </div>
-        </ScrollReveal>
-      </Section>
-
-      {/* Testimonials */}
-      <Section padding="lg">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <Typography variant="h2" align="center" className="mb-4">
-              What Our Clients Say
-            </Typography>
-            <Typography
-              variant="body1"
-              color="secondary"
-              align="center"
-              className="text-xl max-w-3xl mx-auto"
-            >
-              Don&apos;t just take our word for it. Here&apos;s what our clients have to say about
-              working with us.
-            </Typography>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={testimonial.name} delay={index * 0.2}>
-              <Card padding="lg" hover animated>
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <Typography variant="h6" weight="semibold">
-                      {testimonial.name}
-                    </Typography>
-                    <Typography variant="caption" color="secondary">
-                      {testimonial.role}, {testimonial.company}
-                    </Typography>
-                  </div>
-                </div>
-                <Typography variant="body2" className="italic">
-                  &quot;{testimonial.content}&quot;
-                </Typography>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-      </Section>
+      <FeaturedProjectsShowcase />
 
       {/* CTA Section */}
       <Section variant="gradient" className="text-text-primary" padding="lg">
