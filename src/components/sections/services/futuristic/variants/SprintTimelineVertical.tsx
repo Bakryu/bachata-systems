@@ -125,7 +125,7 @@ export default function SprintTimelineVertical() {
             {sprintSteps.map((step, index) => (
               <motion.div
                 key={index}
-                className="relative"
+                className="relative w-[250px]"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}

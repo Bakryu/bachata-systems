@@ -3,6 +3,20 @@ import { motion } from 'framer-motion';
 import { Section, Container, Typography } from '@/components/ui';
 
 export default function SprintTimelineHorizontal() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Auto-advance active card
+  React.useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % sprintSteps.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
   const sprintSteps = [
     {
       number: '01',
@@ -110,14 +124,27 @@ export default function SprintTimelineHorizontal() {
           </motion.div>
 
           {/* Sprint Steps */}
-          <div className="mt-36 grid grid-cols-5 gap-6">
-            {sprintSteps.map((step, index) => (
+          <div className="mt-36 flex justify-center items-start gap-6">
+            {sprintSteps.map((step, index, length) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group"
+                animate={{
+                  scale: index === activeIndex ? 1.1 : 1,
+                  translateX: index !== 0 && index === activeIndex ? '25%' : 0,
+                  // zIndex: index === activeIndex ? 10 : sprintSteps.length - index,
+                }}
+                transition={{ duration: 0.5 }}
+                className="group w-[300px] absolute top-0"
+                style={{
+                  left: `${index * 20}%`,
+                }}
+                onMouseEnter={() => {
+                  setIsHovered(true);
+                  setActiveIndex(index);
+                }}
+                onMouseLeave={() => setIsHovered(false)}
               >
                 {/* Connecting line */}
                 <motion.div
@@ -130,7 +157,7 @@ export default function SprintTimelineHorizontal() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 />
 
-                <div className="relative">
+                <div className="relative ">
                   <motion.div
                     className="absolute -inset-px rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur"
                     style={{ background: step.color }}
@@ -175,26 +202,42 @@ export default function SprintTimelineHorizontal() {
 
           {/* Timeline bar */}
           <motion.div
-            className="mt-8 h-2 bg-white/10 rounded-full overflow-hidden"
+            className="mt-[250px] h-2 bg-white/10 rounded-full overflow-hidden"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="h-full bg-gradient-to-r from-[#F0B90B] via-[#2563EB] to-[#8B5CF6]"
+              className="h-full"
               initial={{ x: '-100%' }}
-              whileInView={{ x: '0%' }}
-              transition={{ duration: 1.5, delay: 0.4 }}
+              animate={{
+                x: isHovered ? `-${(4 - activeIndex) * 20}%` : '0%',
+                background: sprintSteps[activeIndex].color,
+              }}
+              transition={{
+                x: {
+                  duration: isHovered ? 0.3 : 5,
+                  // repeat: activeIndex === sprintSteps.length - 1 ? 0 : Infinity,
+                  // repeatType: 'loop',
+                },
+                background: { duration: 0.5 },
+              }}
             />
           </motion.div>
 
           {/* Sprint duration */}
-          <div className="mt-4 flex justify-between text-gray-400">
+          <motion.div
+            className="mt-4 flex justify-between"
+            animate={{
+              color: isHovered ? sprintSteps[activeIndex].color : '#9CA3AF',
+            }}
+            transition={{ duration: 0.5 }}
+          >
             <span>Day 1</span>
             <span>Week 1</span>
             <span>Week 2</span>
             <span>Day 14</span>
-          </div>
+          </motion.div>
         </div>
       </Container>
     </Section>
