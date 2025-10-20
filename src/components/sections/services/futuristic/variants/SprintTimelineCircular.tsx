@@ -58,7 +58,7 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Testing',
     description: 'Quality assurance and bug fixing',
-    color: '#10B981',
+    color: '#EF4444',
     icon: <FaSearch />,
     days: 'Day 12-14',
     details: [
@@ -71,8 +71,8 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Release',
     description: 'Deploying to production and gathering feedback',
-    color: '#EF4444',
     icon: <FaRocket />,
+    color: '#10B981',
     days: 'Day 14',
     details: [
       'Deploy to production environment',
@@ -86,12 +86,16 @@ const sprintSteps: SprintStep[] = [
 export default function SprintTimelineCircular() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [prevIndex, setPrevIndex] = useState(0);
 
   useEffect(() => {
     if (isHovered) return;
 
     const interval = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % sprintSteps.length);
+      setActiveIndex(prev => {
+        setPrevIndex(prev);
+        return (prev + 1) % sprintSteps.length;
+      });
     }, 3000);
 
     return () => clearInterval(interval);
@@ -153,10 +157,10 @@ export default function SprintTimelineCircular() {
             <Typography variant="overline" className="text-[#F0B90B] mb-4 tracking-widest">
               SPRINT SYSTEM
             </Typography>
-            <Typography variant="h2" className="mb-6 text-white">
+            <Typography variant="h2" className="mb-6 text-white text-center">
               Two Week Sprint Cycle
             </Typography>
-            <Typography variant="body1" className="text-gray-400 max-w-2xl mx-auto">
+            <Typography variant="body1" className="text-gray-400 max-w-2xl mx-auto text-center">
               Our agile development process with daily scrum meetings ensures efficient and
               transparent project delivery
             </Typography>
@@ -193,6 +197,7 @@ export default function SprintTimelineCircular() {
                 strokeWidth="2"
               />
               <motion.circle
+                key={activeIndex === 0 && prevIndex === sprintSteps.length - 1 ? 'reset' : 'normal'}
                 cx={centerX}
                 cy={centerY}
                 r={radius}
@@ -200,11 +205,19 @@ export default function SprintTimelineCircular() {
                 stroke={sprintSteps[activeIndex].color}
                 strokeWidth="4"
                 strokeLinecap="round"
-                initial={{ pathLength: 0 }}
+                initial={{
+                  pathLength:
+                    activeIndex === 0 && prevIndex === sprintSteps.length - 1
+                      ? 1
+                      : activeIndex / sprintSteps.length,
+                }}
                 animate={{
                   pathLength: (activeIndex + 1) / sprintSteps.length,
                 }}
-                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                transition={{
+                  duration: activeIndex === 0 && prevIndex === sprintSteps.length - 1 ? 0 : 0.5,
+                  ease: 'easeInOut',
+                }}
                 style={{
                   filter: `drop-shadow(0 0 10px ${sprintSteps[activeIndex].color})`,
                 }}
@@ -249,6 +262,7 @@ export default function SprintTimelineCircular() {
                     whileHover={{ scale: isActive ? 1.25 : 1.15 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => {
+                      setPrevIndex(activeIndex);
                       setActiveIndex(index);
                       setIsHovered(true);
                     }}
@@ -379,6 +393,7 @@ export default function SprintTimelineCircular() {
             <motion.button
               key={index}
               onClick={() => {
+                setPrevIndex(activeIndex);
                 setActiveIndex(index);
                 setIsHovered(true);
               }}
