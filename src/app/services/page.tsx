@@ -108,14 +108,12 @@ import CaseStudies from '@/components/sections/services/futuristic/CaseStudies';
 import FinalCTA from '@/components/sections/services/futuristic/FinalCTA';
 
 // Alternative variants
-import HeroFuturisticAlt from '@/components/sections/services/futuristic/variants/HeroFuturisticAlt';
+// import HeroFuturisticAlt from '@/components/sections/services/futuristic/variants/HeroFuturisticAlt';
 import ServicesGridAlt from '@/components/sections/services/futuristic/variants/ServicesGridAlt';
-import WorkflowTimelineAlt from '@/components/sections/services/futuristic/variants/WorkflowTimelineAlt';
-import SprintTimelineAlt from '@/components/sections/services/futuristic/variants/SprintTimelineAlt';
 import TechStackAlt from '@/components/sections/services/futuristic/variants/TechStackAlt';
-import SprintTimelineHorizontal from '@/components/sections/services/futuristic/variants/SprintTimelineHorizontal';
-import SprintTimelineVertical from '@/components/sections/services/futuristic/variants/SprintTimelineVertical';
-import SprintCyclesAlt from '@/components/sections/services/futuristic/variants/SprintCyclesAlt';
+import SprintTimelineAccordion from '@/components/sections/services/futuristic/variants/SprintTimelineAccordion';
+import SprintTimelineCircular from '@/components/sections/services/futuristic/variants/SprintTimelineCircular';
+import SprintTimelineCards from '@/components/sections/services/futuristic/variants/SprintTimelineCards';
 
 export default function ServicesPage() {
   // Toggle between different variants
@@ -125,11 +123,11 @@ export default function ServicesPage() {
     <main className="bg-[#02021e]">
       {useAlternativeVersions ? (
         <>
-          <HeroFuturisticAlt />
+          {/* <HeroFuturisticAlt /> */}
           <ServicesGridAlt />
-          <SprintTimelineHorizontal />
-          <SprintTimelineVertical />
-          <SprintCyclesAlt />
+          <SprintTimelineAccordion />
+          <SprintTimelineCircular />
+          <SprintTimelineCards />
           <TechStackAlt />
         </>
       ) : (

@@ -1,109 +1,143 @@
 'use client';
 
-import { Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere, Box, Torus } from '@react-three/drei';
-import { Mesh } from 'three';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, Sphere, Box, Torus, useGLTF } from '@react-three/drei';
+import * as THREE from 'three';
 import { motion } from 'framer-motion';
 
-// Animated 3D Objects
 function FloatingGeometry() {
-  const sphereRef = useRef<Mesh>(null);
-  const boxRef = useRef<Mesh>(null);
-  const torusRef = useRef<Mesh>(null);
+  const [mounted, setMounted] = useState(false);
+  const sphereRef = useRef<THREE.Mesh>(null);
+  const boxRef = useRef<THREE.Mesh>(null);
+  const torusRef = useRef<THREE.Mesh>(null);
+  const { viewport } = useThree();
 
-  useFrame((state) => {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useFrame((state, delta) => {
+    if (!mounted) return;
+
     const time = state.clock.getElapsedTime();
-    
+
+    // Sphere animation
     if (sphereRef.current) {
-      sphereRef.current.position.y = Math.sin(time) * 0.5;
-      sphereRef.current.rotation.x = time * 0.3;
-      sphereRef.current.rotation.y = time * 0.2;
+      sphereRef.current.position.y = Math.sin(time * 0.5) * 0.5;
+      sphereRef.current.rotation.x = time * 0.2;
+      sphereRef.current.rotation.y = time * 0.1;
     }
-    
+
+    // Box animation
     if (boxRef.current) {
-      boxRef.current.position.y = Math.cos(time * 1.2) * 0.3;
-      boxRef.current.rotation.x = time * 0.4;
+      boxRef.current.position.y = Math.cos(time * 0.8) * 0.3;
+      boxRef.current.rotation.x = time * 0.3;
       boxRef.current.rotation.z = time * 0.1;
     }
-    
+
+    // Torus animation
     if (torusRef.current) {
-      torusRef.current.position.y = Math.sin(time * 0.8) * 0.4;
+      torusRef.current.position.y = Math.sin(time * 0.6) * 0.4;
       torusRef.current.rotation.x = time * 0.2;
-      torusRef.current.rotation.y = time * 0.5;
+      torusRef.current.rotation.y = time * 0.4;
     }
   });
 
+  if (!mounted) return null;
+
   return (
-    <>
+    <group>
       {/* Main Sphere */}
       <Sphere ref={sphereRef} args={[1, 32, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial
+        <meshPhysicalMaterial
           color="#3b82f6"
           metalness={0.7}
           roughness={0.2}
           transparent
           opacity={0.8}
+          envMapIntensity={1}
         />
       </Sphere>
 
       {/* Floating Box */}
       <Box ref={boxRef} args={[0.8, 0.8, 0.8]} position={[3, 1, -2]}>
-        <meshStandardMaterial
+        <meshPhysicalMaterial
           color="#eab308"
           metalness={0.5}
           roughness={0.3}
           transparent
           opacity={0.7}
+          envMapIntensity={0.8}
         />
       </Box>
 
       {/* Floating Torus */}
       <Torus ref={torusRef} args={[0.6, 0.2, 16, 32]} position={[-2.5, -1, 1]}>
-        <meshStandardMaterial
+        <meshPhysicalMaterial
           color="#1d4ed8"
           metalness={0.8}
           roughness={0.1}
           transparent
           opacity={0.6}
+          envMapIntensity={1.2}
         />
       </Torus>
 
-      {/* Additional small spheres */}
-      {Array.from({ length: 8 }).map((_, i) => (
+      {/* Particle Field */}
+      {Array.from({ length: 12 }).map((_, i) => (
         <Sphere
           key={i}
           args={[0.1, 16, 16]}
           position={[
-            Math.cos(i * 0.8) * 4,
-            Math.sin(i * 0.6) * 2,
-            Math.sin(i * 0.4) * 3,
+            Math.cos(i * 0.8) * 4 * viewport.factor,
+            Math.sin(i * 0.6) * 2 * viewport.factor,
+            Math.sin(i * 0.4) * 3 * viewport.factor,
           ]}
         >
-          <meshStandardMaterial
-            color={i % 2 === 0 ? "#60a5fa" : "#fbbf24"}
+          <meshPhysicalMaterial
+            color={i % 2 === 0 ? '#60a5fa' : '#fbbf24'}
             transparent
             opacity={0.6}
+            envMapIntensity={0.5}
           />
         </Sphere>
       ))}
-    </>
+    </group>
   );
 }
 
-// 3D Scene Component
 function Scene() {
+  const [sceneReady, setSceneReady] = useState(false);
+
+  useEffect(() => {
+    setSceneReady(true);
+  }, []);
+
+  if (!sceneReady) return null;
+
   return (
     <>
-      {/* Lighting */}
+      {/* Environment and Lighting */}
+      <color attach="background" args={['#02021e']} />
+      <fog attach="fog" args={['#02021e', 5, 18]} />
       <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 10, 5]} intensity={1} color="#ffffff" />
+      <directionalLight
+        position={[10, 10, 5]}
+        intensity={1}
+        color="#ffffff"
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+      />
       <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
-      
+      <hemisphereLight intensity={0.3} groundColor="#000000" />
+
       {/* 3D Objects */}
-      <FloatingGeometry />
-      
-      {/* Controls */}
+      <Suspense fallback={null}>
+        <FloatingGeometry />
+      </Suspense>
+
+      {/* Camera Controls */}
       <OrbitControls
         enableZoom={false}
         enablePan={false}
@@ -112,6 +146,7 @@ function Scene() {
         autoRotateSpeed={0.5}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 2}
+        makeDefault
       />
     </>
   );
@@ -132,6 +167,12 @@ interface Hero3DProps {
 }
 
 export default function Hero3D({ className = '' }: Hero3DProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <motion.div
       className={`w-full h-full ${className}`}
@@ -139,60 +180,115 @@ export default function Hero3D({ className = '' }: Hero3DProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.5 }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
-        style={{ background: 'transparent' }}
-        dpr={[1, 2]}
-        performance={{ min: 0.5 }}
-      >
-        <Suspense fallback={null}>
-          <Scene />
-        </Suspense>
-      </Canvas>
-      
-      {/* Mobile fallback - static SVG */}
-      <div className="md:hidden absolute inset-0 flex items-center justify-center">
-        <svg
+      {mounted && (
+        <Canvas
+          shadows
+          dpr={[1, 2]}
+          camera={{
+            position: [0, 0, 8],
+            fov: 60,
+            near: 0.1,
+            far: 100,
+          }}
+          gl={{
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping,
+          }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+          }}
+          onCreated={({ gl }) => {
+            gl.setClearColor('#02021e');
+          }}
+        >
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+        </Canvas>
+      )}
+
+      {/* Mobile Fallback */}
+      <div className="md:hidden absolute inset-0 flex items-center justify-center bg-[#02021e]">
+        <motion.svg
           width="300"
           height="300"
           viewBox="0 0 300 300"
-          className="opacity-20 animate-pulse"
+          className="opacity-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          <circle
+          <motion.circle
             cx="150"
             cy="150"
             r="80"
             fill="none"
             stroke="#3b82f6"
             strokeWidth="2"
-            className="animate-spin"
-            style={{ transformOrigin: '150px 150px', animationDuration: '10s' }}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 2,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'loop',
+            }}
           />
-          <circle
+          <motion.circle
             cx="150"
             cy="150"
             r="50"
             fill="#3b82f6"
             opacity="0.3"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
           />
-          <rect
+          <motion.rect
             x="200"
             y="100"
             width="30"
             height="30"
             fill="#eab308"
             opacity="0.5"
-            className="animate-bounce"
+            animate={{
+              y: [100, 120, 100],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: 'loop',
+            }}
           />
-          <circle
+          <motion.circle
             cx="100"
             cy="200"
             r="15"
             fill="#1d4ed8"
             opacity="0.4"
-            className="animate-pulse"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.4, 0.6, 0.4],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
           />
-        </svg>
+        </motion.svg>
       </div>
     </motion.div>
   );

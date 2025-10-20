@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Section, Container, Typography, Button } from '@/components/ui';
 
@@ -31,26 +33,41 @@ export default function HeroFuturisticAlt() {
 
       {/* Floating elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              rotate: 360,
-            }}
-            transition={{
-              duration: 15 + Math.random() * 10,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute w-32 h-32 bg-gradient-to-br from-[#F0B90B]/5 to-[#2563EB]/5 rounded-full blur-xl"
-          />
-        ))}
+        {Array.from({ length: 5 }).map((_, i) => {
+          const [mounted, setMounted] = React.useState(false);
+          const [animateProps, setAnimateProps] = React.useState({
+            x: 0,
+            y: 0,
+            rotate: 0,
+          });
+
+          React.useEffect(() => {
+            setMounted(true);
+            if (typeof window !== 'undefined') {
+              setAnimateProps({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                rotate: 360,
+              });
+            }
+          }, []);
+
+          if (!mounted) return null;
+
+          return (
+            <motion.div
+              key={i}
+              initial={{ x: animateProps.x, y: animateProps.y, rotate: 0 }}
+              animate={animateProps}
+              transition={{
+                duration: 15,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              className="absolute w-32 h-32 bg-gradient-to-br from-[#F0B90B]/5 to-[#2563EB]/5 rounded-full blur-xl"
+            />
+          );
+        })}
       </div>
 
       <Container className="relative">
