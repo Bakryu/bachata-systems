@@ -1,26 +1,35 @@
 'use client';
 
-import React from 'react';
-import CaseStudies from '@/components/sections/services/futuristic/CaseStudies';
-import FinalCTA from '@/components/sections/services/futuristic/FinalCTA';
+import React, { Suspense } from 'react';
+import CaseStudies from '@/components/sections/services/CaseStudies';
+import FinalCTA from '@/components/sections/services/FinalCTA';
 
-// Alternative variants
-// import HeroFuturisticAlt from '@/components/sections/services/futuristic/variants/HeroFuturisticAlt';
-import ServicesGridAlt from '@/components/sections/services/futuristic/variants/ServicesGridAlt';
-import TechStackAlt from '@/components/sections/services/futuristic/variants/TechStackAlt';
-import SprintTimelineAccordion from '@/components/sections/services/futuristic/variants/SprintTimelineAccordion';
-import SprintTimelineCircular from '@/components/sections/services/futuristic/variants/SprintTimelineCircular';
+import ServicesDetailed from '@/components/sections/services/ServicesDetailed'; // Tabbed Layout
+
+// Original sections
+import SprintTimelineAccordion from '@/components/sections/services/SprintTimelineAccordion';
+import SprintTimelineCircular from '@/components/sections/services/SprintTimelineCircular';
+import TechStackA from '@/components/sections/services/TechStackA';
+
+// Loading component for Suspense
+function ServicesLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="text-white text-xl">Loading services...</div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   return (
     <>
-      {/* <HeroFuturisticAlt /> */}
-      <ServicesGridAlt />
+      <Suspense fallback={<ServicesLoading />}>
+        <ServicesDetailed />
+      </Suspense>
+
       <SprintTimelineAccordion />
       <SprintTimelineCircular />
-
-      <TechStackAlt />
-
+      <TechStackA />
       <CaseStudies />
       <FinalCTA />
     </>

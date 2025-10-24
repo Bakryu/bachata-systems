@@ -4,10 +4,11 @@ import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { Typography, Section, Container, Card, Button, ScrollReveal } from '@/components/ui';
 import TrustedCompanies from '@/components/sections/TrustedCompanies';
-import ServicesPreview from '@/components/sections/ServicesPreview';
+import WhoWeAre from '@/components/sections/WhoWeAre';
 import WebDevSteps from '@/components/sections/WebDevSteps';
 
 import FeaturedProjectsShowcase from '@/components/sections/FeaturedProjectsShowcase';
+import ServicesPreview from '@/components/sections/ServicesPreview';
 
 // Lazy load the Matrix component for better performance
 const MatrixHero = lazy(() => import('@/components/three/MatrixHero'));
@@ -87,6 +88,8 @@ export default function HomePage() {
       </Section>
 
       <TrustedCompanies />
+
+      <WhoWeAre />
 
       <ServicesPreview />
 

@@ -1,58 +1,66 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
-  size?: "sm" | "md" | "lg" | "xl";
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
   animated?: boolean;
+  glowColor?: string; // RGB values for glass variant (e.g., "240, 185, 11")
+  colorClass?: string; // Tailwind color class for text (e.g., "text-brand-gold")
 }
 
-const variantStyles = {
+const variantStyles: Record<
+  'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass',
+  string
+> = {
   primary:
-    "bg-accent-BtnYellow text-background hover:bg-accent-yellow active:bg-accent-yellowHover shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold",
+    'bg-accent-BtnYellow text-background hover:bg-accent-yellow active:bg-accent-yellowHover shadow-sm hover:shadow-lg hover:shadow-accent-yellow/20 font-semibold',
   secondary:
-    "bg-background-secondary text-text-primary hover:bg-border-subtle active:bg-border-subtle border border-border-subtle",
+    'bg-background-secondary text-text-primary hover:bg-border-subtle active:bg-border-subtle border border-border-subtle',
   outline:
-    "border-2 border-border-subtle text-text-primary hover:bg-background-secondary active:bg-border-subtle hover:border-accent-blue",
+    'border-2 border-border-subtle text-text-primary hover:bg-background-secondary active:bg-border-subtle hover:border-accent-blue',
   ghost:
-    "text-text-secondary hover:bg-background-secondary active:bg-border-subtle hover:text-text-primary",
-  link: "text-accent-blue hover:text-accent-purple underline-offset-4 hover:underline",
+    'text-text-secondary hover:bg-background-secondary active:bg-border-subtle hover:text-text-primary',
+  link: 'text-accent-blue hover:text-accent-purple underline-offset-4 hover:underline',
+  glass: 'backdrop-blur-md bg-white/10 border border-white/20 font-medium rounded-full',
 };
 
 const sizeStyles = {
-  sm: "px-3 py-2 text-sm",
-  md: "px-4 py-2.5 text-base",
-  lg: "px-6 py-3 text-lg",
-  xl: "px-8 py-4 text-xl",
+  sm: 'px-3 py-2 text-sm',
+  md: 'px-4 py-2.5 text-base',
+  lg: 'px-6 py-3 text-lg',
+  xl: 'px-8 py-4 text-xl',
 };
 
 export default function Button({
-  variant = "primary",
-  size = "md",
+  variant = 'primary',
+  size = 'md',
   loading = false,
   leftIcon,
   rightIcon,
   fullWidth = false,
   animated = true,
+  glowColor,
+  colorClass,
   className,
   children,
   disabled,
   ...props
 }: ButtonProps) {
   const baseClasses =
-    "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none";
+    'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none';
 
   const classes = cn(
     baseClasses,
     variantStyles[variant],
     sizeStyles[size],
-    fullWidth && "w-full",
+    fullWidth && 'w-full',
+    variant === 'glass' && colorClass,
     className
   );
 
@@ -87,23 +95,35 @@ export default function Button({
   );
 
   if (animated && !disabled && !loading) {
+    // Glass variant with special hover effects
+    if (variant === 'glass' && glowColor) {
+      return (
+        <motion.button
+          className={classes}
+          disabled={disabled || loading}
+          whileHover={{
+            scale: 1.05,
+            backgroundColor: `rgba(${glowColor}, 0.1)`,
+            borderColor: `rgba(${glowColor}, 0.4)`,
+          }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          type={props.type}
+          onClick={props.onClick}
+        >
+          {content}
+        </motion.button>
+      );
+    }
+
     return (
       <motion.button
         className={classes}
         disabled={disabled || loading}
         whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onBlur={props.onBlur}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
         type={props.type}
-        form={props.form}
-        name={props.name}
-        value={props.value}
-        id={props.id}
-        tabIndex={props.tabIndex}
-        aria-label={props["aria-label"]}
-        aria-describedby={props["aria-describedby"]}
+        onClick={props.onClick}
       >
         {content}
       </motion.button>

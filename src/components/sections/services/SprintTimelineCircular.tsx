@@ -9,7 +9,10 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 interface SprintStep {
   title: string;
   description: string;
-  color: string;
+  colorClass: string;
+  bgClass: string;
+  borderClass: string;
+  textClass: string;
   icon: React.ReactNode;
   days: string;
   details: string[];
@@ -19,7 +22,10 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Sprint Planning',
     description: 'Setting goals and planning tasks for the next two weeks',
-    color: '#F0B90B',
+    colorClass: 'brand-gold',
+    bgClass: 'bg-brand-gold/20',
+    borderClass: 'border-brand-gold',
+    textClass: 'text-brand-gold',
     icon: <FaClipboardList />,
     days: 'Day 1',
     details: [
@@ -32,7 +38,10 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Design Phase',
     description: 'Creating wireframes and visual designs',
-    color: '#2563EB',
+    colorClass: 'brand-blue',
+    bgClass: 'bg-brand-blue/20',
+    borderClass: 'border-brand-blue',
+    textClass: 'text-brand-blue',
     icon: <FaPalette />,
     days: 'Day 2-5',
     details: [
@@ -45,7 +54,10 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Development',
     description: 'Building and implementing features',
-    color: '#8B5CF6',
+    colorClass: 'brand-violet',
+    bgClass: 'bg-brand-violet/20',
+    borderClass: 'border-brand-violet',
+    textClass: 'text-brand-violet',
     icon: <FaCode />,
     days: 'Day 5-12',
     details: [
@@ -58,7 +70,10 @@ const sprintSteps: SprintStep[] = [
   {
     title: 'Testing',
     description: 'Quality assurance and bug fixing',
-    color: '#EF4444',
+    colorClass: 'brand-pink',
+    bgClass: 'bg-brand-pink/20',
+    borderClass: 'border-brand-pink',
+    textClass: 'text-brand-pink',
     icon: <FaSearch />,
     days: 'Day 12-14',
     details: [
@@ -72,7 +87,10 @@ const sprintSteps: SprintStep[] = [
     title: 'Release',
     description: 'Deploying to production and gathering feedback',
     icon: <FaRocket />,
-    color: '#10B981',
+    colorClass: 'brand-green',
+    bgClass: 'bg-brand-green/20',
+    borderClass: 'border-brand-green',
+    textClass: 'text-brand-green',
     days: 'Day 14',
     details: [
       'Deploy to production environment',
@@ -131,19 +149,10 @@ export default function SprintTimelineCircular() {
   const { radius, centerX, centerY, size } = dimensions;
 
   return (
-    <Section variant="default" padding="xl" className="bg-[#02021e] relative overflow-hidden">
+    <Section variant="default" padding="xl" className="bg-background relative overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-            linear-gradient(rgba(240, 185, 11, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(240, 185, 11, 0.1) 1px, transparent 1px)
-          `,
-            backgroundSize: '50px 50px',
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(240,185,11,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(240,185,11,0.1)_1px,transparent_1px)] bg-[length:50px_50px]" />
       </div>
 
       <Container className="relative">
@@ -154,7 +163,7 @@ export default function SprintTimelineCircular() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="overline" className="text-[#F0B90B] mb-4 tracking-widest">
+            <Typography variant="overline" className="text-accent-yellow mb-4 tracking-widest">
               SPRINT SYSTEM
             </Typography>
             <Typography variant="h2" className="mb-6 text-white text-center">
@@ -202,9 +211,10 @@ export default function SprintTimelineCircular() {
                 cy={centerY}
                 r={radius}
                 fill="none"
-                stroke={sprintSteps[activeIndex].color}
+                stroke="currentColor"
                 strokeWidth="4"
                 strokeLinecap="round"
+                className={`${sprintSteps[activeIndex].textClass} drop-shadow-[0_0_10px_currentColor]`}
                 initial={{
                   pathLength:
                     activeIndex === 0 && prevIndex === sprintSteps.length - 1
@@ -217,9 +227,6 @@ export default function SprintTimelineCircular() {
                 transition={{
                   duration: activeIndex === 0 && prevIndex === sprintSteps.length - 1 ? 0 : 0.5,
                   ease: 'easeInOut',
-                }}
-                style={{
-                  filter: `drop-shadow(0 0 10px ${sprintSteps[activeIndex].color})`,
                 }}
               />
             </svg>
@@ -246,17 +253,18 @@ export default function SprintTimelineCircular() {
                   }}
                 >
                   <motion.button
-                    className={`relative ${nodeSize} rounded-full flex items-center justify-center cursor-pointer`}
-                    style={{
-                      backgroundColor: isActive ? step.color : 'rgba(2, 2, 30, 0.8)',
-                      border: `${size < 400 ? '2px' : '3px'} solid ${isActive ? step.color : isPassed ? step.color : 'rgba(255, 255, 255, 0.2)'}`,
-                      color: isActive ? '#02021e' : step.color,
-                      backdropFilter: 'blur(10px)',
-                    }}
+                    className={`relative ${nodeSize} rounded-full flex items-center justify-center cursor-pointer backdrop-blur-md
+                      ${
+                        isActive
+                          ? `${step.bgClass} ${step.borderClass} text-background`
+                          : `bg-background/80 ${isPassed ? step.borderClass : 'border-white/20'} ${step.textClass}`
+                      }
+                      ${size < 400 ? 'border-2' : 'border-[3px]'}
+                    `}
                     animate={{
                       scale: isActive ? 1.2 : 1,
                       boxShadow: isActive
-                        ? `0 0 30px ${step.color}80, 0 0 60px ${step.color}40`
+                        ? `0 0 30px currentColor, 0 0 60px currentColor`
                         : '0 0 0 rgba(0, 0, 0, 0)',
                     }}
                     whileHover={{ scale: isActive ? 1.25 : 1.15 }}
@@ -291,8 +299,7 @@ export default function SprintTimelineCircular() {
                       }}
                     >
                       <div
-                        className="text-xs font-semibold"
-                        style={{ color: isActive ? step.color : '#9CA3AF' }}
+                        className={`text-xs font-semibold ${isActive ? step.textClass : 'text-text-secondary'}`}
                       >
                         {step.title}
                       </div>
@@ -313,22 +320,13 @@ export default function SprintTimelineCircular() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-2xl p-4 sm:p-6 lg:p-8 border"
-                style={{
-                  backgroundColor: 'rgba(2, 2, 30, 0.6)',
-                  backdropFilter: 'blur(10px)',
-                  borderColor: `${sprintSteps[activeIndex].color}40`,
-                }}
+                className={`rounded-2xl p-4 sm:p-6 lg:p-8 border backdrop-blur-md bg-background/60 ${sprintSteps[activeIndex].borderClass} border-opacity-25`}
               >
                 {/* Header */}
                 <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                   <div
-                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0"
-                    style={{
-                      backgroundColor: `${sprintSteps[activeIndex].color}20`,
-                      border: `2px solid ${sprintSteps[activeIndex].color}`,
-                      color: sprintSteps[activeIndex].color,
-                    }}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0
+                      ${sprintSteps[activeIndex].bgClass} bg-opacity-20 ${sprintSteps[activeIndex].borderClass} border-2 ${sprintSteps[activeIndex].textClass}`}
                   >
                     {sprintSteps[activeIndex].icon}
                   </div>
@@ -340,8 +338,7 @@ export default function SprintTimelineCircular() {
                       {sprintSteps[activeIndex].title}
                     </Typography>
                     <div
-                      className="text-xs sm:text-sm font-medium"
-                      style={{ color: sprintSteps[activeIndex].color }}
+                      className={`text-xs sm:text-sm font-medium ${sprintSteps[activeIndex].textClass}`}
                     >
                       {sprintSteps[activeIndex].days}
                     </div>
@@ -367,15 +364,11 @@ export default function SprintTimelineCircular() {
                       className="flex items-start gap-2 sm:gap-3"
                     >
                       <div
-                        className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center mt-0.5"
-                        style={{
-                          backgroundColor: `${sprintSteps[activeIndex].color}20`,
-                          border: `2px solid ${sprintSteps[activeIndex].color}`,
-                        }}
+                        className={`flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center mt-0.5
+                          ${sprintSteps[activeIndex].bgClass} bg-opacity-20 ${sprintSteps[activeIndex].borderClass} border-2`}
                       >
                         <div
-                          className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full"
-                          style={{ backgroundColor: sprintSteps[activeIndex].color }}
+                          className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${sprintSteps[activeIndex].bgClass}`}
                         />
                       </div>
                       <span className="text-gray-300 text-xs sm:text-sm flex-1">{detail}</span>
@@ -397,10 +390,7 @@ export default function SprintTimelineCircular() {
                 setActiveIndex(index);
                 setIsHovered(true);
               }}
-              className="w-2 h-2 rounded-full"
-              style={{
-                backgroundColor: index === activeIndex ? step.color : 'rgba(255, 255, 255, 0.2)',
-              }}
+              className={`w-2 h-2 rounded-full ${index === activeIndex ? step.bgClass : 'bg-white/20'}`}
               animate={{
                 scale: index === activeIndex ? 1.5 : 1,
               }}
