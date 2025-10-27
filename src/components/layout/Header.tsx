@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services/' },
   { name: 'Projects', href: '/projects/' },
-  { name: 'Team', href: '/team/' },
+  { name: 'Dedicated Team', href: '/dedicated-team/' },
   { name: 'Resources', href: '/resources/' },
   { name: 'Pricing', href: '/pricing/' },
 ];
@@ -81,7 +81,7 @@ export default function Header() {
           <div className="hidden lg:block ml-4">
             {/* Variant 2: Glassmorphic Button with Orbiting Dots */}
             <Link
-              href="/contact"
+              href="/contacts"
               className="group relative inline-flex items-center px-7 py-2 font-semibold text-text-primary bg-background-secondary/60 backdrop-blur-md rounded-2xl shadow-xl border border-border-subtle hover:border-accent-yellow transition-all duration-300 overflow-hidden"
               style={{
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',

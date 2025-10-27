@@ -209,7 +209,10 @@ export default function SprintTimelineAccordion() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="overline" className="text-accent-yellow mb-4 tracking-widest">
+            <Typography
+              variant="h6"
+              className="text-accent-yellow mb-4 tracking-widest text-center"
+            >
               Our Process
             </Typography>
 

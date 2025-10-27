@@ -7,7 +7,9 @@
 @layer base {
   body {
     @apply bg-background text-text-primary font-sans antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
     background-color: #02021e;
   }
 
@@ -113,21 +115,15 @@
 
   /* Grid patterns */
   .grid-pattern {
-    background-image: linear-gradient(
-        rgba(37, 99, 235, 0.1) 1px,
-        transparent 1px
-      ),
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
   /* Gradient overlays */
   .gradient-overlay {
-    background: linear-gradient(
-      135deg,
-      rgba(37, 99, 235, 0.1) 0%,
-      rgba(255, 214, 0, 0.1) 100%
-    );
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(255, 214, 0, 0.1) 100%);
   }
 
   /* Button hover animations */
@@ -136,7 +132,7 @@
   }
 
   .btn-slide::before {
-    content: "";
+    content: '';
     @apply absolute inset-0 bg-accent-yellowHover transform -translate-x-full transition-transform duration-300 ease-out;
   }
 
@@ -167,12 +163,7 @@
 
   /* Custom border utilities */
   .border-gradient {
-    border-image: linear-gradient(
-        135deg,
-        rgba(37, 99, 235, 0.3),
-        rgba(255, 214, 0, 0.3)
-      )
-      1;
+    border-image: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(255, 214, 0, 0.3)) 1;
   }
 
   /* Glow effects */
@@ -186,5 +177,50 @@
 
   .glow-purple {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar for mobile horizontal scroll */
+  .scrollbar-mobile {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar {
+    height: 6px;
+    -webkit-appearance: none;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Force scrollbar to always show */
+  .scrollbar-mobile::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-track {
+    visibility: visible;
   }
 }

@@ -238,7 +238,7 @@ export default function TechStackA() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <Typography variant="overline" className="text-accent-yellow mb-4 tracking-widest">
+          <Typography variant="h6" className="text-accent-yellow mb-4 tracking-widest text-center">
             Technology Stack
           </Typography>
           <Typography

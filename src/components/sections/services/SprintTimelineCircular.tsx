@@ -163,7 +163,10 @@ export default function SprintTimelineCircular() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="overline" className="text-accent-yellow mb-4 tracking-widest">
+            <Typography
+              variant="h6"
+              className="text-accent-yellow mb-4 tracking-widest text-center"
+            >
               SPRINT SYSTEM
             </Typography>
             <Typography variant="h2" className="mb-6 text-white text-center">
@@ -256,7 +259,7 @@ export default function SprintTimelineCircular() {
                     className={`relative ${nodeSize} rounded-full flex items-center justify-center cursor-pointer backdrop-blur-md
                       ${
                         isActive
-                          ? `${step.bgClass} ${step.borderClass} text-background`
+                          ? `${step.bgClass} ${step.borderClass} ${step.textClass}`
                           : `bg-background/80 ${isPassed ? step.borderClass : 'border-white/20'} ${step.textClass}`
                       }
                       ${size < 400 ? 'border-2' : 'border-[3px]'}

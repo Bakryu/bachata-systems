@@ -3,19 +3,19 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass' | 'shimmer';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
   animated?: boolean;
-  glowColor?: string; // RGB values for glass variant (e.g., "240, 185, 11")
+  glowColor?: string; // RGB values for glass/shimmer variant (e.g., "240, 185, 11")
   colorClass?: string; // Tailwind color class for text (e.g., "text-brand-gold")
 }
 
 const variantStyles: Record<
-  'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass',
+  'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass' | 'shimmer',
   string
 > = {
   primary:
@@ -28,6 +28,7 @@ const variantStyles: Record<
     'text-text-secondary hover:bg-background-secondary active:bg-border-subtle hover:text-text-primary',
   link: 'text-accent-blue hover:text-accent-purple underline-offset-4 hover:underline',
   glass: 'backdrop-blur-md bg-white/10 border border-white/20 font-medium rounded-full',
+  shimmer: 'relative overflow-hidden rounded-xl text-white font-medium',
 };
 
 const sizeStyles = {
@@ -95,6 +96,54 @@ export default function Button({
   );
 
   if (animated && !disabled && !loading) {
+    // Shimmer variant with glow and animated shimmer effect
+    if (variant === 'shimmer' && glowColor) {
+      return (
+        <motion.button
+          className={cn(
+            classes,
+            'bg-gradient-to-r from-white/10 to-white/5 border border-white/20'
+          )}
+          disabled={disabled || loading}
+          whileHover={{
+            scale: 1.03,
+            boxShadow: `0 8px 30px rgba(${glowColor}, 0.4)`,
+            borderColor: `rgba(${glowColor}, 0.6)`,
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.3 }}
+          type={props.type}
+          onClick={props.onClick}
+        >
+          <motion.div
+            className="absolute inset-0 opacity-10 pointer-events-none"
+            initial={{ x: -100 }}
+            animate={{ x: 100 }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              repeatType: 'reverse',
+            }}
+            style={{
+              background: `linear-gradient(90deg, transparent, rgba(${glowColor}, 0.3), transparent)`,
+            }}
+          />
+          <span className="relative">{children}</span>
+          {leftIcon && <span className="relative mr-2">{leftIcon}</span>}
+          {rightIcon && (
+            <motion.span
+              className="relative ml-2"
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {rightIcon}
+            </motion.span>
+          )}
+        </motion.button>
+      );
+    }
+
     // Glass variant with special hover effects
     if (variant === 'glass' && glowColor) {
       return (

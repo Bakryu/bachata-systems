@@ -171,6 +171,20 @@ export const servicesData = {
           'Media Management',
         ],
       },
+      {
+        id: 'ai-integration',
+        title: 'AI Integration',
+        shortDescription: 'Integrate AI and machine learning into your applications.',
+        fullDescription:
+          'Leverage the power of artificial intelligence to automate tasks, gain insights, and enhance user experiences. We integrate cutting-edge AI technologies into your products.',
+        features: [
+          'GPT & LLM Integration',
+          'Computer Vision Solutions',
+          'Predictive Analytics',
+          'Recommendation Systems',
+          'Custom ML Models',
+        ],
+      },
     ],
   },
   support: {

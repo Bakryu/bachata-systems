@@ -235,25 +235,6 @@ function ServiceCard({ service, index }: { service: ServiceConfig; index: number
                     transform: 'translateZ(20px)',
                   }}
                 >
-                  {/* Floating Geometric Shapes */}
-                  {[0, 1, 2, 3].map(i => (
-                    <motion.div
-                      key={i}
-                      className={`absolute w-1.5 h-1.5 ${colorClasses.bg} rounded-full`}
-                      animate={{
-                        opacity: isHovered ? [0, 1, 0] : 0,
-                        x: isHovered ? [0, Math.cos((i * Math.PI) / 2) * 40] : 0,
-                        y: isHovered ? [0, Math.sin((i * Math.PI) / 2) * 40] : 0,
-                        scale: isHovered ? [0, 1.5, 0] : 0,
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.2,
-                      }}
-                    />
-                  ))}
-
                   {/* Icon */}
                   <motion.div
                     className={`text-5xl ${colorClasses.text} relative z-10 drop-shadow-lg`}

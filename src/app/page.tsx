@@ -9,6 +9,8 @@ import WebDevSteps from '@/components/sections/WebDevSteps';
 
 import FeaturedProjectsShowcase from '@/components/sections/FeaturedProjectsShowcase';
 import ServicesPreview from '@/components/sections/ServicesPreview';
+import OurProceses from '@/components/sections/OurProceses';
+import HomeCTA from '@/components/sections/HomeCTA';
 
 // Lazy load the Matrix component for better performance
 const MatrixHero = lazy(() => import('@/components/three/MatrixHero'));
@@ -92,41 +94,12 @@ export default function HomePage() {
       <WhoWeAre />
 
       <ServicesPreview />
-
-      <WebDevSteps />
+      <OurProceses />
 
       <FeaturedProjectsShowcase />
 
       {/* CTA Section */}
-      <Section variant="gradient" className="text-text-primary" padding="lg">
-        <ScrollReveal>
-          <div className="text-center">
-            <Typography variant="h2" align="center" className="mb-4 text-text-primary">
-              Ready to Start Your Project?
-            </Typography>
-            <Typography
-              variant="body1"
-              align="center"
-              className="text-xl mb-8 max-w-3xl mx-auto opacity-90 text-text-primary"
-            >
-              Let&apos;s work together to create something amazing. Get in touch with us today and
-              let&apos;s discuss how we can help bring your vision to life.
-            </Typography>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg">
-                <a href="/contact">Get Started Today</a>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-text-primary text-text-primary hover:bg-text-primary hover:text-background"
-              >
-                <a href="/pricing">View Pricing</a>
-              </Button>
-            </div>
-          </div>
-        </ScrollReveal>
-      </Section>
+      <HomeCTA />
     </>
   );
 }

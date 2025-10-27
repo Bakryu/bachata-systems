@@ -1,37 +1,25 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
+import ServicesHero from '@/components/sections/services/ServicesHero';
+import ServicesDetailed from '@/components/sections/services/ServicesDetailed';
 import CaseStudies from '@/components/sections/services/CaseStudies';
-import FinalCTA from '@/components/sections/services/FinalCTA';
-
-import ServicesDetailed from '@/components/sections/services/ServicesDetailed'; // Tabbed Layout
 
 // Original sections
-import SprintTimelineAccordion from '@/components/sections/services/SprintTimelineAccordion';
-import SprintTimelineCircular from '@/components/sections/services/SprintTimelineCircular';
 import TechStackA from '@/components/sections/services/TechStackA';
-
-// Loading component for Suspense
-function ServicesLoading() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="text-white text-xl">Loading services...</div>
-    </div>
-  );
-}
+import HomeCTA from '@/components/sections/HomeCTA';
+import FAQ from '@/components/sections/FAQ';
 
 export default function ServicesPage() {
   return (
     <>
-      <Suspense fallback={<ServicesLoading />}>
-        <ServicesDetailed />
-      </Suspense>
+      <ServicesHero />
+      <ServicesDetailed />
 
-      <SprintTimelineAccordion />
-      <SprintTimelineCircular />
       <TechStackA />
       <CaseStudies />
-      <FinalCTA />
+      <FAQ page="services" />
+      <HomeCTA />
     </>
   );
 }

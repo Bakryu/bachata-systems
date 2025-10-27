@@ -28,58 +28,49 @@ export default function Select({
   ...props
 }: SelectProps) {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
-  
+
   const selectClasses = cn(
-    'w-full px-4 py-3 border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed appearance-none bg-white',
-    error 
-      ? 'border-red-300 focus:ring-red-600' 
-      : 'border-charcoal-300',
+    'w-full px-4 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed appearance-none bg-white/5 text-white',
+    error
+      ? 'border-red-500/50 focus:ring-red-500/20 focus:border-red-500'
+      : 'border-white/10 focus:ring-brand-gold/20 focus:border-brand-gold/50',
     className
   );
 
-  const containerClasses = cn(
-    'relative',
-    fullWidth ? 'w-full' : 'w-auto'
-  );
+  const containerClasses = cn('relative', fullWidth ? 'w-full' : 'w-auto');
 
   return (
     <div className={containerClasses}>
       {label && (
-        <label 
-          htmlFor={selectId}
-          className="block text-sm font-medium text-charcoal-700 mb-2"
-        >
+        <label htmlFor={selectId} className="block text-sm font-medium text-gray-300 mb-2">
           {label}
-          {props.required && <span className="text-red-500 ml-1">*</span>}
+          {props.required && <span className="text-red-400 ml-1">*</span>}
         </label>
       )}
-      
+
       <div className="relative">
-        <select
-          id={selectId}
-          className={selectClasses}
-          {...props}
-        >
+        <select id={selectId} className={selectClasses} {...props}>
           {placeholder && (
-            <option value="" disabled>
+            <option value="" disabled className="bg-[#02021e] text-gray-400">
               {placeholder}
             </option>
           )}
-          {options.map((option) => (
-            <option 
-              key={option.value} 
+          {options.map(option => (
+            <option
+              key={option.value}
               value={option.value}
               disabled={option.disabled}
+              className="bg-[#02021e] text-white"
             >
               {option.label}
             </option>
           ))}
         </select>
-        
+
         {/* Custom dropdown arrow */}
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <svg
-            className="h-5 w-5 text-charcoal-500"
+            className="h-5 w-5 text-gray-400"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -92,15 +83,11 @@ export default function Select({
           </svg>
         </div>
       </div>
-      
+
       {(error || helperText) && (
         <div className="mt-2">
-          {error && (
-            <p className="text-sm text-red-600">{error}</p>
-          )}
-          {!error && helperText && (
-            <p className="text-sm text-charcoal-500">{helperText}</p>
-          )}
+          {error && <p className="text-sm text-red-400">{error}</p>}
+          {!error && helperText && <p className="text-sm text-gray-400">{helperText}</p>}
         </div>
       )}
     </div>
