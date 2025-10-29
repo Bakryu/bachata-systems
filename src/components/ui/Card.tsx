@@ -41,7 +41,7 @@ export default function Card({
     baseClasses,
     variantStyles[variant],
     paddingStyles[padding],
-    hover && 'hover:shadow-lg hover:shadow-accent-blue/40 hover:-translate-y-1',
+    hover && 'hover:shadow-xl hover:shadow-accent-blue/40 hover:-translate-y-1',
     className
   );
 

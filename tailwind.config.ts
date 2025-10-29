@@ -102,6 +102,7 @@ const config: Config = {
           pink: '#EC4899', // Accent color - pink
           green: '#16B981', // Success/positive color - emerald green
           cyan: '#06B6D4FF', // Info/neutral color - cyan
+          red: '#EF4444', // Error/negative color - red
         },
         border: {
           subtle: '#1F2937', // subtle dividers and borders
@@ -147,7 +148,36 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: any) {
+      const newUtilities = {
+        '.scrollbar-thin': {
+          'scrollbar-width': 'thin',
+        },
+        '.scrollbar-thin::-webkit-scrollbar': {
+          width: '6px',
+          height: '6px',
+        },
+        '.scrollbar-thumb-white\\/10::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '3px',
+        },
+        '.scrollbar-thumb-transparent::-webkit-scrollbar-thumb': {
+          backgroundColor: 'transparent',
+        },
+        '.scrollbar-thumb-transparent:hover::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        '.hover\\:scrollbar-thumb-white\\/10:hover::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        '.scrollbar-track-transparent::-webkit-scrollbar-track': {
+          backgroundColor: 'transparent',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
   darkMode: 'class',
 };
 
