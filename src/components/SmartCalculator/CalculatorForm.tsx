@@ -32,7 +32,7 @@ export default function CalculatorForm({
   isValid,
 }: CalculatorFormProps) {
   return (
-    <div className="p-4 md:p-6 lg:p-8 lg:col-span-5 flex flex-col justify-between flex-1">
+    <div className="px-4 md:px-6 lg:px-8 pt-4 md:pt-6 lg:pt-8 lg:col-span-5 flex flex-col justify-between flex-1">
       <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
         <AnimatePresence mode="wait">
           <motion.div
@@ -61,7 +61,7 @@ export default function CalculatorForm({
             </Typography>
 
             {/* Options */}
-            <div className="space-y-2 md:space-y-3 mb-6 md:mb-8">
+            <div className="space-y-2 md:space-y-3">
               {currentStep.type === 'multiselect' &&
                 currentStep.options?.map(option => {
                   const Icon = option.icon;

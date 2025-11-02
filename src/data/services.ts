@@ -20,6 +20,8 @@ export interface ServiceCategory {
   services: ServiceItem[];
   colorClass: string;
   bgClass: string;
+  borderClass: string;
+  iconColor: string;
   glowColor: string;
 }
 
@@ -31,6 +33,8 @@ export const servicesData = {
     description: 'Creating beautiful, intuitive interfaces that users love',
     colorClass: 'text-brand-violet',
     bgClass: 'bg-brand-violet',
+    borderClass: 'border-brand-violet',
+    iconColor: 'text-brand-violet',
     glowColor: '139, 92, 246',
     services: [
       {
@@ -98,6 +102,8 @@ export const servicesData = {
     description: 'Building robust, scalable solutions with cutting-edge technologies',
     colorClass: 'text-brand-gold',
     bgClass: 'bg-brand-gold',
+    borderClass: 'border-brand-gold',
+    iconColor: 'text-brand-gold',
     glowColor: '240, 185, 11',
     services: [
       {
@@ -193,6 +199,8 @@ export const servicesData = {
     description: 'Keeping your digital products running smoothly and up-to-date',
     colorClass: 'text-brand-cyan',
     bgClass: 'bg-brand-cyan',
+    borderClass: 'border-brand-cyan',
+    iconColor: 'text-brand-cyan',
     glowColor: '6, 182, 212',
     services: [
       {

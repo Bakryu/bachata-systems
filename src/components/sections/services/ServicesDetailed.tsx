@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   FaPaintBrush,
   FaLaptopCode,
@@ -179,15 +180,17 @@ const ServiceCard = ({ service, index, categoryColor, glowColor, bgClass }: Serv
           </div>
 
           {/* CTA Button with Shimmer Effect */}
-          <Button
-            variant="shimmer"
-            glowColor={glowColor}
-            colorClass={categoryColor}
-            className="w-full px-6 py-3"
-            rightIcon={<FaArrowRight />}
-          >
-            View Details
-          </Button>
+          <Link href={`/resources/${service.id}`}>
+            <Button
+              variant="shimmer"
+              glowColor={glowColor}
+              colorClass={categoryColor}
+              className="w-full px-6 py-3"
+              rightIcon={<FaArrowRight />}
+            >
+              View Details
+            </Button>
+          </Link>
         </div>
       </motion.div>
     </motion.div>

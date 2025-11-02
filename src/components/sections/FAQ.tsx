@@ -195,7 +195,7 @@ const FAQItem = ({
     >
       <button
         onClick={onToggle}
-        className="w-full text-left p-6 flex items-start justify-between gap-4 group"
+        className="w-full text-left p-6 flex items-center justify-between gap-4 group"
       >
         <div className="flex-1">
           <Typography

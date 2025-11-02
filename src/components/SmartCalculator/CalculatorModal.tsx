@@ -256,7 +256,7 @@ export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProp
                 <>
                   <div className="p-4 md:p-6 lg:p-8 lg:col-span-5 flex flex-col">
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-4 md:mb-6">
+                    <div className="flex items-start justify-between">
                       <div>
                         <Typography
                           variant="h4"
@@ -301,7 +301,7 @@ export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProp
                 <>
                   {/* Header */}
                   <div className="p-4 md:p-6 lg:p-8 lg:col-span-5 flex flex-col">
-                    <div className="flex items-start justify-between mb-4 md:mb-6">
+                    <div className="flex items-start justify-between">
                       <div>
                         <Typography
                           variant="h4"

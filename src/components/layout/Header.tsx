@@ -53,7 +53,6 @@ export default function Header() {
             </motion.div>
             <span className="text-xl font-bold text-text-primary">Bachata-team</span>
           </Link>
-
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navigation.map(item => (
