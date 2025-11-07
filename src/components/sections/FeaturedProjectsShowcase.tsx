@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Container, ScrollReveal, Typography } from '@/components/ui';
+import { Button, Container, Link, ScrollReveal, Typography } from '@/components/ui';
 import { motion } from 'framer-motion';
 
 interface Project {
@@ -13,6 +13,12 @@ interface Project {
     value: string;
     label: string;
   }[];
+  video?: {
+    src: string;
+    type: string;
+    mobileSrc?: string;
+    mobileType?: string;
+  };
 }
 
 const projects: Project[] = [
@@ -22,12 +28,18 @@ const projects: Project[] = [
       'A modern, intuitive control panel for DreamHost users to manage websites, domains, and hosting with ease. Features include one-click installs, advanced DNS management, and real-time resource monitoring.',
     image: '/projects/dreamhost.jpg',
     category: 'Web Hosting',
-    technologies: ['React', 'TypeScript', 'GraphQL', 'AWS'],
+    technologies: ['React', 'Redux', 'Node.js', 'AWS'],
     metrics: [
-      { icon: '�️', value: '99.99%', label: 'Uptime' },
+      { icon: '👥', value: '2M+', label: 'Active Customers' },
       { icon: '⚡', value: '1s', label: 'Avg. Response' },
       { icon: '🔒', value: '100%', label: 'SSL Coverage' },
     ],
+    video: {
+      src: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard.mp4',
+      type: 'video/mp4',
+      mobileSrc: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard.webm',
+      mobileType: 'video/webm',
+    },
   },
   {
     title: 'Prom.ua Marketplace',
@@ -37,23 +49,29 @@ const projects: Project[] = [
     category: 'Marketplace',
     technologies: ['Vue.js', 'Node.js', 'Redis', 'PostgreSQL'],
     metrics: [
-      { icon: '�', value: '2M+', label: 'Monthly Orders' },
+      { icon: '📦', value: '2M+', label: 'Monthly Orders' },
       { icon: '👨‍💼', value: '100K+', label: 'Active Sellers' },
-      { icon: '�', value: '24h', label: 'Avg. Delivery' },
+      { icon: '🚚', value: '24h', label: 'Avg. Delivery' },
     ],
   },
   {
-    title: 'Heineken Real Child',
+    title: 'DreamHost Website',
     description:
-      'A digital platform for Heineken’s “Real Child” subsidiary, focused on responsible drinking education and community engagement. Includes interactive campaigns, event management, and analytics dashboards for impact measurement.',
-    image: '/projects/heineken.jpg',
-    category: 'Corporate Social Responsibility',
-    technologies: ['Next.js', 'Firebase', 'D3.js', 'Cloud Functions'],
+      "Complete rebuild of DreamHost's main website, creating a modern, high-performance platform that drives customer acquisition and enhances user experience. Features optimized conversion funnels, advanced SEO, and seamless integration with their hosting infrastructure.",
+    image: '/projects/dreamhost-main.jpg',
+    category: 'Web Hosting',
+    technologies: ['Gatsby.js', 'Tailwind CSS', 'GraphQL'],
     metrics: [
-      { icon: '🌍', value: '12+', label: 'Countries Impacted' },
-      { icon: '�', value: '500K+', label: 'Users Reached' },
-      { icon: '🎉', value: '120+', label: 'Events Hosted' },
+      { icon: '👥', value: '50K+', label: 'New Customers/Month' },
+      { icon: '⚡', value: '95+', label: 'Performance Score' },
+      { icon: '📈', value: '200%', label: 'Conversion Increase' },
     ],
+    video: {
+      src: '/movies/dreamhost-website.mp4',
+      type: 'video/mp4',
+      mobileSrc: '/movies/dreamhost-website.mp4',
+      mobileType: 'video/mp4',
+    },
   },
 ];
 
@@ -164,9 +182,40 @@ export const FeaturedProjectsShowcase: FC = () => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="relative"
                   >
-                    {/* Placeholder for project image */}
+                    {/* Project media - Video for DreamHost, placeholder for others */}
                     <div className="aspect-video rounded-2xl overflow-hidden bg-background-secondary border border-border-subtle group-hover:border-accent-yellow transition-colors duration-300 shadow-lg group-hover:shadow-accent-yellow/40">
-                      <div className="absolute inset-0 bg-gradient-to-br from-accent-yellow/10 via-accent-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {project?.video?.src ? (
+                        <div className="relative w-full h-full">
+                          {/* Desktop video */}
+                          <video
+                            className="hidden md:block w-full h-full object-fill"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                          >
+                            <source src={project.video?.src} type={project.video?.type} />
+                          </video>
+
+                          {/* Mobile video */}
+                          <video
+                            className="block md:hidden w-full h-full object-fill"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                          >
+                            <source
+                              src={project.video?.mobileSrc}
+                              type={project.video?.mobileType}
+                            />
+                          </video>
+
+                          <div className="absolute inset-0 bg-gradient-to-br from-accent-yellow/10 via-accent-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent-yellow/10 via-accent-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      )}
                     </div>
                   </motion.div>
                 </div>
@@ -177,7 +226,7 @@ export const FeaturedProjectsShowcase: FC = () => {
         <ScrollReveal delay={0.4}>
           <div className="text-center mt-12">
             <Button variant="outline" size="md">
-              <a href="/projects">View All Projects</a>
+              <Link href="/projects">View Details</Link>
             </Button>
           </div>
         </ScrollReveal>

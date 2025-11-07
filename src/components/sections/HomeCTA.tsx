@@ -5,9 +5,12 @@ import Container from '@/components/ui/Container';
 import Section from '@/components/ui/Section';
 import Typography from '@/components/ui/Typography';
 import Button from '@/components/ui/Button';
-import { FaArrowRight, FaCalendar } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa';
+import { useBookCallModal } from '@/contexts/BookCallModalContext';
 
 export default function HomeCTA() {
+  const { openModal } = useBookCallModal();
+
   return (
     <Section className="relative py-24 overflow-hidden">
       {/* Background Effects */}
@@ -132,6 +135,7 @@ export default function HomeCTA() {
                   size="xl"
                   rightIcon={<FaCalendar />}
                   className="shadow-lg shadow-brand-gold/30 hover:shadow-xl hover:shadow-brand-gold/50 transition-shadow"
+                  onClick={openModal}
                 >
                   Book a Call
                 </Button>

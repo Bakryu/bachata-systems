@@ -261,7 +261,7 @@ function ServiceCard({ service, index }: { service: ServiceConfig; index: number
               style={{
                 transform: 'translateZ(40px)',
               }}
-              className="relative text-center space-y-4 flex-1 flex flex-col justify-center pointer-events-none"
+              className="relative text-center space-y-4 grid flex-1 pointer-events-none"
             >
               {/* Title */}
               <motion.div
