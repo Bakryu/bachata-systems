@@ -115,7 +115,7 @@ export const FeaturedProjectsShowcase: FC = () => {
               />
 
               <div
-                className={`flex flex-col gap-8 lg:gap-0 lg:flex-row ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
+                className={`flex flex-col relative z-1 gap-8 lg:gap-0 lg:flex-row ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
               >
                 {/* Content side */}
                 <div className="lg:w-1/2 lg:px-12 flex flex-col justify-center">

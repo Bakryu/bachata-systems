@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Orbitron, Urbanist, Montserrat, Outfit, Poppins } from 'next/font/google';
+import { Inter, Orbitron } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -11,35 +11,10 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-// Custom fonts for company name variants
 const orbitron = Orbitron({
   subsets: ['latin'],
   variable: '--font-orbitron',
   weight: ['400', '500', '600', '700', '800', '900'],
-});
-
-const urbanist = Urbanist({
-  subsets: ['latin'],
-  variable: '--font-urbanist',
-  weight: ['300', '400', '500', '600', '700', '800'],
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -61,6 +36,9 @@ export const metadata: Metadata = {
     description:
       'A creative digital agency helping startups and enterprises build exceptional web experiences that drive results and inspire users.',
   },
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -69,10 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${orbitron.variable} ${urbanist.variable} ${montserrat.variable} ${outfit.variable} ${poppins.variable}`}
-    >
+    <html lang="en" className={`${inter.variable} ${orbitron.variable} `}>
       <body className="font-sans antialiased" suppressHydrationWarning={true}>
         <BookCallModalProvider>
           <Header />
