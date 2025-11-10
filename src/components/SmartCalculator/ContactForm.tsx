@@ -138,7 +138,7 @@ export default function ContactForm({
           {/* Privacy Policy */}
           <Typography variant="caption" className="text-gray-500 text-xs text-center block">
             By submitting the form I agree with the Privacy Policy and consent to receive SMS
-            updates from bachata team.
+            updates from SoftKerr.
           </Typography>
         </form>
       </div>

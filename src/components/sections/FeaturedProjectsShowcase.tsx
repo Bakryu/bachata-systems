@@ -223,7 +223,7 @@ export const FeaturedProjectsShowcase: FC = () => {
             </motion.div>
           ))}
         </div>
-        <ScrollReveal delay={0.4}>
+        <ScrollReveal delay={0.2}>
           <div className="text-center mt-12">
             <Button variant="outline" size="md">
               <Link href="/projects">View Details</Link>

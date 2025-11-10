@@ -107,7 +107,7 @@ function ServiceCard({ service, index }: { service: ServiceConfig; index: number
   }, [x, y]);
 
   return (
-    <ScrollReveal delay={index * 0.1}>
+    <ScrollReveal delay={0.2}>
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -380,7 +380,7 @@ export default function ServicesPreview() {
           ))}
         </div>
 
-        <ScrollReveal delay={0.4}>
+        <ScrollReveal delay={0.2}>
           <div className="text-center mt-16">
             <Link
               href="/services"

@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { FaTimes, FaPaperPlane, FaUpload, FaCheckCircle } from 'react-icons/fa';
+import { FaTimes, FaPaperPlane } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi';
 import { Typography, Button, Input, Textarea } from '@/components/ui';
 import { useBookCallModal } from '@/contexts/BookCallModalContext';
+import { submitToFormspree } from '@/lib/formspree';
 
 type ContactFormData = {
   fullName: string;
@@ -29,10 +30,21 @@ export default function BookCallModal() {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      console.log('Form data:', data);
+      // Submit to Formspree using the reusable utility
+      const result = await submitToFormspree({
+        data: {
+          fullName: data.fullName,
+          companyEmail: data.companyEmail,
+          phoneNumber: data.phoneNumber || 'Not provided',
+          projectDescription: data.projectDescription,
+        },
+        subject: 'New Project Inquiry from {fullName}',
+        replyTo: '{companyEmail}',
+      });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (!result.success) {
+        throw new Error(result.message || 'Form submission failed');
+      }
 
       setSubmitStatus('success');
       reset();
@@ -232,7 +244,7 @@ export default function BookCallModal() {
                           >
                             Privacy Policy
                           </Link>{' '}
-                          and consent to receive SMS updates from Bachata Systems.
+                          and consent to receive SMS updates from SoftKerr.
                         </Typography>
 
                         {/* Submit Button */}

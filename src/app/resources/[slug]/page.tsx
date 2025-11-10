@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   const { service, category } = data;
 
   return {
-    title: `${service.title} - Complete Guide | Bachata Systems`,
+    title: `${service.title} - Complete Guide | SoftKerr`,
     description: service.fullDescription,
     keywords: [
       service.title,

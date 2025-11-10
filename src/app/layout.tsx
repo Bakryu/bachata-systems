@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Orbitron, Urbanist, Montserrat, Outfit, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -11,14 +11,45 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+// Custom fonts for company name variants
+const orbitron = Orbitron({
+  subsets: ['latin'],
+  variable: '--font-orbitron',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  variable: '--font-urbanist',
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
 export const metadata: Metadata = {
-  title: 'Bachata Team - We Build Web Experiences',
+  title: 'SoftKerr - We Build Web Experiences',
   description:
     'A creative digital agency helping startups and enterprises build exceptional web experiences that drive results and inspire users.',
   keywords: 'web development, ui/ux design, digital agency, startup, enterprise, web design',
-  authors: [{ name: 'Bachata Team' }],
+  authors: [{ name: 'SoftKerr' }],
   openGraph: {
-    title: 'Bachata Team - We Build Web Experiences',
+    title: 'SoftKerr - We Build Web Experiences',
     description:
       'A creative digital agency helping startups and enterprises build exceptional web experiences that drive results and inspire users.',
     type: 'website',
@@ -26,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bachata Team - We Build Web Experiences',
+    title: 'SoftKerr - We Build Web Experiences',
     description:
       'A creative digital agency helping startups and enterprises build exceptional web experiences that drive results and inspire users.',
   },
@@ -38,7 +69,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${orbitron.variable} ${urbanist.variable} ${montserrat.variable} ${outfit.variable} ${poppins.variable}`}
+    >
       <body className="font-sans antialiased" suppressHydrationWarning={true}>
         <BookCallModalProvider>
           <Header />

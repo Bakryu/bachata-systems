@@ -129,7 +129,7 @@ export default function ArticleContent({
                 <>
                   <span>📝 Complete Guide</span>
                   <span>•</span>
-                  <span>👤 Bachata Systems Team</span>
+                  <span>👤 SoftKerr Team</span>
                   <span>•</span>
                   <span>📅 Updated Oct 2025</span>
                   <span>•</span>

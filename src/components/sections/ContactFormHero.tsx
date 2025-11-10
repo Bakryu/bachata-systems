@@ -13,6 +13,7 @@ import Select from '@/components/ui/Select';
 import Textarea from '@/components/ui/Textarea';
 import { FaUpload, FaCheckCircle, FaPaperPlane } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi';
+import { submitToFormspree } from '@/lib/formspree';
 
 const budgetOptions = [
   { value: 'under-10k', label: 'Under $10,000' },
@@ -59,11 +60,23 @@ export default function ContactFormHero() {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      console.log('Form data:', data);
-      console.log('File:', file);
+      // Submit to Formspree using the reusable utility
+      const result = await submitToFormspree({
+        data: {
+          fullName: data.fullName,
+          companyEmail: data.companyEmail,
+          phoneNumber: data.phoneNumber || 'Not provided',
+          budget: data.budget,
+          projectDescription: data.projectDescription,
+          attachedFile: file ? file.name : 'No file attached',
+        },
+        subject: 'New Contact Form Submission from {fullName}',
+        replyTo: '{companyEmail}',
+      });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (!result.success) {
+        throw new Error(result.message || 'Form submission failed');
+      }
 
       setSubmitStatus('success');
       reset();
@@ -320,7 +333,7 @@ export default function ContactFormHero() {
                     >
                       Privacy Policy
                     </Link>{' '}
-                    and consent to receive SMS updates from Bachata-team.
+                    and consent to receive SMS updates from SoftKerr.
                   </Typography>
                   {/* Submit Button */}
                   <Button

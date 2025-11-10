@@ -320,7 +320,7 @@ export default function ResourcesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {resources.map((resource, index) => (
-            <ScrollReveal key={resource.title} delay={index * 0.1}>
+            <ScrollReveal key={resource.title} delay={0.2}>
               <Card padding="md" className="text-center group" hover animated>
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {resource.icon}
@@ -367,7 +367,7 @@ export default function ResourcesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool, index) => (
-            <ScrollReveal key={tool.name} delay={index * 0.1}>
+            <ScrollReveal key={tool.name} delay={0.2}>
               <Link href={tool.url} external>
                 <Card padding="md" className="group" hover animated>
                   <div className="flex items-start space-x-4">

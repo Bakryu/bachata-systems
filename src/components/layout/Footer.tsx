@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 
 import Link from '../ui/Link';
+import { Logo } from '../Logo';
+import { Typography } from '../ui';
 
 const footerLinks = {
   Services: [
@@ -40,11 +42,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-accent-yellow to-accent-purple rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-background">H</span>
-              </div>
-              <span className="text-2xl font-bold">Bachata-team</span>
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2">
+              {/* <AnimatedLogo variant="bladeWave" className="text-brand-gold w-12 h-12" /> */}
+              <Logo className="text-brand-gold w-10 h-10" />
+              <Typography
+                variant="h5"
+                className="text-brand-gold font-orbitron font-black tracking-wide"
+              >
+                SoftKerr
+              </Typography>
             </Link>
 
             <p className="text-text-secondary mb-6 max-w-md">
@@ -92,7 +99,7 @@ export default function Footer() {
       <div className="border-t border-border-subtle">
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-text-muted text-sm">© 2024 Bachata-team. All rights reserved.</p>
+            <p className="text-text-muted text-sm">© 2024 SoftKerr. All rights reserved.</p>
 
             <div className="flex space-x-6 text-sm">
               <Link href="#" className="text-text-muted hover:text-text-primary transition-colors">

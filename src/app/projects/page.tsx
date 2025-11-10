@@ -2,9 +2,9 @@
 
 import ProjectHero from '@/components/sections/projects/ProjectHero';
 import Project from '@/components/sections/projects/Project';
-import ProjectCTA from '@/components/sections/projects/ProjectCTA';
 
 import { projects } from '@/data/projects';
+import HomeCTA from '@/components/sections/HomeCTA';
 // Project data from FeaturedProjectsShowcase
 
 export default function ProjectsPage() {
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       ))}
 
       {/* CTA Section */}
-      <ProjectCTA />
+      <HomeCTA />
     </>
   );
 }

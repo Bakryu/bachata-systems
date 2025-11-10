@@ -47,7 +47,7 @@ export default function BudgetChallenges() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
         {challenges.map((challenge, index) => (
-          <ScrollReveal key={challenge.title} delay={index * 0.1}>
+          <ScrollReveal key={challenge.title} delay={0.2}>
             <Card className="relative overflow-hidden h-full" hover animated>
               <div className="p-4 h-full flex flex-col justify-between">
                 <div>

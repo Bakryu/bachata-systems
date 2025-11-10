@@ -99,7 +99,7 @@ export default function CaseStudies() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cases.map((study, index) => (
-            <CaseStudy key={index} {...study} delay={index * 0.1} />
+            <CaseStudy key={index} {...study} delay={0.2} />
           ))}
         </div>
       </Container>

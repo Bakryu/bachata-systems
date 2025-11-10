@@ -123,7 +123,7 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        'Bachata Systems delivered a marketplace platform that exceeded our expectations. The system handles millions of transactions seamlessly, and our sellers love the powerful dashboard tools.',
+        'SoftKerr delivered a marketplace platform that exceeded our expectations. The system handles millions of transactions seamlessly, and our sellers love the powerful dashboard tools.',
       author: 'Oleksandr Petrenko',
       role: 'CTO',
       company: 'Prom.ua',
@@ -185,7 +185,7 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new DreamHost website has been a game-changer for our business. We're seeing record numbers of new customers, and our conversion rates have skyrocketed. The team at Bachata Systems delivered beyond our wildest expectations.",
+        "The new DreamHost website has been a game-changer for our business. We're seeing record numbers of new customers, and our conversion rates have skyrocketed. The team at SoftKerr delivered beyond our wildest expectations.",
       author: 'Brian Glassman',
       role: 'Director of SEO',
       company: 'DreamHost',

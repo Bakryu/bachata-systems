@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
 import { usePathname } from 'next/navigation';
 import Link from '../ui/Link';
+import { Logo } from '../Logo';
+import { Typography } from '../ui';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -31,11 +32,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/95 backdrop-blur-md shadow-sm border-b border-border-subtle'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md shadow-lg "
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
@@ -43,15 +40,15 @@ export default function Header() {
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              className="w-10 h-10 bg-gradient-to-r from-accent-yellow to-accent-purple rounded-full flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              transition={{ duration: 0.3 }}
+          <Link href="/" className="flex items-center space-x-3">
+            {/* <AnimatedLogo variant="bladeWave" className="text-brand-gold w-12 h-12" /> */}
+            <Logo className="text-brand-gold w-12 h-12" />
+            <Typography
+              variant="h4"
+              className="text-brand-gold font-orbitron font-black tracking-wide"
             >
-              <span className="text-2xl font-bold text-background">B</span>
-            </motion.div>
-            <span className="text-xl font-bold text-text-primary">Bachata-team</span>
+              SoftKerr
+            </Typography>
           </Link>
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
@@ -81,70 +78,20 @@ export default function Header() {
             {/* Variant 2: Glassmorphic Button with Orbiting Dots */}
             <Link
               href="/contacts"
-              className="group relative inline-flex items-center px-7 py-2 font-semibold text-text-primary bg-background-secondary/60 backdrop-blur-md rounded-2xl shadow-xl border border-border-subtle hover:border-accent-yellow transition-all duration-300 overflow-hidden"
+              className="group relative inline-flex items-center px-7 py-2 font-semibold text-text-primary bg-background-secondary/60 backdrop-blur-md rounded-2xl shadow-xl border border-brand-gold/60 hover:border-brand-gold transition-all duration-300 overflow-hidden"
               style={{
                 boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
               }}
             >
               <span className="relative z-10 flex items-center gap-4">
                 <span className="drop-shadow-lg">Contact Us</span>
-                {/* Orbiting Dots Animation */}
-                <span className="relative w-5 h-5">
-                  <span className="absolute w-2 h-2 bg-accent-yellow rounded-full animate-orbit1" />
-                  <span className="absolute w-2 h-2 bg-accent-blue rounded-full animate-orbit2" />
-                  <span className="absolute w-2 h-2 bg-accent-purple rounded-full animate-orbit3" />
-                </span>
+                {/* <AnimatedLogo variant="pulse" className="text-brand-gold w-8 h-8" /> */}
               </span>
               {/* Glass shine */}
               <span className="absolute left-0 top-0 w-full h-full pointer-events-none">
-                <span className="absolute left-[-60%] top-0 w-1/2 h-full bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-40 animate-shine3d" />
+                <span className="absolute left-[-60%] top-0 w-1/2 h-full bg-gradient-to-r from-brand-blue/0 via-brand-blue/60 to-brand-blue/0 opacity-60 animate-shine3d" />
               </span>
               <style jsx>{`
-                @keyframes orbit1 {
-                  0% {
-                    transform: rotate(0deg) translateX(8px);
-                  }
-                  100% {
-                    transform: rotate(360deg) translateX(8px);
-                  }
-                }
-                @keyframes orbit2 {
-                  0% {
-                    transform: rotate(120deg) translateX(8px);
-                  }
-                  100% {
-                    transform: rotate(480deg) translateX(8px);
-                  }
-                }
-                @keyframes orbit3 {
-                  0% {
-                    transform: rotate(240deg) translateX(8px);
-                  }
-                  100% {
-                    transform: rotate(600deg) translateX(8px);
-                  }
-                }
-                .animate-orbit1 {
-                  animation: orbit1 1.8s linear infinite;
-                  left: 50%;
-                  top: 50%;
-                  margin-left: -4px;
-                  margin-top: -4px;
-                }
-                .animate-orbit2 {
-                  animation: orbit2 2.2s linear infinite;
-                  left: 50%;
-                  top: 50%;
-                  margin-left: -4px;
-                  margin-top: -4px;
-                }
-                .animate-orbit3 {
-                  animation: orbit3 2.6s linear infinite;
-                  left: 50%;
-                  top: 50%;
-                  margin-left: -4px;
-                  margin-top: -4px;
-                }
                 @keyframes shine3d {
                   0% {
                     left: -60%;
