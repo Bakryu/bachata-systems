@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import ServicesHero from '@/components/sections/services/ServicesHero';
 import ServicesDetailed from '@/components/sections/services/ServicesDetailed';
 import CaseStudies from '@/components/sections/services/CaseStudies';
@@ -14,7 +14,9 @@ export default function ServicesPage() {
   return (
     <>
       <ServicesHero />
-      <ServicesDetailed />
+      <Suspense fallback={<div className="py-20" />}>
+        <ServicesDetailed />
+      </Suspense>
 
       <TechStack />
       <CaseStudies />

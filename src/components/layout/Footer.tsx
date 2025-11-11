@@ -102,13 +102,22 @@ export default function Footer() {
             <p className="text-text-muted text-sm">© 2024 SoftKerr. All rights reserved.</p>
 
             <div className="flex space-x-6 text-sm">
-              <Link href="#" className="text-text-muted hover:text-text-primary transition-colors">
+              <Link
+                href="/privacy-policy"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-text-muted hover:text-text-primary transition-colors">
+              <Link
+                href="/terms-of-use"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Terms of Service
               </Link>
-              <Link href="#" className="text-text-muted hover:text-text-primary transition-colors">
+              <Link
+                href="/cookie-policy"
+                className="text-text-muted hover:text-text-primary transition-colors"
+              >
                 Cookie Policy
               </Link>
             </div>
