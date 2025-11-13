@@ -241,6 +241,7 @@ export default function BookCallModal() {
                           <Link
                             href="/privacy-policy"
                             className="text-brand-gold hover:text-brand-violet transition-colors underline"
+                            onClick={closeModal}
                           >
                             Privacy Policy
                           </Link>{' '}

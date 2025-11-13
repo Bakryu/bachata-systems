@@ -2,7 +2,7 @@
 
 import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
-import { Typography, Section, Container, Button } from '@/components/ui';
+import { Typography, Section, Container, Button, Link } from '@/components/ui';
 import { FaAward, FaCheckCircle, FaLightbulb } from 'react-icons/fa';
 
 // Lazy load the Matrix component for better performance
@@ -71,14 +71,14 @@ const Hero = () => {
               {/* CTA Buttons */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8">
                 <Button variant="primary" size="lg" className="grid-template-columns-1" animated>
-                  <a href="/contacts">Start Your Project</a>
+                  <Link href="/contacts">Start Your Project</Link>
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
                   className="border-white/20 hover:border-brand-violet/50 grid-template-columns-1"
                 >
-                  <a href="/projects">View Our Work</a>
+                  <Link href="/projects">View Our Work</Link>
                 </Button>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { FC, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaPlayCircle, FaPauseCircle } from 'react-icons/fa';
+import Image from 'next/image';
 
 interface VideoPlayerProps {
   video?: {
@@ -10,6 +11,7 @@ interface VideoPlayerProps {
     mobileType?: string;
     desktop?: string;
     mobile?: string;
+    previewImage?: string;
   };
   title: string;
 }
@@ -17,7 +19,6 @@ interface VideoPlayerProps {
 const VideoPlayer: FC<VideoPlayerProps> = ({ video, title }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [posterUrl, setPosterUrl] = useState<string>('');
   const videoRefDesktop = useRef<HTMLVideoElement>(null);
   const videoRefMobile = useRef<HTMLVideoElement>(null);
 
@@ -26,22 +27,7 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ video, title }) => {
   const mobileSrc = video?.mobileSrc || video?.mobile || desktopSrc;
   const videoType = video?.type || 'video/mp4';
   const mobileType = video?.mobileType || videoType;
-
-  // Generate poster image from first frame of video
-  const generatePoster = (videoElement: HTMLVideoElement) => {
-    if (posterUrl) return; // Already generated
-
-    const canvas = document.createElement('canvas');
-    canvas.width = videoElement.videoWidth;
-    canvas.height = videoElement.videoHeight;
-
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-      setPosterUrl(dataUrl);
-    }
-  };
+  const previewImage = video?.previewImage;
 
   const handlePlayPause = () => {
     const isMobile = window.innerWidth < 768;
@@ -66,20 +52,22 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ video, title }) => {
     setIsPlaying(false);
   };
 
-  const handleLoadedData = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    generatePoster(e.currentTarget);
-  };
-
   if (!desktopSrc) return null;
 
   return (
     <div className="relative w-full h-full group/video">
-      {/* Show poster image when video is not playing */}
-      {!isPlaying && posterUrl && (
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center z-10"
-          style={{ backgroundImage: `url(${posterUrl})` }}
-        />
+      {/* Show preview image when video is not playing */}
+      {!isPlaying && previewImage && (
+        <div className="absolute inset-0 z-10">
+          <Image
+            src={previewImage}
+            alt={`${title} preview`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+          />
+        </div>
       )}
 
       {/* Desktop video */}
@@ -91,7 +79,6 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ video, title }) => {
         playsInline
         preload="metadata"
         onEnded={handleVideoEnd}
-        onLoadedData={handleLoadedData}
       >
         <source src={desktopSrc} type={videoType} />
       </video>
@@ -105,7 +92,6 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ video, title }) => {
         playsInline
         preload="metadata"
         onEnded={handleVideoEnd}
-        onLoadedData={handleLoadedData}
       >
         <source src={mobileSrc} type={mobileType} />
       </video>

@@ -319,7 +319,7 @@ export default function FAQSection({ page, title, description }: FAQSectionProps
             <Typography variant="body2" className="text-gray-400">
               Still have questions?{' '}
               <Link
-                href="#"
+                href="/contacts"
                 className="text-brand-gold hover:text-brand-violet transition-colors underline"
               >
                 Contact Us
