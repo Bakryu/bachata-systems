@@ -233,14 +233,7 @@ export default function ServicesArticles() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
         className="text-center mt-12"
-      >
-        <Typography variant="body2" color="secondary" className="mb-4">
-          Want to be notified when new service guides are published?
-        </Typography>
-        <Button variant="outline" size="lg">
-          Subscribe to Updates
-        </Button>
-      </motion.div>
+      ></motion.div>
     </Section>
   );
 }
