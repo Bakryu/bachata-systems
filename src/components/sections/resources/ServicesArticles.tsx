@@ -204,19 +204,6 @@ export default function ServicesArticles() {
                           </div>
                         </div>
                       )}
-
-                      {/* CTA */}
-                      <div className="flex items-center justify-between pt-4 border-t border-border-subtle">
-                        <Typography variant="caption" color="muted">
-                          {article.comingSoon ? 'Article in progress' : 'Read full article'}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          className={`${article.colorClass} font-medium ${!article.comingSoon && 'group-hover:underline'}`}
-                        >
-                          {article.comingSoon ? '🔔 Notify Me' : 'Read More →'}
-                        </Typography>
-                      </div>
                     </div>
                   </Card>
                 </Link>
