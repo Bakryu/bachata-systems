@@ -25,6 +25,7 @@ interface PageTemplate {
     description?: string;
     listTitle?: string;
     list?: (string | React.ReactNode)[];
+    listDescription?: string;
     listFooter?: string;
   }>;
   footer?: string;
@@ -147,7 +148,10 @@ const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
 
             {/* Description */}
             {description && (
-              <Typography variant="body1" className="text-slate-300 text-lg leading-relaxed">
+              <Typography
+                variant="body1"
+                className="text-slate-300 max-w-3xl text-lg whitespace-pre-line leading-none"
+              >
                 {description}
               </Typography>
             )}
@@ -187,10 +191,20 @@ const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
                   )}
                   {section.listTitle && (
                     <Typography
-                      variant="body1"
-                      className={`${category.colorClass} leading-relaxed text-xl mt-6 mb-4 font-bold`}
+                      variant="h5"
+                      className="text-slate-300 leading-relaxed text-lg mt-4"
                     >
                       {section.listTitle}
+                    </Typography>
+                  )}
+
+                  {/* List Items */}
+                  {section.listDescription && (
+                    <Typography
+                      variant="body1"
+                      className="text-slate-300 leading-relaxed text-lg whitespace-pre-line"
+                    >
+                      {section.listDescription}
                     </Typography>
                   )}
                   {section.list && section.list.length > 0 && (
@@ -237,8 +251,10 @@ const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
               transition={{ duration: 0.6 }}
               className="relative max-w-4xl mx-auto text-center p-12"
             >
-              <div className={`h-1 w-24 ${category.bgClass} rounded-full mx-auto mb-6`} />
-              <Typography variant="body1" className="text-slate-300 leading-relaxed text-xl">
+              <Typography
+                variant="body1"
+                className="text-slate-300 leading-relaxed text-lg whitespace-pre-line"
+              >
                 {pageData.footer}
               </Typography>
             </motion.div>
