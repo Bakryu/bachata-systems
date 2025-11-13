@@ -1,26 +1,22 @@
 'use client';
-
-import WhoWeAre from '@/components/sections/WhoWeAre';
-import FeaturedProjectsShowcase from '@/components/sections/FeaturedProjectsShowcase';
-import ServicesPreview from '@/components/sections/ServicesPreview';
-import OurProceses from '@/components/sections/OurProceses';
+import FeaturedProjectsShowcase from '@/components/sections/homePage/FeaturedProjectsShowcase';
+import ServicesPreview from '@/components/sections/homePage/ServicesPreview';
+import OurProceses from '@/components/sections/homePage/OurProceses';
 import HomeCTA from '@/components/sections/HomeCTA';
-import { title } from 'process';
-import { desc, footer } from 'framer-motion/client';
-import { list } from 'postcss';
+import Hero from '@/components/sections/homePage/Hero';
+import FAQSection from '@/components/sections/FAQ';
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero + Who We Are combined section */}
-      <WhoWeAre />
+      <Hero />
 
       <ServicesPreview />
       <OurProceses />
 
       <FeaturedProjectsShowcase />
 
-      {/* CTA Section */}
+      <FAQSection page="home" />
       <HomeCTA />
     </>
   );

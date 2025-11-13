@@ -35,5 +35,5 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  return <ResourcePageClient pageData={pageData} />;
+  return <ResourcePageClient pageData={pageData} slug={params.slug} />;
 }

@@ -197,11 +197,11 @@ export const servicesData = {
     id: 'support',
     title: 'Support & Maintenance',
     description: 'Keeping your digital products running smoothly and up-to-date',
-    colorClass: 'text-brand-cyan',
-    bgClass: 'bg-brand-cyan',
-    borderClass: 'border-brand-cyan',
-    iconColor: 'text-brand-cyan',
-    glowColor: '6, 182, 212',
+    colorClass: 'text-brand-blue',
+    bgClass: 'bg-brand-blue',
+    borderClass: 'border-brand-blue',
+    iconColor: 'text-brand-blue',
+    glowColor: '37, 99, 235',
     services: [
       {
         id: 'ongoing-support',

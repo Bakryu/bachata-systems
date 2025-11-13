@@ -2,8 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { Container, Section, Typography, Button } from '@/components/ui';
-import { FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
+import {
+  FaCheckCircle,
+  FaArrowLeft,
+  FaPaintBrush,
+  FaCode,
+  FaLifeRing,
+  FaUser,
+  FaCalendar,
+  FaClock,
+} from 'react-icons/fa';
 import Link from 'next/link';
+import { exp } from 'three/tsl';
 
 // Template type definition
 interface PageTemplate {
@@ -23,46 +33,121 @@ interface PageTemplate {
 
 interface ResourcePageClientProps {
   pageData: PageTemplate;
+  slug?: string;
 }
 
-export default function ResourcePageClient({ pageData }: ResourcePageClientProps) {
-  // Use desc as fallback for description
+// Determine category from slug
+function getCategoryFromSlug(slug?: string): {
+  name: string;
+  icon: any;
+  colorClass: string;
+  bgClass: string;
+  borderClass: string;
+} {
+  if (!slug)
+    return {
+      name: 'Resources',
+      icon: FaCode,
+      colorClass: 'text-brand-gold',
+      bgClass: 'bg-brand-gold',
+      borderClass: 'border-brand-gold',
+    };
+
+  if (slug.includes('design')) {
+    return {
+      name: 'Design',
+      icon: FaPaintBrush,
+      colorClass: 'text-brand-violet',
+      bgClass: 'bg-brand-violet',
+      borderClass: 'border-brand-violet',
+    };
+  } else if (slug.includes('support') || slug.includes('maintenance') || slug.includes('hosting')) {
+    return {
+      name: 'Support',
+      icon: FaLifeRing,
+      colorClass: 'text-brand-blue',
+      bgClass: 'bg-brand-blue',
+      borderClass: 'border-brand-blue',
+    };
+  } else {
+    return {
+      name: 'Development',
+      icon: FaCode,
+      colorClass: 'text-brand-gold',
+      bgClass: 'bg-brand-gold',
+      borderClass: 'border-brand-gold',
+    };
+  }
+}
+
+const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
   const description = pageData.description || pageData.desc;
+  const category = getCategoryFromSlug(slug);
+  const CategoryIcon = category.icon;
 
   return (
     <>
-      {/* Hero Section */}
-      <Section className="relative min-h-[40vh] flex items-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <Section className="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900">
         <Container className="relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className={`rounded-2xl border-2 ${category.borderClass} bg-slate-900/50 backdrop-blur-sm p-8 md:p-12 shadow-2xl shadow-${category.bgClass}/20`}
           >
             {/* Back Button */}
-            <Link href="/">
+            <Link href="/resources">
               <Button
                 variant="ghost"
                 leftIcon={<FaArrowLeft />}
-                className="mb-8 text-slate-400 hover:text-white"
+                className={`mb-6 ${category.colorClass} hover:bg-white/5`}
               >
-                Back to Home
+                Back to Resources
               </Button>
             </Link>
 
+            {/* Category with Icon */}
+            <div className="flex items-center gap-3 mb-6">
+              <div
+                className={`p-3 rounded-xl ${category.bgClass} bg-opacity-20 ${category.borderClass} border`}
+              >
+                <CategoryIcon className={`text-2xl ${category.colorClass}`} />
+              </div>
+              <Typography variant="h3" className={`text-xl font-bold ${category.colorClass}`}>
+                {category.name}
+              </Typography>
+            </div>
+
             {/* Title */}
             {pageData.title && (
-              <Typography
-                variant="h1"
-                className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent"
-              >
+              <Typography variant="h1" className="text-4xl md:text-6xl font-bold mb-6 text-white">
                 {pageData.title}
               </Typography>
             )}
 
+            {/* Meta Bar */}
+            <div
+              className={`flex flex-wrap items-center gap-4 p-4 rounded-lg ${category.bgClass} bg-opacity-10 border ${category.borderClass} border-opacity-30 mb-6`}
+            >
+              <div className="flex items-center gap-2">
+                <FaUser className={category.colorClass} />
+                <span className="text-slate-300 text-sm">SoftKerr Design Team</span>
+              </div>
+              <span className="text-slate-600">•</span>
+              <div className="flex items-center gap-2">
+                <FaCalendar className={category.colorClass} />
+                <span className="text-slate-300 text-sm">October 30, 2025</span>
+              </div>
+              <span className="text-slate-600">•</span>
+              <div className="flex items-center gap-2">
+                <FaClock className={category.colorClass} />
+                <span className="text-slate-300 text-sm">8 min read</span>
+              </div>
+            </div>
+
             {/* Description */}
             {description && (
-              <Typography variant="body1" className="text-slate-300 max-w-3xl text-lg">
+              <Typography variant="body1" className="text-slate-300 text-lg leading-relaxed">
                 {description}
               </Typography>
             )}
@@ -72,9 +157,9 @@ export default function ResourcePageClient({ pageData }: ResourcePageClientProps
 
       {/* Content Sections */}
       {pageData.content && pageData.content.length > 0 && (
-        <Section>
+        <Section className="bg-slate-950">
           <Container>
-            <div className="max-w-4xl mx-auto space-y-12">
+            <div className="max-w-4xl mx-auto space-y-16">
               {pageData.content.map((section, index) => (
                 <motion.div
                   key={index}
@@ -82,57 +167,53 @@ export default function ResourcePageClient({ pageData }: ResourcePageClientProps
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  className="space-y-4"
+                  className="relative pl-8 border-l-2 border-slate-800 hover:border-opacity-100 transition-all"
                 >
-                  {/* Section Title */}
                   {section.title && (
                     <Typography
                       variant="h2"
-                      className="text-2xl md:text-3xl font-bold text-slate-100 mb-4"
+                      className="text-3xl md:text-4xl font-bold mb-6 text-white"
                     >
                       {section.title}
                     </Typography>
                   )}
-
-                  {/* Section Description */}
                   {section.description && (
                     <Typography
                       variant="body1"
-                      className="text-slate-300 leading-relaxed text-lg whitespace-pre-line"
+                      className="text-slate-300 leading-relaxed text-lg whitespace-pre-line mb-6"
                     >
                       {section.description}
                     </Typography>
                   )}
-
-                  {/* List Title */}
                   {section.listTitle && (
                     <Typography
                       variant="body1"
-                      className="text-slate-300 leading-relaxed text-lg mt-4"
+                      className={`${category.colorClass} leading-relaxed text-xl mt-6 mb-4 font-bold`}
                     >
                       {section.listTitle}
                     </Typography>
                   )}
-
-                  {/* List Items */}
                   {section.list && section.list.length > 0 && (
-                    <ul className="space-y-3 mt-4">
+                    <ul className="space-y-4 mt-4">
                       {section.list.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <FaCheckCircle className="text-brand-gold text-lg mt-1 flex-shrink-0" />
-                          <Typography className="text-slate-300">
+                        <li
+                          key={i}
+                          className={`flex items-start gap-4 p-4 rounded-lg ${category.bgClass} bg-opacity-5 hover:bg-opacity-10 transition-all`}
+                        >
+                          <FaCheckCircle
+                            className={`${category.colorClass} text-xl mt-1 flex-shrink-0`}
+                          />
+                          <Typography className="text-slate-300 text-lg">
                             {typeof item === 'string' ? item : item}
                           </Typography>
                         </li>
                       ))}
                     </ul>
                   )}
-
-                  {/* List Footer */}
                   {section.listFooter && (
                     <Typography
                       variant="body1"
-                      className="text-slate-300 leading-relaxed text-lg mt-4"
+                      className={`text-slate-400 leading-relaxed text-base mt-6 p-4 rounded-lg ${category.bgClass} bg-opacity-5 italic`}
                     >
                       {section.listFooter}
                     </Typography>
@@ -146,35 +227,26 @@ export default function ResourcePageClient({ pageData }: ResourcePageClientProps
 
       {/* Footer Section */}
       {pageData.footer && (
-        <Section className="bg-slate-900/50">
+        <Section className={`relative overflow-hidden`}>
+          <div className={`absolute inset-0 ${category.bgClass} opacity-5`} />
           <Container>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto text-center"
+              className="relative max-w-4xl mx-auto text-center p-12"
             >
-              <Typography variant="body1" className="text-slate-300 leading-relaxed text-lg">
+              <div className={`h-1 w-24 ${category.bgClass} rounded-full mx-auto mb-6`} />
+              <Typography variant="body1" className="text-slate-300 leading-relaxed text-xl">
                 {pageData.footer}
               </Typography>
             </motion.div>
           </Container>
         </Section>
       )}
-
-      {/* Last Updated */}
-      {pageData.lastUpdated && (
-        <Section className="py-8">
-          <Container>
-            <div className="max-w-4xl mx-auto">
-              <Typography variant="body2" className="text-slate-500 text-center">
-                {pageData.lastUpdated}
-              </Typography>
-            </div>
-          </Container>
-        </Section>
-      )}
     </>
   );
-}
+};
+
+export default Resources;
