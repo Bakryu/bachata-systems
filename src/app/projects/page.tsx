@@ -1,10 +1,8 @@
 'use client';
 
 import ProjectHero from '@/components/sections/projects/ProjectHero';
-import Project from '@/components/sections/projects/Project';
-
-import { projects } from '@/data/projects';
 import HomeCTA from '@/components/sections/HomeCTA';
+import Projects from '@/components/sections/projects/Projects';
 // Project data from FeaturedProjectsShowcase
 
 export default function ProjectsPage() {
@@ -14,9 +12,7 @@ export default function ProjectsPage() {
       <ProjectHero />
 
       {/* Projects */}
-      {projects.map(project => (
-        <Project key={project.id} project={project} />
-      ))}
+      <Projects />
 
       {/* CTA Section */}
       <HomeCTA />

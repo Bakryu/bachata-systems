@@ -1,4 +1,17 @@
-import { FaAws, FaNodeJs, FaReact } from 'react-icons/fa';
+import { IconType } from 'react-icons';
+import { ReactNode } from 'react';
+import {
+  FaAws,
+  FaNodeJs,
+  FaReact,
+  FaUsers,
+  FaBolt,
+  FaLock,
+  FaTooth,
+  FaGlobeAmericas,
+  FaStar,
+  FaChartLine,
+} from 'react-icons/fa';
 import {
   SiRedux,
   SiMui,
@@ -9,13 +22,57 @@ import {
   SiTailwindcss,
 } from 'react-icons/si';
 
-export const projects = [
+// Project type definition
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image?: string;
+  technologies: Array<{
+    name: string;
+    icon: ReactNode;
+  }>;
+  // For showcase display (simple string array)
+  techStack?: string[];
+  metrics: Array<{
+    icon: IconType | string;
+    value: string;
+    label: string;
+  }>;
+  video?: {
+    src?: string;
+    type?: string;
+    mobileSrc?: string;
+    mobileType?: string;
+    desktop?: string;
+    mobile?: string;
+    previewImage?: string;
+  };
+  challenge?: string;
+  solution?: string;
+  results?: string[];
+  features?: Array<{
+    title: string;
+    description: string;
+  }>;
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+    company: string;
+    avatar: string;
+  };
+}
+
+export const projects: Project[] = [
   {
     id: 'dreamhost-panel',
     title: 'DreamHost Panel',
     description:
       'A modern, intuitive control panel for DreamHost users to manage websites, domains, and hosting with ease. Features include one-click installs, advanced DNS management, and real-time resource monitoring.',
     category: 'Web Hosting',
+    image: '/projects/dreamhost.jpg',
     technologies: [
       { name: 'React', icon: <FaReact className="text-2xl text-brand-blue" /> },
       { name: 'Redux', icon: <SiRedux className="text-2xl text-brand-violet" /> },
@@ -23,14 +80,20 @@ export const projects = [
       { name: 'AWS', icon: <FaAws className="text-2xl text-brand-gold" /> },
       { name: 'MUI', icon: <SiMui className="text-2xl text-brand-blue" /> },
     ],
+    techStack: ['React', 'Redux', 'Node.js', 'AWS'],
     metrics: [
-      { icon: 'FaUsers', value: '2M+', label: 'Active Customers' },
-      { icon: 'FaBolt', value: '1s', label: 'Avg. Response' },
-      { icon: 'FaLock', value: '100%', label: 'SSL Coverage' },
+      { icon: FaUsers, value: '2M+', label: 'Active Customers' },
+      { icon: FaBolt, value: '1s', label: 'Avg. Response' },
+      { icon: FaLock, value: '100%', label: 'SSL Coverage' },
     ],
     video: {
+      src: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard.mp4',
+      type: 'video/mp4',
+      mobileSrc: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard.webm',
+      mobileType: 'video/webm',
       desktop: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard.mp4',
       mobile: 'https://dwagloaw4bttd.cloudfront.net/video/optimized/dashboard/dashboard_small.mp4',
+      previewImage: '/movies/dreamhost-panel-preview.png',
     },
     challenge:
       'DreamHost needed to modernize their control panel to handle millions of users while maintaining blazing-fast performance and industry-leading uptime. The existing system was outdated, difficult to navigate, and lacked real-time monitoring capabilities.',
@@ -75,59 +138,73 @@ export const projects = [
     },
   },
   {
-    id: 'promua-marketplace',
-    title: 'Prom.ua Marketplace',
+    id: 'turkiyedental',
+    title: 'TürkiyeDental',
     description:
-      'A robust shopping cart and marketplace app for Prom.ua, enabling seamless product discovery, secure checkout, and real-time order tracking for millions of users and merchants.',
-    category: 'Marketplace',
+      'A comprehensive dental tourism platform connecting international patients with top dental clinics in Turkey. Features include clinic discovery, treatment planning, appointment booking, and seamless coordination of medical travel services.',
+    category: 'Healthcare',
+    image: '/projects/turkiyedental.jpg',
     technologies: [
-      { name: 'React.js', icon: <FaReact className="text-2xl text-brand-blue" /> },
-      { name: 'Node.js', icon: <FaNodeJs className="text-2xl text-brand-green" /> },
-      { name: 'Redis', icon: <SiRedis className="text-2xl text-brand-red" /> },
+      { name: 'Next.js', icon: <FaReact className="text-2xl text-brand-blue" /> },
+      { name: 'TypeScript', icon: <SiRedux className="text-2xl text-brand-violet" /> },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-2xl text-brand-blue" /> },
       { name: 'PostgreSQL', icon: <SiPostgresql className="text-2xl text-brand-violet" /> },
     ],
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe'],
     metrics: [
-      { icon: 'FaBox', value: '2M+', label: 'Monthly Orders' },
-      { icon: 'FaUserTie', value: '100K+', label: 'Active Sellers' },
-      { icon: 'FaTruck', value: '24h', label: 'Avg. Delivery' },
+      { icon: FaTooth, value: '15K+', label: 'Treatments Booked' },
+      { icon: FaGlobeAmericas, value: '70+', label: 'Countries' },
+      { icon: FaStar, value: '4.9/5', label: 'Patient Rating' },
     ],
+    video: {
+      src: '/movies/türkiye-dental.mp4',
+      type: 'video/mp4',
+      mobileSrc: '/movies/türkiye-dental.mp4',
+      mobileType: 'video/webm',
+      desktop: '/movies/türkiye-dental.mp4',
+      mobile: '/movies/türkiye-dental.mp4',
+      previewImage: '/movies/türkiye-dental-preview.png',
+    },
     challenge:
-      'Prom.ua needed a scalable marketplace platform to handle millions of transactions while providing seamless product discovery and secure payment processing. The challenge was to create an ecosystem that serves both buyers and sellers efficiently.',
+      'TürkiyeDental needed a modern platform to bridge the gap between international patients seeking quality dental care and Turkish dental clinics. The challenge was to create a trustworthy, multilingual platform that simplifies the medical tourism journey from discovery to post-treatment follow-up.',
     solution:
-      'We developed a comprehensive marketplace solution using Vue.js for the frontend, ensuring fast and responsive user interfaces. The backend was built with Node.js, Redis for caching, and PostgreSQL for robust data management. We implemented advanced search algorithms, real-time inventory management, and secure payment gateways.',
+      'We developed a comprehensive healthcare platform using Next.js and TypeScript for robust type safety and optimal performance. The platform features multilingual support, integrated payment processing with Stripe, real-time clinic availability, and secure patient data management. We implemented advanced search filters, virtual consultations, and treatment cost calculators.',
     results: [
-      'Processing over 2 million monthly orders with 99.9% success rate',
-      'Onboarded 100,000+ active sellers within the first year',
-      'Achieved average delivery time of 24 hours',
-      'Reduced cart abandonment rate by 28%',
-      'Increased mobile conversion by 42%',
+      'Successfully facilitated 15,000+ dental treatments',
+      'Connected patients from 50+ countries with verified clinics',
+      'Achieved 4.9/5 patient satisfaction rating',
+      'Reduced booking time by 70% compared to traditional methods',
+      'Increased clinic partner revenue by 150%',
+      'Processed over €5M in secure transactions',
     ],
     features: [
       {
-        title: 'Smart Product Discovery',
+        title: 'Smart Clinic Matching',
         description:
-          'AI-powered search and recommendation engine for personalized shopping experiences.',
+          'AI-powered matching system that connects patients with the best clinics based on treatment needs, budget, and preferences.',
       },
       {
-        title: 'Seller Dashboard',
-        description: 'Comprehensive analytics and inventory management tools for merchants.',
+        title: 'Virtual Consultations',
+        description: 'Secure video consultation platform for initial assessments and follow-ups.',
       },
       {
-        title: 'Secure Checkout',
-        description: 'Multi-payment gateway integration with PCI DSS compliance.',
+        title: 'Treatment Planning',
+        description:
+          'Interactive treatment cost calculator with detailed breakdowns and financing options.',
       },
       {
-        title: 'Order Tracking',
-        description: 'Real-time order tracking with notifications for buyers and sellers.',
+        title: 'Travel Coordination',
+        description:
+          'Integrated services for flight booking, hotel accommodation, and airport transfers.',
       },
     ],
     testimonial: {
       quote:
-        'SoftKerr delivered a marketplace platform that exceeded our expectations. The system handles millions of transactions seamlessly, and our sellers love the powerful dashboard tools.',
-      author: 'Oleksandr Petrenko',
-      role: 'CTO',
-      company: 'Prom.ua',
-      avatar: '/avatars/brian-glasman-avatar.jpeg',
+        'SoftKerr built us an exceptional platform that has revolutionized how we connect with international patients. The user experience is seamless, and our booking rates have increased dramatically.',
+      author: 'Dr. Mehmet Yılmaz',
+      role: 'Medical Director',
+      company: 'TürkiyeDental',
+      avatar: '/avatars/mahmet-avatar.jpeg',
     },
   },
   {
@@ -136,20 +213,27 @@ export const projects = [
     description:
       "Complete rebuild of DreamHost's main website, creating a modern, high-performance platform that drives customer acquisition and enhances user experience. Features optimized conversion funnels, advanced SEO, and seamless integration with their hosting infrastructure.",
     category: 'Web Development',
+    image: '/projects/dreamhost-main.jpg',
     technologies: [
       { name: 'Gatsby.js', icon: <SiGatsby className="text-2xl text-brand-violet" /> },
       { name: 'GraphQL', icon: <SiGraphql className="text-2xl text-brand-blue" /> },
       { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-2xl text-brand-blue" /> },
       { name: 'AWS', icon: <FaAws className="text-2xl text-brand-gold" /> },
     ],
+    techStack: ['Gatsby.js', 'Tailwind CSS', 'GraphQL'],
     metrics: [
-      { icon: 'FaUsers', value: '50K+', label: 'New Customers/Month' },
-      { icon: 'FaBolt', value: '95+', label: 'Performance Score' },
-      { icon: 'FaChartLine', value: '200%', label: 'Conversion Increase' },
+      { icon: FaUsers, value: '50K+', label: 'New Customers/Month' },
+      { icon: FaBolt, value: '95+', label: 'Performance Score' },
+      { icon: FaChartLine, value: '200%', label: 'Conversion Increase' },
     ],
     video: {
+      src: '/movies/dreamhost-website.mp4',
+      type: 'video/mp4',
+      mobileSrc: '/movies/dreamhost-website.mp4',
+      mobileType: 'video/mp4',
       desktop: '/movies/dreamhost-website.mp4',
       mobile: '/movies/dreamhost-website.mp4',
+      previewImage: '/movies/dreamhost-website-preview.png.png',
     },
     challenge:
       "DreamHost's website needed a complete overhaul to improve conversion rates, enhance user experience, and achieve top performance scores. The existing site was slow, difficult to navigate, and not optimized for modern SEO practices.",
@@ -193,3 +277,12 @@ export const projects = [
     },
   },
 ];
+
+// Helper function to get featured projects (for showcase)
+export const getFeaturedProjects = () => projects;
+
+// Helper function to get project by ID
+export const getProjectById = (id: string) => projects.find(p => p.id === id);
+
+// Helper function to get all project IDs
+export const getProjectIds = () => projects.map(p => p.id);
