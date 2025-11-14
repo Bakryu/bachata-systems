@@ -13,7 +13,8 @@ import {
   FaClock,
 } from 'react-icons/fa';
 import Link from 'next/link';
-import { exp } from 'three/tsl';
+import HomeCTA from '@/components/sections/HomeCTA';
+import RelatedArticles from '@/components/sections/services/RelatedArticles';
 
 // Template type definition
 interface PageTemplate {
@@ -249,11 +250,11 @@ const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative max-w-4xl mx-auto text-center p-12"
+              className="relative max-w-4xl mx-auto text-center"
             >
               <Typography
                 variant="body1"
-                className="text-slate-300 leading-relaxed text-lg whitespace-pre-line"
+                className="text-slate-300 leading-relaxed lg:text-2xl whitespace-pre-line"
               >
                 {pageData.footer}
               </Typography>
@@ -261,6 +262,9 @@ const Resources = ({ pageData, slug }: ResourcePageClientProps) => {
           </Container>
         </Section>
       )}
+      <RelatedArticles />
+
+      <HomeCTA />
     </>
   );
 };

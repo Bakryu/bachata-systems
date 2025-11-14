@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section';
 import Typography from '@/components/ui/Typography';
 import Button from '@/components/ui/Button';
 import { FaPlay, FaArrowRight } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function ServicesHero() {
   return (
@@ -92,10 +93,10 @@ export default function ServicesHero() {
             >
               <div className="space-y-1">
                 <Typography variant="h3" className="text-3xl font-bold text-brand-gold">
-                  50+
+                  5+
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Projects Delivered
+                  Years experience
                 </Typography>
               </div>
               <div className="space-y-1">
@@ -124,7 +125,7 @@ export default function ServicesHero() {
               className="flex flex-wrap gap-4"
             >
               <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
-                Get Started
+                <Link href="/contacts">Get Started</Link>
               </Button>
               <Button
                 variant="outline"
@@ -132,7 +133,7 @@ export default function ServicesHero() {
                 leftIcon={<FaPlay />}
                 className="border-white/20 hover:border-brand-gold/50"
               >
-                View Our Work
+                <Link href="/projects">View Our Work</Link>
               </Button>
             </motion.div>
           </motion.div>

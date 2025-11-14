@@ -41,7 +41,6 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            {/* <AnimatedLogo variant="bladeWave" className="text-brand-gold w-12 h-12" /> */}
             <Logo className="text-brand-gold w-12 h-12" />
             <Typography
               variant="h4"

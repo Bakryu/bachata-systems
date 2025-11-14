@@ -1,151 +1,334 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Typography, Container, Button, Link, ScrollReveal } from '@/components/ui';
+import { Typography, Container, Button, Link, ScrollReveal, Section } from '@/components/ui';
 import { HiSparkles } from 'react-icons/hi';
-import { FaProjectDiagram, FaChartLine, FaUsers, FaStar } from 'react-icons/fa';
+import {
+  FaProjectDiagram,
+  FaChartLine,
+  FaUsers,
+  FaStar,
+  FaArrowRight,
+  FaPlay,
+  FaRocket,
+  FaAward,
+  FaCode,
+} from 'react-icons/fa';
 
-export default function ProjectHero() {
+const ProjectHero = () => {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background-secondary to-background">
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(to right, #2563EB 1px, transparent 1px),
-                           linear-gradient(to bottom, #2563EB 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-          }}
-        />
-      </div>
+    <Section className="relative py-20 md:py-32 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-violet/5 to-transparent" />
 
-      {/* Floating Orbs */}
+      {/* Animated Grid Background */}
       <motion.div
-        className="absolute top-20 left-20 w-64 h-64 bg-accent-blue/20 rounded-full blur-3xl"
-        animate={{
-          x: [0, 50, 0],
-          y: [0, 30, 0],
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(139,92,246,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-accent-purple/20 rounded-full blur-3xl"
         animate={{
-          x: [0, -30, 0],
-          y: [0, 50, 0],
+          backgroundPosition: ['0px 0px', '60px 60px'],
         }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-72 h-72 bg-accent-yellow/20 rounded-full blur-3xl"
-        animate={{
-          x: [-36, 36, -36],
-          y: [-36, 36, -36],
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'linear',
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       <Container className="relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-          <ScrollReveal>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-violet/20 to-brand-gold/20 border border-brand-violet/30 backdrop-blur-sm"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-blue/10 border border-accent-blue/30 mb-8">
-                <HiSparkles className="text-accent-blue" />
-                <span className="text-sm font-medium text-accent-blue">Featured Case Studies</span>
-              </div>
-
-              <Typography variant="h1" className="mb-6 text-6xl md:text-7xl lg:text-8xl font-bold">
-                Projects That{' '}
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-yellow bg-clip-text text-transparent">
-                    Define
-                  </span>
-                  <motion.span
-                    className="absolute bottom-2 left-0 w-full h-3 bg-gradient-to-r from-accent-blue/30 via-accent-purple/30 to-accent-yellow/30 -z-10"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                  />
-                </span>{' '}
-                Excellence
+              <HiSparkles className="w-4 h-4 text-brand-violet" />
+              <Typography variant="body2" className="text-brand-violet font-medium">
+                Featured Case Studies
               </Typography>
+            </motion.div>
 
+            {/* Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <Typography
-                variant="body1"
-                className="text-xl md:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto leading-relaxed"
+                variant="h1"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
               >
+                Projects That{' '}
+                <span className="bg-gradient-to-r from-brand-violet via-brand-gold to-brand-pink bg-clip-text text-transparent">
+                  Define Excellence
+                </span>
+              </Typography>
+            </motion.div>
+
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Typography variant="body1" className="text-lg text-gray-300 leading-relaxed">
                 Explore our portfolio of transformative digital solutions. Each project represents
                 our commitment to innovation, quality, and measurable business impact.
               </Typography>
+            </motion.div>
 
-              {/* Stats Bar */}
-              <motion.div
-                className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-3">
-                    <FaProjectDiagram className="text-3xl text-accent-blue" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent mb-2">
-                    150+
-                  </div>
-                  <div className="text-sm text-text-secondary">Projects Delivered</div>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-3">
-                    <FaStar className="text-3xl text-accent-yellow" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-purple to-accent-yellow bg-clip-text text-transparent mb-2">
-                    98%
-                  </div>
-                  <div className="text-sm text-text-secondary">Client Satisfaction</div>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-3">
-                    <FaUsers className="text-3xl text-accent-purple" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-yellow to-accent-blue bg-clip-text text-transparent mb-2">
-                    50M+
-                  </div>
-                  <div className="text-sm text-text-secondary">Users Impacted</div>
-                </div>
-              </motion.div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="primary" size="lg">
-                  <Link href="/contacts">Start Your Project</Link>
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Link href="/services">Our Services</Link>
-                </Button>
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="grid grid-cols-3 gap-6 py-6"
+            >
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-violet">
+                  150+
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Projects Delivered
+                </Typography>
+              </div>
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-gold">
+                  98%
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Satisfaction Rate
+                </Typography>
+              </div>
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-pink">
+                  50M+
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Users Impacted
+                </Typography>
               </div>
             </motion.div>
-          </ScrollReveal>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
+                <Link href="/contacts">Start Your Project</Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                leftIcon={<FaPlay />}
+                className="border-white/20 hover:border-brand-violet/50"
+              >
+                <Link href="/services">Our Services</Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side - Glass Container Showcase */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative"
+          >
+            {/* Main Container with 3:4 Aspect Ratio */}
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto">
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-violet/20 via-brand-gold/20 to-brand-pink/20 rounded-3xl" />
+
+              {/* Glass Container */}
+              <motion.div
+                className="relative h-full backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/20 rounded-3xl overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 opacity-50"
+                  animate={{
+                    background: [
+                      'radial-gradient(circle at 0% 0%, rgba(139,92,246,0.3), transparent 50%)',
+                      'radial-gradient(circle at 100% 100%, rgba(240,185,11,0.3), transparent 50%)',
+                      'radial-gradient(circle at 0% 100%, rgba(236,72,153,0.3), transparent 50%)',
+                      'radial-gradient(circle at 0% 0%, rgba(139,92,246,0.3), transparent 50%)',
+                    ],
+                  }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                />
+
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col p-8">
+                  {/* Top Section */}
+                  <div className="flex-1 flex flex-col justify-center space-y-6">
+                    {/* Icon */}
+                    <motion.div
+                      className="flex justify-center"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-violet to-brand-gold flex items-center justify-center shadow-lg shadow-brand-violet/50">
+                        <FaProjectDiagram className="w-12 h-12 text-white" />
+                      </div>
+                    </motion.div>
+
+                    <div className="text-center space-y-2">
+                      <Typography variant="h3" className="text-2xl font-bold text-white">
+                        Case Studies
+                      </Typography>
+                      <Typography variant="body2" className="text-gray-300">
+                        Real results, real impact
+                      </Typography>
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <motion.div
+                        className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <FaChartLine className="w-6 h-6 text-brand-gold mb-2" />
+                        <Typography variant="h4" className="text-xl font-bold text-white">
+                          300%
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Avg. ROI
+                        </Typography>
+                      </motion.div>
+
+                      <motion.div
+                        className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <FaStar className="w-6 h-6 text-brand-pink mb-2" />
+                        <Typography variant="h4" className="text-xl font-bold text-white">
+                          4.9/5
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Client Rating
+                        </Typography>
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section - Trust Indicators */}
+                  <div className="space-y-3">
+                    <motion.div
+                      className="flex items-center gap-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <span className="text-green-500 text-sm">✓</span>
+                      </div>
+                      <Typography variant="body2" className="text-white text-sm">
+                        On-Time Delivery
+                      </Typography>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex items-center gap-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 }}
+                    >
+                      <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <span className="text-green-500 text-sm">✓</span>
+                      </div>
+                      <Typography variant="body2" className="text-white text-sm">
+                        Scalable Architecture
+                      </Typography>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Decorative Elements */}
+                <motion.div
+                  className="absolute top-4 right-4 w-20 h-20 bg-brand-violet/10 rounded-full blur-2xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-4 left-4 w-16 h-16 bg-brand-gold/10 rounded-full blur-2xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: 1.5,
+                  }}
+                />
+              </motion.div>
+
+              {/* Floating Badges */}
+              <motion.div
+                className="absolute -top-4 -right-4 px-4 py-2 rounded-full bg-gradient-to-r from-brand-violet/90 to-brand-gold/90 backdrop-blur-sm border border-white/20 shadow-lg"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Typography variant="body2" className="text-white font-bold">
+                  🏆 Award Winning
+                </Typography>
+              </motion.div>
+
+              <motion.div
+                className="absolute -bottom-4 -left-4 px-4 py-2 rounded-full bg-gradient-to-r from-brand-gold/90 to-brand-pink/90 backdrop-blur-sm border border-white/20 shadow-lg"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 1.5,
+                }}
+              >
+                <Typography variant="body2" className="text-white font-bold">
+                  ⚡ Fast Delivery
+                </Typography>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </Container>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-accent-blue/50 flex items-start justify-center p-2">
-          <motion.div
-            className="w-1.5 h-1.5 rounded-full bg-accent-blue"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
-    </section>
+    </Section>
   );
-}
+};
+
+export default ProjectHero;

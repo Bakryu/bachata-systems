@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Typography, Section, Card, Button } from '@/components/ui';
-import { servicesData } from '@/data/services';
+import { Typography, Section, Card } from '@/components/ui';
+import { resources } from '@/data/resources';
+import { resourcesMeta } from '@/data/resourcesMeta';
 import { FaPaintBrush, FaCode, FaLifeRing } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Icon mapping for categories
 const categoryIcons = {
@@ -14,26 +16,26 @@ const categoryIcons = {
   support: FaLifeRing,
 };
 
-// Generate article previews from services data
-const generateServiceArticles = () => {
+// Generate article previews from resources data with metadata
+const generateResourceArticles = () => {
   const articles: any[] = [];
 
-  Object.values(servicesData).forEach(category => {
-    category.services.forEach((service: any) => {
-      articles.push({
-        id: service.id,
-        title: `Complete Guide to ${service.title}`,
-        excerpt: service.fullDescription,
-        category: category.title,
-        categoryId: category.id,
-        colorClass: category.colorClass,
-        bgClass: category.bgClass,
-        glowColor: category.glowColor,
-        readTime: '8 min read',
-        date: new Date().toISOString(),
-        comingSoon: true, // Mark as coming soon since articles aren't written yet
-        features: service.features || [],
-      });
+  Object.entries(resources).forEach(([slug, resource]) => {
+    const meta = resourcesMeta[slug];
+    if (!meta) return; // Skip if no metadata found
+
+    articles.push({
+      id: slug,
+      title: resource.title,
+      excerpt: resource.description,
+      category: meta.categoryTitle,
+      categoryId: meta.category,
+      colorClass: meta.colorClass,
+      bgClass: meta.bgClass,
+      glowColor: meta.glowColor,
+      readTime: meta.readTime,
+      date: meta.date,
+      image: meta.image,
     });
   });
 
@@ -42,14 +44,14 @@ const generateServiceArticles = () => {
 
 export default function ServicesArticles() {
   const [activeCategory, setActiveCategory] = useState('All');
-  const serviceArticles = generateServiceArticles();
+  const resourceArticles = generateResourceArticles();
 
   const categories = ['All', 'Design', 'Development', 'Support & Maintenance'];
 
   const filteredArticles =
     activeCategory === 'All'
-      ? serviceArticles
-      : serviceArticles.filter(article => article.category === activeCategory);
+      ? resourceArticles
+      : resourceArticles.filter(article => article.category === activeCategory);
 
   return (
     <Section variant="muted" padding="lg">
@@ -60,8 +62,8 @@ export default function ServicesArticles() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h2" align="center" className="mb-4">
-            Service Guides
+          <Typography variant="h2" align="center" className="mb-4" id="articles">
+            Browse Articles
           </Typography>
           <Typography
             variant="body1"
@@ -69,7 +71,8 @@ export default function ServicesArticles() {
             align="center"
             className="text-xl max-w-3xl mx-auto"
           >
-            In-depth articles and guides for each of our services. Coming soon!
+            In-depth guides covering design, development, and support services to help you make
+            informed decisions.
           </Typography>
         </motion.div>
       </div>
@@ -104,8 +107,6 @@ export default function ServicesArticles() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {filteredArticles.map((article, index) => {
-            const CategoryIcon = categoryIcons[article.categoryId as keyof typeof categoryIcons];
-
             return (
               <motion.div
                 key={article.id}
@@ -119,36 +120,27 @@ export default function ServicesArticles() {
                     hover
                     animated
                   >
-                    {/* Coming Soon Badge */}
-                    {article.comingSoon && (
-                      <div className="absolute top-4 left-4 z-10">
-                        <span className="px-3 py-1.5 bg-brand-gold text-background text-xs font-bold rounded-full shadow-lg">
-                          Coming Soon
-                        </span>
-                      </div>
-                    )}
+                    <div className="relative overflow-hidden h-48">
+                      {/* Background Image */}
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
 
-                    {/* Icon Header */}
-                    <div
-                      className={`relative overflow-hidden ${article.bgClass}/10 p-8 flex items-center justify-center`}
-                    >
-                      <motion.div
-                        className={`w-20 h-20 rounded-2xl ${article.bgClass}/20 flex items-center justify-center`}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <CategoryIcon className={`text-4xl ${article.colorClass}`} />
-                      </motion.div>
-
-                      {/* Category badge */}
-                      <div className="absolute top-4 right-4">
-                        <Typography
-                          variant="caption"
-                          component="span"
-                          className={`px-3 py-1 ${article.bgClass}/20 ${article.colorClass} rounded-full font-semibold text-xs`}
-                        >
-                          {article.category}
-                        </Typography>
+                      {/* Content Layer */}
+                      <div className="relative z-10 h-full p-8 flex items-center justify-center">
+                        <div className="absolute top-4 right-4">
+                          <Typography
+                            variant="caption"
+                            component="span"
+                            className={`px-3 py-1 ${article.bgClass} text-text-primary rounded-full font-semibold text-xs shadow-lg`}
+                          >
+                            {article.category}
+                          </Typography>
+                        </div>
                       </div>
                     </div>
 
@@ -176,34 +168,6 @@ export default function ServicesArticles() {
                       <Typography variant="body2" color="secondary" className="mb-4 line-clamp-3">
                         {article.excerpt}
                       </Typography>
-
-                      {/* Features preview */}
-                      {article.features && article.features.length > 0 && (
-                        <div className="mb-4">
-                          <Typography
-                            variant="caption"
-                            color="muted"
-                            className="mb-2 block font-semibold"
-                          >
-                            Topics Covered:
-                          </Typography>
-                          <div className="flex flex-wrap gap-2">
-                            {article.features.slice(0, 3).map((feature: string, idx: number) => (
-                              <span
-                                key={idx}
-                                className={`px-2 py-1 text-xs ${article.bgClass}/10 ${article.colorClass} rounded`}
-                              >
-                                {feature}
-                              </span>
-                            ))}
-                            {article.features.length > 3 && (
-                              <span className="px-2 py-1 text-xs bg-background-secondary text-text-muted rounded">
-                                +{article.features.length - 3} more
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </Card>
                 </Link>

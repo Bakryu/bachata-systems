@@ -5,6 +5,7 @@ import Container from '@/components/ui/Container';
 import Section from '@/components/ui/Section';
 import Typography from '@/components/ui/Typography';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 import { FaArrowRight, FaGlobe, FaUsers, FaChartLine } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi';
 
@@ -124,7 +125,7 @@ export default function DedicatedTeamHero() {
               className="flex flex-wrap gap-4"
             >
               <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
-                Build Your Team
+                <Link href="/contacts">Build Your Team</Link>
               </Button>
               <Button
                 variant="outline"
@@ -132,7 +133,7 @@ export default function DedicatedTeamHero() {
                 leftIcon={<FaGlobe />}
                 className="border-white/20 hover:border-brand-violet/50"
               >
-                View Case Studies
+                <Link href="/pricing">View Pricing</Link>
               </Button>
             </motion.div>
           </motion.div>
