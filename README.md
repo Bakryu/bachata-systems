@@ -1,6 +1,6 @@
-# HaloAgency - Modern Web Development Agency Website
+# SoftKerr - Modern Web Development Agency Website
 
-A comprehensive, multi-page agency website built with Next.js, inspired by halo-lab.com design principles. Features modern animations, 3D elements, and a clean, professional aesthetic.
+A comprehensive, multi-page agency website built with Next.js, inspired by SoftKerr.com design principles. Features modern animations, 3D elements, and a clean, professional aesthetic.
 
 ## 🚀 Features
 
@@ -14,7 +14,7 @@ A comprehensive, multi-page agency website built with Next.js, inspired by halo-
 
 ### Design System
 
-- **Halo-Lab Inspired Palette**: Clean white backgrounds with charcoal text, deep blue accents, and bright yellow highlights
+- **SoftKerr Inspired Palette**: Clean white backgrounds with charcoal text, deep blue accents, and bright yellow highlights
 - **Typography**: Inter font family for modern, readable text
 - **Responsive Design**: Mobile-first approach with seamless desktop scaling
 - **Accessibility**: Respects `prefers-reduced-motion` and includes proper ARIA labels
@@ -137,7 +137,7 @@ Interactive 3D elements using React Three Fiber:
 
    ```bash
    git clone <repository-url>
-   cd halo-agency
+   cd softkerr
    ```
 
 2. **Install dependencies**
@@ -168,7 +168,7 @@ npm start
 ## 📁 Project Structure
 
 ```
-halo-agency/
+softkerr/
 ├── src/
 │   ├── app/                    # Next.js App Router pages
 │   │   ├── layout.tsx         # Root layout with Header/Footer
@@ -297,7 +297,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Design inspiration from [Halo-Lab](https://halo-lab.com)
+- Design inspiration from [SoftKerr](https://SoftKerr.com)
 - 3D graphics powered by [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
 - Animations by [Framer Motion](https://www.framer.com/motion/)
 - UI components built with [Tailwind CSS](https://tailwindcss.com)

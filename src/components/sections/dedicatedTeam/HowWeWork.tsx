@@ -172,7 +172,7 @@ const CooperationCard = ({ model, index }: { model: CooperationModel; index: num
 
 export default function HowWeWork() {
   return (
-    <Section className="relative py-24 overflow-hidden">
+    <Section className="relative py-12 lg:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient Background */}

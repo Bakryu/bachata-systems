@@ -17,7 +17,7 @@ import {
 
 const ProjectHero = () => {
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-violet/5 to-transparent" />
 
@@ -127,7 +127,7 @@ const ProjectHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8"
             >
               <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
                 <Link href="/contacts">Start Your Project</Link>

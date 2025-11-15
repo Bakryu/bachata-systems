@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <Section className="py-20 lg:py-32">
+    <Section className="py-12 lg:py-32">
       <Container>
         <div className="mx-auto max-w-4xl">
           {/* Header */}

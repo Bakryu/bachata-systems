@@ -29,7 +29,7 @@ export const ProcessSteps: FC<ProcessStepsProps> = ({
   const bgClass = variant === 'muted' ? 'bg-background-secondary' : 'bg-background';
 
   return (
-    <section className={`py-32 ${bgClass}`}>
+    <section className={`py-12 lg:py-32 ${bgClass}`}>
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

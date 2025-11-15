@@ -53,7 +53,7 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
   const op = operations[currentOp];
 
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-brand-violet/10 to-brand-pink/10" />
 
       <Container className="relative z-10">

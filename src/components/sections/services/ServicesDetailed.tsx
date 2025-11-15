@@ -255,7 +255,7 @@ export default function ServicesDetailed() {
   };
 
   return (
-    <Section id="services-detailed" className="relative py-24 overflow-hidden">
+    <Section id="services-detailed" className="relative py-12 lg:py-32 overflow-hidden">
       {/* Dynamic Background Based on Active Tab */}
       <AnimatePresence mode="wait">
         <motion.div

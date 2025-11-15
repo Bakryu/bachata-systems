@@ -22,7 +22,7 @@ export default function CareersHero() {
   ];
 
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-violet/5 to-transparent" />
 
@@ -147,16 +147,14 @@ export default function CareersHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8"
             >
               <Button onClick={scrollToPositions} size="lg" className="group">
                 View Open Positions
               </Button>
-              <Link href="/contacts">
-                <Button variant="outline" size="lg">
-                  Get in Touch
-                </Button>
-              </Link>
+              <Button variant="outline" size="lg">
+                <Link href="/contacts">Get in Touch</Link>
+              </Button>
             </motion.div>
           </motion.div>
 
