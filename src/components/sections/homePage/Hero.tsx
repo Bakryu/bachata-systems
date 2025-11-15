@@ -39,7 +39,7 @@ const Hero = () => {
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Side - Content */}
-            <div className="space-y-6 backdrop-blur-sm bg-background/10 rounded-2xl p-8 md:p-12 border border-border-subtle/20 shadow-2xl shadow-black/20">
+            <div className="space-y-6 backdrop-blur-sm bg-background/10 rounded-2xl p-4 md:p-12 border border-border-subtle/20 shadow-2xl shadow-black/20">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-violet/20 to-brand-gold/20 border border-brand-violet/30 backdrop-blur-sm">
                 <FaLightbulb className="w-4 h-4 text-brand-violet" />

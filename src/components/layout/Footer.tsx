@@ -8,22 +8,19 @@ import { Typography } from '../ui';
 
 const footerLinks = {
   Services: [
-    { name: 'Web Development', href: '/services/development' },
-    { name: 'UI/UX Design', href: '/services/design' },
-    { name: 'Consulting', href: '/services' },
-    { name: 'Support', href: '/services' },
+    { name: 'Web Development', href: '/services/?tab=development' },
+    { name: 'UI/UX Design', href: '/services/?tab=design' },
+    { name: 'Support', href: '/services/?tab=support' },
   ],
   Company: [
-    { name: 'About Us', href: '/team' },
-    { name: 'Our Team', href: '/team' },
+    { name: 'Our Team', href: '/dedicated-team#team-members' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Contacts', href: '/contacts' },
   ],
   Resources: [
     { name: 'Blog', href: '/resources' },
     { name: 'Case Studies', href: '/projects' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'FAQ', href: '/team' },
   ],
 };
 
@@ -39,12 +36,10 @@ export default function Footer() {
     <footer className="bg-background text-text-primary">
       {/* Main Footer Content */}
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-8 lg:gap-12">
           {/* Brand Section */}
-          <div className="lg:col-span-2">
-            {/* Logo */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-4">
             <Link href="/" className="flex items-center space-x-2">
-              {/* <AnimatedLogo variant="bladeWave" className="text-brand-gold w-12 h-12" /> */}
               <Logo className="text-brand-gold w-10 h-10" />
               <Typography
                 variant="h5"
@@ -54,7 +49,7 @@ export default function Footer() {
               </Typography>
             </Link>
 
-            <p className="text-text-secondary mb-6 max-w-md">
+            <p className="text-text-secondary mb-6">
               We're a creative digital agency that helps startups and enterprises build exceptional
               web experiences that drive results and inspire users.
             </p>
@@ -76,7 +71,7 @@ export default function Footer() {
 
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
+            <div key={category} className="grid-span-1 lg:col-span-2">
               <h3 className="text-lg font-semibold mb-4">{category}</h3>
               <ul className="space-y-3">
                 {links.map(link => (
