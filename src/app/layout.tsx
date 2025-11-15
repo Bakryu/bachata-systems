@@ -51,7 +51,7 @@ export default function RootLayout({
       <body className="font-sans antialiased" suppressHydrationWarning={true}>
         <BookCallModalProvider>
           <Header />
-          <main className="pt-16 lg:pt-20">{children}</main>
+          <main className="pt-16 lg:pt-20 overflow-hidden">{children}</main>
           <Footer />
           <BookCallModal />
         </BookCallModalProvider>

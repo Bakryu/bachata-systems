@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { Container } from '../ui';
+import { Container, Section } from '../ui';
 import { Typography } from '../ui';
 import { motion } from 'framer-motion';
 
@@ -29,7 +29,7 @@ export const ProcessSteps: FC<ProcessStepsProps> = ({
   const bgClass = variant === 'muted' ? 'bg-background-secondary' : 'bg-background';
 
   return (
-    <section className={`py-12 lg:py-32 ${bgClass}`}>
+    <Section className={`py-12 lg:py-32 ${bgClass}`}>
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -157,7 +157,7 @@ export const ProcessSteps: FC<ProcessStepsProps> = ({
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 

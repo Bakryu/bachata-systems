@@ -69,6 +69,7 @@ export default function ContactFormHero() {
           budget: data.budget,
           projectDescription: data.projectDescription,
           attachedFile: file ? file.name : 'No file attached',
+          formType: 'contact-form',
         },
         subject: 'New Contact Form Submission from {fullName}',
         replyTo: '{companyEmail}',

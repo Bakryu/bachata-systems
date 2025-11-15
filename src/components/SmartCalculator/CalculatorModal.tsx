@@ -11,6 +11,7 @@ import ContactForm from './ContactForm';
 import ProjectSummary from './ProjectSummary';
 import { CalculatorData, ContactFormData, ServiceType, TimeEstimate } from './types';
 import { calculatorSteps, serviceOptions } from '@/data/calculator';
+import { submitToFormspree } from '@/lib/formspree';
 
 type CalculatorModalProps = {
   isOpen: boolean;
@@ -20,6 +21,7 @@ type CalculatorModalProps = {
 export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [calculatorData, setCalculatorData] = useState<CalculatorData>({
     services: [],
     additionalFeatures: [],
@@ -204,27 +206,66 @@ export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProp
 
   const onSubmitContactForm = async (data: ContactFormData) => {
     try {
-      // Combine calculator data with contact form data
-      const fullData = {
-        ...data,
-        estimate: estimate,
-        calculatorData: calculatorData,
+      setSubmitStatus('idle');
+
+      // Format estimate breakdown for email
+      const breakdownText = estimate.breakdown
+        .map(item => `${item.service}: ${item.minDays}-${item.maxDays} days`)
+        .join('\n');
+
+      // Prepare complete data for submission
+      const submissionData: any = {
+        fullName: data.fullName,
+        email: data.email,
+        phone: `${data.countryCode} ${data.phone}`,
+        estimateRange: `${estimate.minDays}-${estimate.maxDays} days`,
+        services: calculatorData.services.join(', '),
+        additionalFeatures:
+          calculatorData.additionalFeatures.length > 0
+            ? calculatorData.additionalFeatures.join(', ')
+            : 'None',
+        estimateBreakdown: breakdownText,
+        formType: 'calculator-estimate',
       };
 
-      console.log('Submitting estimate request:', fullData);
+      // Add conditional fields if present
+      if (calculatorData.designPages) {
+        submissionData.designPages = calculatorData.designPages;
+      }
+      if (calculatorData.platformType) {
+        submissionData.platformType = calculatorData.platformType;
+      }
+      if (calculatorData.backendComplexity) {
+        submissionData.backendComplexity = calculatorData.backendComplexity;
+      }
+      if (calculatorData.ecommerceProducts) {
+        submissionData.ecommerceProducts = calculatorData.ecommerceProducts;
+      }
+      if (calculatorData.hasContent !== undefined) {
+        submissionData.hasContent = calculatorData.hasContent ? 'Yes' : 'No';
+      }
 
-      // Here you would send data to your backend
-      // await fetch('/api/estimate', { method: 'POST', body: JSON.stringify(fullData) });
+      const result = await submitToFormspree({
+        data: submissionData,
+        subject: 'New Project Estimate Request from {fullName}',
+        replyTo: '{email}',
+      });
 
-      // Show success message
-      alert('Thank you! We will send your detailed estimate shortly.');
+      if (!result.success) {
+        throw new Error(result.message || 'Form submission failed');
+      }
 
-      // Close modal and reset
-      onClose();
-      handleReset();
+      setSubmitStatus('success');
+
+      // Close modal and reset after showing success message
+      setTimeout(() => {
+        onClose();
+        handleReset();
+        setSubmitStatus('idle');
+      }, 2000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Something went wrong. Please try again.');
+      setSubmitStatus('error');
     }
   };
 
@@ -292,6 +333,7 @@ export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProp
                       register={register}
                       errors={errors}
                       isSubmitting={isSubmitting}
+                      submitStatus={submitStatus}
                       onSubmit={handleSubmit(onSubmitContactForm)}
                       onBack={handleBack}
                     />
