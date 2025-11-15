@@ -37,6 +37,7 @@ export default function BookCallModal() {
           companyEmail: data.companyEmail,
           phoneNumber: data.phoneNumber || 'Not provided',
           projectDescription: data.projectDescription,
+          formType: 'book-call',
         },
         subject: 'New Project Inquiry from {fullName}',
         replyTo: '{companyEmail}',

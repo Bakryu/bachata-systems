@@ -12,38 +12,11 @@ export default function HomeCTA() {
   const { openModal } = useBookCallModal();
 
   return (
-    <Section className="relative py-24 overflow-hidden">
+    <Section className="relative py-12 lg:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-brand-violet/10 to-brand-pink/10" />
-
-        {/* Animated Orbs */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-violet/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 4,
-          }}
-        />
       </div>
 
       <Container className="relative z-10">
@@ -55,7 +28,7 @@ export default function HomeCTA() {
           className="max-w-4xl mx-auto"
         >
           {/* Glass Card */}
-          <div className="relative backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/20 rounded-3xl p-8 md:p-12 lg:p-16 overflow-hidden">
+          <div className="relative backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/20 rounded-3xl p-4 md:p-12 lg:p-16 overflow-hidden">
             {/* Gradient Border Effect */}
             <motion.div
               className="absolute inset-0 opacity-50"
@@ -66,11 +39,6 @@ export default function HomeCTA() {
                   'linear-gradient(270deg, rgba(236,72,153,0.2), transparent, rgba(240,185,11,0.2))',
                   'linear-gradient(360deg, rgba(240,185,11,0.2), transparent, rgba(139,92,246,0.2))',
                 ],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: 'linear',
               }}
             />
 
@@ -147,7 +115,7 @@ export default function HomeCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex flex-wrap items-center justify-center gap-6 pt-8 text-sm text-gray-400"
+                className="flex flex-wrap items-center justify-center gap-2 md:gap-6 md:pt-8 text-sm text-gray-400"
               >
                 <div className="flex items-center gap-2">
                   <span className="text-brand-gold">✓</span>

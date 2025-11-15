@@ -55,7 +55,7 @@ interface Props {
 
 const ProjectSection = ({ project }: Props) => {
   return (
-    <section id={project.id} className="py-32 bg-background relative overflow-hidden">
+    <section id={project.id} className="py-12 lg:py-32 bg-background relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-l from-accent-yellow/10 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-gradient-to-r from-accent-blue/10 to-transparent rounded-full blur-3xl" />
@@ -316,7 +316,7 @@ const ProjectSection = ({ project }: Props) => {
 
 const Projects = () => {
   return (
-    <Section component="section" className="bg-background py-20 lg:py-32">
+    <Section component="section" className="bg-background py-12 lg:py-32">
       {projects.map(project => (
         <ProjectSection key={project.id} project={project} />
       ))}

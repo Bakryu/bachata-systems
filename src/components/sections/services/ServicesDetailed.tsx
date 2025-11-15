@@ -255,7 +255,7 @@ export default function ServicesDetailed() {
   };
 
   return (
-    <Section id="services-detailed" className="relative py-24 overflow-hidden">
+    <Section id="services-detailed" className="relative py-12 lg:py-32 overflow-hidden">
       {/* Dynamic Background Based on Active Tab */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -461,19 +461,17 @@ export default function ServicesDetailed() {
           viewport={{ once: true }}
           className="text-center mt-20"
         >
-          <Typography variant="h3" className="text-2xl font-bold text-white mb-4">
+          <Typography variant="h3" className="text-2xl font-bold text-white mb-4 text-center ">
             Ready to get started?
           </Typography>
-          <Typography variant="body1" className="text-gray-400 mb-8">
+          <Typography variant="body1" className="text-gray-400 mb-8 text-center ">
             Let's discuss how we can help bring your project to life
           </Typography>
-          <motion.button
-            className="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-gold to-brand-violet text-white font-bold"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Schedule a Consultation
-          </motion.button>
+          <Link href="/contacts">
+            <Button variant="primary" size="lg">
+              Schedule a Consultation
+            </Button>
+          </Link>
         </motion.div>
       </Container>
     </Section>

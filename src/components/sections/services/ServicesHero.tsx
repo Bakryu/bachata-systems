@@ -6,29 +6,13 @@ import Section from '@/components/ui/Section';
 import Typography from '@/components/ui/Typography';
 import Button from '@/components/ui/Button';
 import { FaPlay, FaArrowRight } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function ServicesHero() {
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-gold/5 to-transparent" />
-
-      {/* Animated Grid Background */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `linear-gradient(rgba(240,185,11,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(240,185,11,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-        animate={{
-          backgroundPosition: ['0px 0px', '60px 60px'],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      />
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -92,10 +76,10 @@ export default function ServicesHero() {
             >
               <div className="space-y-1">
                 <Typography variant="h3" className="text-3xl font-bold text-brand-gold">
-                  50+
+                  5+
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Projects Delivered
+                  Years experience
                 </Typography>
               </div>
               <div className="space-y-1">
@@ -121,10 +105,10 @@ export default function ServicesHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8"
             >
               <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
-                Get Started
+                <Link href="/contacts">Get Started</Link>
               </Button>
               <Button
                 variant="outline"
@@ -132,7 +116,7 @@ export default function ServicesHero() {
                 leftIcon={<FaPlay />}
                 className="border-white/20 hover:border-brand-gold/50"
               >
-                View Our Work
+                <Link href="/projects">View Our Work</Link>
               </Button>
             </motion.div>
           </motion.div>

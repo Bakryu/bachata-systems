@@ -267,7 +267,7 @@ const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }
 
 export default function TeamMembers() {
   return (
-    <Section className="relative py-24 overflow-hidden">
+    <Section id="team-members" className="relative py-12 lg:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient Background */}

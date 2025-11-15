@@ -5,12 +5,13 @@ import Container from '@/components/ui/Container';
 import Section from '@/components/ui/Section';
 import Typography from '@/components/ui/Typography';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 import { FaArrowRight, FaGlobe, FaUsers, FaChartLine } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi';
 
 export default function DedicatedTeamHero() {
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-violet/5 to-transparent" />
 
@@ -121,10 +122,10 @@ export default function DedicatedTeamHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8"
             >
               <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
-                Build Your Team
+                <Link href="/contacts">Build Your Team</Link>
               </Button>
               <Button
                 variant="outline"
@@ -132,7 +133,7 @@ export default function DedicatedTeamHero() {
                 leftIcon={<FaGlobe />}
                 className="border-white/20 hover:border-brand-violet/50"
               >
-                View Case Studies
+                <Link href="/pricing">View Pricing</Link>
               </Button>
             </motion.div>
           </motion.div>

@@ -1,186 +1,325 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Container, Typography, Button } from '@/components/ui';
-import { FaBook, FaLightbulb, FaRocket, FaDownload } from 'react-icons/fa';
+import { Container, Section, Typography, Button } from '@/components/ui';
+import Link from 'next/link';
+import {
+  FaBook,
+  FaLightbulb,
+  FaRocket,
+  FaArrowRight,
+  FaGraduationCap,
+  FaPlay,
+} from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi';
 
 export default function ResourcesHero() {
-  const stats = [
-    { value: '50+', label: 'Articles', icon: FaBook },
-    { value: '20+', label: 'Free Resources', icon: FaDownload },
-    { value: '15+', label: 'Tools & Guides', icon: FaRocket },
-  ];
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden bg-background">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 via-brand-violet/5 to-brand-blue/5" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-violet/10 via-transparent to-transparent" />
+    <Section className="relative py-12 md:py-32 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-gold/5 to-transparent" />
 
-        {/* Animated orbs */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-
-        {/* Floating icons */}
-        <motion.div
-          className="absolute top-20 left-[15%] text-4xl opacity-10"
-          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          📚
-        </motion.div>
-        <motion.div
-          className="absolute top-40 right-[20%] text-4xl opacity-10"
-          animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          💡
-        </motion.div>
-        <motion.div
-          className="absolute bottom-32 left-[25%] text-4xl opacity-10"
-          animate={{ y: [0, -15, 0], rotate: [0, 15, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          🚀
-        </motion.div>
-      </div>
+      {/* Animated Grid Background */}
+      <motion.div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(240,185,11,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(240,185,11,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+        animate={{
+          backgroundPosition: ['0px 0px', '60px 60px'],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+      />
 
       <Container className="relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side - Content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-center mb-12"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
           >
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-violet/10 border border-brand-violet/30 rounded-full mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-gold/20 to-brand-violet/20 border border-brand-gold/30 backdrop-blur-sm"
             >
-              <HiSparkles className="text-brand-violet" />
-              <span className="text-brand-violet font-semibold text-sm">Knowledge Hub</span>
+              <HiSparkles className="w-4 h-4 text-brand-gold" />
+              <Typography variant="body2" className="text-brand-gold font-medium">
+                Knowledge Hub
+              </Typography>
             </motion.div>
 
             {/* Heading */}
-            <Typography variant="h1" className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6">
-              Resources &{' '}
-              <span className="relative inline-block">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Typography
+                variant="h1"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+              >
+                Resources &{' '}
                 <span className="bg-gradient-to-r from-brand-gold via-brand-violet to-brand-pink bg-clip-text text-transparent">
                   Insights
                 </span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 right-0 h-3 bg-brand-gold/20 -z-10"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                />
-              </span>
-            </Typography>
+              </Typography>
+            </motion.div>
 
             {/* Description */}
-            <Typography
-              variant="body1"
-              className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-10 leading-relaxed"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Discover valuable insights, tools, and resources to help you build better digital
-              experiences and grow your business.
-            </Typography>
+              <Typography variant="body1" className="text-lg text-gray-300 leading-relaxed">
+                Discover valuable insights, guides, and resources to help you build better digital
+                experiences and grow your business. Learn from industry experts and stay ahead of
+                the curve.
+              </Typography>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="grid grid-cols-3 gap-6 py-6"
+            >
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-gold">
+                  12+
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Articles
+                </Typography>
+              </div>
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-violet">
+                  2K+
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Readers
+                </Typography>
+              </div>
+              <div className="space-y-1">
+                <Typography variant="h3" className="text-3xl font-bold text-brand-pink">
+                  100%
+                </Typography>
+                <Typography variant="body2" className="text-gray-400">
+                  Free Access
+                </Typography>
+              </div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-              <motion.button
-                onClick={() => scrollToSection('articles')}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-gold to-brand-violet hover:from-brand-violet hover:to-brand-gold text-white font-bold text-lg rounded-2xl shadow-xl shadow-brand-gold/30 hover:shadow-brand-violet/40 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 lg:pt-8"
+            >
+              <Button variant="primary" size="lg" rightIcon={<FaArrowRight />}>
+                <Link href="/contacts">Get Expert Help</Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                leftIcon={<FaPlay />}
+                className="border-white/20 hover:border-brand-violet/50"
               >
-                <FaBook className="text-xl" />
-                <span>Browse Articles</span>
-              </motion.button>
-
-              <motion.button
-                onClick={() => scrollToSection('resources')}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-background-secondary hover:bg-background-secondary/80 border-2 border-border-subtle hover:border-brand-gold text-text-primary font-bold text-lg rounded-2xl transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaDownload className="text-xl" />
-                <span>Free Resources</span>
-              </motion.button>
-            </div>
+                <Link href="/services">Our Services</Link>
+              </Button>
+            </motion.div>
           </motion.div>
 
-          {/* Stats */}
+          {/* Right Side - Glass Container with Categories */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative"
           >
-            {stats.map((stat, index) => (
+            {/* Main Container with 3:4 Aspect Ratio */}
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto">
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/20 via-brand-violet/20 to-brand-pink/20 rounded-3xl" />
+
+              {/* Glass Container */}
               <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="relative group"
+                className="relative h-full backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/20 rounded-3xl overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               >
-                {/* Glow effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-gold via-brand-violet to-brand-blue opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 rounded-2xl" />
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 opacity-50"
+                  animate={{
+                    background: [
+                      'radial-gradient(circle at 0% 0%, rgba(240,185,11,0.3), transparent 50%)',
+                      'radial-gradient(circle at 100% 100%, rgba(139,92,246,0.3), transparent 50%)',
+                      'radial-gradient(circle at 0% 100%, rgba(236,72,153,0.3), transparent 50%)',
+                      'radial-gradient(circle at 0% 0%, rgba(240,185,11,0.3), transparent 50%)',
+                    ],
+                  }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                />
 
-                {/* Card */}
-                <div className="relative bg-background-secondary/80 backdrop-blur-sm p-6 rounded-2xl border border-border-subtle group-hover:border-brand-gold/50 transition-all duration-300 text-center">
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-violet/20 mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <stat.icon className="text-2xl text-brand-gold" />
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col p-8">
+                  {/* Top Section */}
+                  <div className="flex-1 flex flex-col justify-center space-y-6">
+                    {/* Icon */}
+                    <motion.div
+                      className="flex justify-center"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-gold to-brand-violet flex items-center justify-center shadow-lg shadow-brand-gold/50">
+                        <FaBook className="w-12 h-12 text-white" />
+                      </div>
+                    </motion.div>
+
+                    <div className="text-center space-y-2">
+                      <Typography variant="h3" className="text-2xl font-bold text-white">
+                        Expert Knowledge
+                      </Typography>
+                      <Typography variant="body2" className="text-gray-300">
+                        Curated insights & guides
+                      </Typography>
+                    </div>
+
+                    {/* Categories Grid */}
+                    <div className="grid grid-cols-1 gap-3">
+                      <motion.div
+                        className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <FaLightbulb className="w-5 h-5 text-brand-gold" />
+                          <div>
+                            <Typography variant="body2" className="text-white font-semibold">
+                              Design Services
+                            </Typography>
+                            <Typography variant="caption" className="text-gray-400">
+                              UI/UX, Web & Mobile
+                            </Typography>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <FaRocket className="w-5 h-5 text-brand-violet" />
+                          <div>
+                            <Typography variant="body2" className="text-white font-semibold">
+                              Development
+                            </Typography>
+                            <Typography variant="caption" className="text-gray-400">
+                              Web, Software & AI
+                            </Typography>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <FaGraduationCap className="w-5 h-5 text-brand-pink" />
+                          <div>
+                            <Typography variant="body2" className="text-white font-semibold">
+                              Support Services
+                            </Typography>
+                            <Typography variant="caption" className="text-gray-400">
+                              Maintenance & Hosting
+                            </Typography>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
                   </div>
-
-                  {/* Value */}
-                  <Typography
-                    variant="h2"
-                    className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-gold to-brand-violet bg-clip-text text-transparent mb-2"
-                  >
-                    {stat.value}
-                  </Typography>
-
-                  {/* Label */}
-                  <Typography variant="body2" color="secondary" className="font-medium">
-                    {stat.label}
-                  </Typography>
                 </div>
+
+                {/* Decorative Elements */}
+                <motion.div
+                  className="absolute top-4 right-4 w-20 h-20 bg-brand-gold/10 rounded-full blur-2xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-4 left-4 w-16 h-16 bg-brand-violet/10 rounded-full blur-2xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: 1.5,
+                  }}
+                />
               </motion.div>
-            ))}
+
+              {/* Floating Badges */}
+              <motion.div
+                className="absolute -top-4 -right-4 px-4 py-2 rounded-full bg-gradient-to-r from-brand-gold/90 to-brand-violet/90 backdrop-blur-sm border border-white/20 shadow-lg"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Typography variant="body2" className="text-white font-bold">
+                  📚 Learning Center
+                </Typography>
+              </motion.div>
+
+              <motion.div
+                className="absolute -bottom-4 -left-4 px-4 py-2 rounded-full bg-gradient-to-r from-brand-violet/90 to-brand-pink/90 backdrop-blur-sm border border-white/20 shadow-lg"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 1.5,
+                }}
+              >
+                <Typography variant="body2" className="text-white font-bold">
+                  💡 Expert Tips
+                </Typography>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

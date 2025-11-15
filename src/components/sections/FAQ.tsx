@@ -252,7 +252,7 @@ export default function FAQSection({ page, title, description }: FAQSectionProps
   };
 
   return (
-    <Section className="relative py-24 overflow-hidden">
+    <Section className="relative py-12 lg:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient Background */}

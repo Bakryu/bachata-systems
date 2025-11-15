@@ -54,7 +54,7 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <Section className="relative overflow-hidden py-24">
+    <Section className="relative overflow-hidden py-12 lg:py-32">
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Header */}

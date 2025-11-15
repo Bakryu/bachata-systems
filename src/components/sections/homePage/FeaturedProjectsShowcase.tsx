@@ -7,7 +7,7 @@ import { projects } from '@/data/projects';
 // Variant 3: Interactive Showcase
 export const FeaturedProjectsShowcase: FC = () => {
   return (
-    <section className="py-32 bg-background overflow-hidden">
+    <section className="py-12 lg:py-32 bg-background overflow-hidden">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -15,6 +15,7 @@ type ContactFormProps = {
   register: UseFormRegister<ContactFormData>;
   errors: FieldErrors<ContactFormData>;
   isSubmitting: boolean;
+  submitStatus?: 'idle' | 'success' | 'error';
   onSubmit: () => void;
   onBack: () => void;
 };
@@ -35,6 +36,7 @@ export default function ContactForm({
   register,
   errors,
   isSubmitting,
+  submitStatus = 'idle',
   onSubmit,
   onBack,
 }: ContactFormProps) {
@@ -134,6 +136,23 @@ export default function ContactForm({
               </Typography>
             </Button>
           </div>
+
+          {/* Status Messages */}
+          {submitStatus === 'success' && (
+            <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+              <Typography variant="body2" className="text-green-400 text-center">
+                ✓ Thank you! We will send your detailed estimate shortly.
+              </Typography>
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+              <Typography variant="body2" className="text-red-400 text-center">
+                Something went wrong. Please try again.
+              </Typography>
+            </div>
+          )}
 
           {/* Privacy Policy */}
           <Typography variant="caption" className="text-gray-500 text-xs text-center block">

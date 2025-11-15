@@ -69,6 +69,7 @@ export default function ContactFormHero() {
           budget: data.budget,
           projectDescription: data.projectDescription,
           attachedFile: file ? file.name : 'No file attached',
+          formType: 'contact-form',
         },
         subject: 'New Contact Form Submission from {fullName}',
         replyTo: '{companyEmail}',
@@ -93,7 +94,7 @@ export default function ContactFormHero() {
   };
 
   return (
-    <Section className="relative py-20 md:py-32 overflow-hidden">
+    <Section className="relative py-12 md:py-32 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-brand-violet/10 to-brand-pink/10" />
